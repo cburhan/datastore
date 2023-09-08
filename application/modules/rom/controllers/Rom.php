@@ -124,7 +124,6 @@ class Rom extends MY_Controller
 
     private function do_upload($tipe, $id, $file_name)
     {
-        $this->load->library('rom');
         $upload_file = $_FILES['rom']['name'];
         if ($upload_file) {
             if ($tipe == 1) {

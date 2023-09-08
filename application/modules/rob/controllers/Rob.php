@@ -118,7 +118,6 @@ class Rob extends MY_Controller
 
     private function do_upload($tipe, $id, $file_name)
     {
-        $this->load->library('rob');
         $upload_file = $_FILES['rob']['name'];
         if ($upload_file) {
             if ($tipe == 1) {

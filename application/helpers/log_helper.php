@@ -98,3 +98,42 @@ function generate_filename_rom($tipe, $week, $bulan, $tahun)
 
     return $rot;
 }
+
+function generate_filename_biotrans($bulan, $tahun)
+{
+    $CI = &get_instance();
+    $CI->load->database();
+
+    // Membuat nomor transaksi baru
+    $prefix = 'BIO_TRANS_' . $bulan . '_' . $tahun . '_';
+
+    $CI->db->select('COUNT(*) as count');
+    $CI->db->from('bio_trans');
+    $CI->db->where('BLN', $bulan);
+    $CI->db->where('TAHUN', $tahun);
+    $query = $CI->db->get();
+    $result = $query->row_array();
+    $count = $result['count'] + 1;
+    $bio = $prefix . str_pad($count, 2, '0', STR_PAD_LEFT);
+
+    return $bio;
+}
+
+function generate_filename_biomaster($tipe, $tipe_text)
+{
+    $CI = &get_instance();
+    $CI->load->database();
+
+    // Membuat nomor transaksi baru
+    $prefix = 'BIO_MASTER_' . $tipe_text . '_';
+
+    $CI->db->select('COUNT(*) as count');
+    $CI->db->from('bio_master');
+    $CI->db->where('TIPE', $tipe);
+    $query = $CI->db->get();
+    $result = $query->row_array();
+    $count = $result['count'] + 1;
+    $bio = $prefix . str_pad($count, 2, '0', STR_PAD_LEFT);
+
+    return $bio;
+}

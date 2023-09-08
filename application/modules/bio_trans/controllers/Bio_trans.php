@@ -2,27 +2,27 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Rot extends MY_Controller
+class Bio_trans extends MY_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
         check_permission();
-        $this->load->model('Rot_model');
+        $this->load->model('BioTrans_model');
     }
 
     public function index()
     {
-        $data['ptitle'] = "Rencana Operasi";
-        $data['title']  = "ROT";
+        $data['ptitle'] = "Biomassa";
+        $data['title']  = "Transaksi";
 
-        $this->load->view('rot-view', $data);
+        $this->load->view('bio-trans-view', $data);
     }
 
     public function get_data()
     {
-        $fetch_data = $this->Rot_model->make_datatables();
+        $fetch_data = $this->BioTrans_model->make_datatables();
         $data = array();
 
         $no = 0;
@@ -36,12 +36,8 @@ class Rot extends MY_Controller
             $sub_array = array();
             $sub_array[] = '<div class="text-center">' . $no . '</div>';
             $sub_array[] = $row->FILE;
+            $sub_array[] = $row->BULAN;
             $sub_array[] = $row->TAHUN;
-            if ($row->TIPE == 1) {
-                $sub_array[] = '<span class="badge bg-sm bg-info">SEMENTARA</span>';
-            } else if ($row->TIPE == 2) {
-                $sub_array[] = '<span class="badge bg-sm bg-success">FINAL</span>';
-            }
             $sub_array[] = $row->CREATED_BY;
             $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
             $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
@@ -50,10 +46,10 @@ class Rot extends MY_Controller
             $del = NULL;
 
             if (check_button('detail') > 0) {
-                $detail = '<a href="' . base_url('rot/detail/') . encrypt_url($row->ID) . '" class="btn btn-info btn-sm waves-effect"><i class="ion ion-md-eye"></i></a>';
+                $detail = '<a href="' . base_url('bio_trans/detail/') . encrypt_url($row->ID) . '" class="btn btn-info btn-sm waves-effect"><i class="ion ion-md-eye"></i></a>';
             }
             if (check_button('delete') > 0) {
-                $del = '<a href="' . base_url('rot/delete/') . encrypt_url($row->ID) . '" class="btn btn-danger btn-sm waves-effect" onclick="return confirmDelete()"><i class="ion ion-md-trash"></i></a>';
+                $del = '<a href="' . base_url('bio_trans/delete/') . encrypt_url($row->ID) . '" class="btn btn-danger btn-sm waves-effect" onclick="return confirmDelete()"><i class="ion ion-md-trash"></i></a>';
             }
             if (check_button('detail') > 0 || check_button('delete') > 0) {
                 $sub_array[] = '<div class="text-center">' . $detail . ' ' . $del . '</div>';
@@ -64,8 +60,8 @@ class Rot extends MY_Controller
 
         $output = array(
             'draw'              => isset($_POST['draw']) ? intval($_POST['draw']) : 0,
-            'recordsTotal'      => $this->Rot_model->get_all_data(),
-            'recordsFiltered'   => $this->Rot_model->get_filtered_data(),
+            'recordsTotal'      => $this->BioTrans_model->get_all_data(),
+            'recordsFiltered'   => $this->BioTrans_model->get_filtered_data(),
             'data'              => $data
         );
 
@@ -74,50 +70,47 @@ class Rot extends MY_Controller
 
     public function add()
     {
-        $data['ptitle'] = "Rencana Operasi";
-        $data['title']  = "ROT";
+        $data['ptitle'] = "Biomassa";
+        $data['title']  = "Transaksi";
+
+        $this->form_validation->set_rules('bulan', 'bulan', 'required', [
+            'required' => 'Bulan harus dipilih'
+        ]);
 
         $this->form_validation->set_rules('tahun', 'Tahun', 'required', [
             'required' => 'Tahun harus dipilih'
         ]);
 
-        $this->form_validation->set_rules('tipe', 'Tipe', 'required', [
-            'required' => 'Tipe harus dipilih'
-        ]);
-
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('rot-add', $data);
+            $this->load->view('bio-trans-add', $data);
         } else {
             cek_csrf();
-            $file_name = generate_filename_rot($this->input->post('tipe'), $this->input->post('tahun'));
-            $data_rot = array(
+            $file_name = generate_filename_biotrans($this->input->post('bulan'), $this->input->post('tahun'));
+            $data_bio = array(
+                'BULAN'         => bulan($this->input->post('bulan')),
+                'BLN'           => $this->input->post('bulan'),
                 'TAHUN'         => $this->input->post('tahun'),
-                'TIPE'          => $this->input->post('tipe'),
                 'CREATED_BY'    => get_session_name(),
                 'CREATED_ON'    => date('Y-m-d H:i:s')
             );
-            $add_id = $this->Rot_model->addRot($data_rot);
-            $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
+            $add_id = $this->BioTrans_model->addBioTrans($data_bio);
+            $this->do_upload($add_id, $file_name);
             $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Sukses!</strong> Data ROT berhasil ditambah.
+                        <strong>Sukses!</strong> Data Transaksi Biomassa berhasil ditambah.
                         </div>';
             $this->session->set_flashdata('flash', $flash);
-            $ket = 'Menambah data <strong>Rencana Operasi Tahunan</strong> tahun <strong>' . $data_rot['TAHUN'] . '</strong>';
-            activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
-            redirect('rot');
+            $ket = 'Menambah data <strong>Transaksi Biomassa</strong> periode <strong>' . $data_bio['BULAN'] . ' ' . $data_bio['TAHUN'] . '</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Biomassa', 'ADD', 'success', $ket);
+            redirect('bio_trans');
         }
     }
 
-    private function do_upload($tipe, $id, $file_name)
+    private function do_upload($id, $file_name)
     {
-        $upload_file = $_FILES['rot']['name'];
+        $upload_file = $_FILES['bio']['name'];
         if ($upload_file) {
-            if ($tipe == 1) {
-                $upload_path = './public/upload_file/rot_s';
-            } else if ($tipe == 2) {
-                $upload_path = './public/upload_file/rot_f';
-            }
+            $upload_path                = './public/upload_file/bio_trans';
             $config['upload_path']      = $upload_path;
             $config['allowed_types']    = 'xls|xlsx';
             $config['remove_spaces']    = true;
@@ -125,12 +118,12 @@ class Rot extends MY_Controller
 
             $this->load->library('upload', $config);
 
-            if ($this->upload->do_upload('rot')) {
+            if ($this->upload->do_upload('bio')) {
                 $file = $this->upload->data('file_name');
-                $data_rot = array(
+                $data_bio = array(
                     'FILE'          => $file
                 );
-                $this->Rot_model->editRot($data_rot, $id);
+                $this->BioTrans_model->editBioTrans($data_bio, $id);
             } else {
                 $error = $this->upload->display_errors();
                 $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
@@ -138,8 +131,8 @@ class Rot extends MY_Controller
                             <strong>Gagal!</strong> ' . strip_tags($error) . '
                             </div>';
                 $this->session->set_flashdata('flash', $flash);
-                $this->Rot_model->deleteRot($id);
-                redirect('rot');
+                $this->BioTrans_model->deleteBioTrans($id);
+                redirect('bio_trans');
             }
         } else {
             $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
@@ -147,64 +140,56 @@ class Rot extends MY_Controller
                         <strong>Gagal!</strong> File kosong.
                         </div>';
             $this->session->set_flashdata('flash', $flash);
-            $this->Rot_model->deleteRot($id);
-            redirect('rot');
+            $this->BioTrans_model->deleteRob($id);
+            redirect('bio_trans');
         }
     }
 
-    public function detail($rot_id)
+    public function detail($id)
     {
-        $data['ptitle'] = "Rencana Operasi";
-        $data['title']  = "ROT";
+        $data['ptitle'] = "Biomassa";
+        $data['title']  = "Transaksi";
 
-        $rot_id = decrypt_url($rot_id);
+        $id = decrypt_url($id);
 
-        $rot = $this->Rot_model->getRotById($rot_id);
-        if ($rot != NULL) {
-            if ($rot['TIPE'] == 1) {
-                $path = 'public/upload_file/rot_s/' . $rot['FILE'];
-            } else if ($rot['TIPE'] == 2) {
-                $path = 'public/upload_file/rot_f/' . $rot['FILE'];
-            }
+        $bio = $this->BioTrans_model->getBioTransById($id);
+        if ($bio != NULL) {
+            $path = 'public/upload_file/bio_trans/' . $bio['FILE'];
 
             $this->load->library('Excel');
             $excelreader = new PHPExcel_Reader_Excel2007();
             $loadexcel = $excelreader->load($path);
             $data['sheet'] = $loadexcel->getActiveSheet()->toArray(null, true, true, true);
-            $data['file'] = $rot;
+            $data['file'] = $bio;
 
-            $this->load->view('rot-detail', $data);
+            $this->load->view('bio-trans-detail', $data);
         } else {
             $this->load->view('myerror/error404', $data);
         }
     }
 
-    public function delete($rot_id)
+    public function delete($id)
     {
-        $rot_id = decrypt_url($rot_id);
+        $id = decrypt_url($id);
 
-        $rot   = $this->Rot_model->getRotById($rot_id);
-        if ($rot['TIPE'] == 1) {
-            unlink('public/upload_file/rot_s/' . $rot['FILE']);
-        } else if ($rot['TIPE'] == 2) {
-            unlink('public/upload_file/rot_f/' . $rot['FILE']);
-        }
-        $delete = $this->Rot_model->deleteRot($rot_id);
+        $bio = $this->BioTrans_model->getBioTransById($id);
+        unlink('public/upload_file/bio_trans/' . $bio['FILE']);
+        $delete = $this->BioTrans_model->deleteBioTrans($bio);
         if ($delete) {
             $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Sukses!</strong> Data ROT berhasil dihapus.
+                        <strong>Sukses!</strong> Data Transaksi Biomassa berhasil dihapus.
                         </div>';
             $this->session->set_flashdata('flash', $flash);
-            $ket = 'Menghapus data <strong>Rencana Operasi Tahunan</strong> tahun <strong>' . $rot['TAHUN'] . '</strong> dengan nama file <strong>' . $rot['FILE'] . '</strong>';
-            activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'DELETE', 'danger', $ket);
+            $ket = 'Menghapus data <strong>Transaksi Biomassa</strong> data <strong>' . $bio['TIPE_TEXT'] . '</strong> dengan nama file <strong>' . $bio['FILE'] . '</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Biomassa', 'DELETE', 'danger', $ket);
         } else {
             $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Gagal!</strong> Data ROT masih digunakan.
+                        <strong>Gagal!</strong> Data Transaksi Biomassa masih digunakan.
                         </div>';
             $this->session->set_flashdata('flash', $flash);
         }
-        redirect('rot');
+        redirect('bio_trans');
     }
 }
