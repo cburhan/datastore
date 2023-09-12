@@ -8,7 +8,7 @@
     <style>
         .smalls,
         smalls {
-            font-size: 70%;
+            font-size: 65%;
         }
     </style>
 </head>
@@ -93,6 +93,9 @@
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Sistem</smalls>
+                                                    </th>
+                                                    <th class="p-1 text-center align-middle">
+                                                        <smalls>Bahan Bakar</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>DMN (MW)</smalls>
@@ -199,6 +202,9 @@
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['Q'] != NULL ? $f['Q'] : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['R'] != NULL ? $f['R'] : 'No data'); ?></smalls>
                                                                 </td>
                                                             </tr>
                                                         <?php endif; ?>

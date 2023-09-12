@@ -95,6 +95,9 @@
                                                         <smalls>Sistem</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
+                                                        <smalls>Bahan Bakar</smalls>
+                                                    </th>
+                                                    <th class="p-1 text-center align-middle">
                                                         <smalls>DMN (MW)</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
@@ -132,16 +135,19 @@
                                                                     <smalls><?= ($f['C'] != NULL ? $f['C'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['D'] != NULL ? bulan($f['D']) : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['D'] != NULL ? $f['D'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['E'] != NULL ? $f['E'] : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['E'] != NULL ? bulan($f['E']) : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['F'] != NULL ? $f['F'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['G'] != NULL ? $f['G'] : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['H'] != NULL ? $f['H'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['H'] != NULL ? $f['H'] : 'No data'); ?></smalls>

@@ -54,7 +54,7 @@
                                 <div class="card">
                                     <div class="card-body border-bottom border-1">
                                         <dl class="row mb-0">
-                                            <dt class="col-sm-2">ROB</dt>
+                                            <dt class="col-sm-2">ROM</dt>
                                             <dd class="col-sm-4 mb-0"><?= 'Week ' . $file['WEEK'] . ' ' . $file['BULAN'] . ' ' . $file['TAHUN']; ?></dd>
                                             <dt class="col-sm-2">Upload By</dt>
                                             <dd class="col-sm-4 mb-0"><?= $file['CREATED_BY']; ?></dd>
@@ -99,6 +99,9 @@
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Tgl End</smalls>
+                                                    </th>
+                                                    <th class="p-1 text-center align-middle">
+                                                        <smalls>Bahan Bakar</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>DMN (MW)</smalls>
@@ -149,6 +152,9 @@
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['G'] != NULL ? $f['G'] : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['H'] != NULL ? $f['H'] : 'No data'); ?></smalls>
                                                                 </td>
                                                             </tr>
                                                         <?php endif; ?>
