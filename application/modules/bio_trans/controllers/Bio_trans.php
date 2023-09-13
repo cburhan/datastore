@@ -85,13 +85,17 @@ class Bio_trans extends MY_Controller
             $this->load->view('bio-trans-add', $data);
         } else {
             cek_csrf();
-            $file_name = generate_filename_biotrans($this->input->post('bulan'), $this->input->post('tahun'));
+            $time = date('Y-m-d H:i:s');
+            $time_name = date('YmdHis', strtotime($time));
+            $bulan = $this->input->post('bulan');
+            $tahun = $this->input->post('tahun');
+            $file_name = 'BIO_TRANS_' . $bulan . '_' . $tahun . '_' . $time_name;
             $data_bio = array(
-                'BULAN'         => bulan($this->input->post('bulan')),
-                'BLN'           => $this->input->post('bulan'),
-                'TAHUN'         => $this->input->post('tahun'),
+                'BULAN'         => bulan($bulan),
+                'BLN'           => $bulan,
+                'TAHUN'         => $tahun,
                 'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => date('Y-m-d H:i:s')
+                'CREATED_ON'    => $time
             );
             $add_id = $this->BioTrans_model->addBioTrans($data_bio);
             $this->do_upload($add_id, $file_name);

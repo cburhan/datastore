@@ -92,13 +92,15 @@ class Bio_master extends MY_Controller
             $this->load->view('bio-master-add', $data);
         } else {
             cek_csrf();
-            $file_name = generate_filename_biomaster($tipe, $tipe_text);
+            $time = date('Y-m-d H:i:s');
+            $time_name = date('YmdHis', strtotime($time));
+            $file_name = 'BIO_MASTER_' . $tipe_text . '_' . $time_name;
             $data_bio = array(
                 'TIPE'          => $tipe,
                 'TIPE_TEXT'     => $tipe_text,
                 'TIPE_COLOR'    => $tipe_color,
                 'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => date('Y-m-d H:i:s')
+                'CREATED_ON'    => $time
             );
             $add_id = $this->BioMaster_model->addBioMaster($data_bio);
             $this->do_upload($add_id, $file_name);

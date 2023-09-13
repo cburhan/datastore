@@ -59,7 +59,7 @@
                                             <dt class="col-sm-2">Upload By</dt>
                                             <dd class="col-sm-4 mb-0"><?= $file['CREATED_BY']; ?></dd>
                                             <dt class="col-sm-2">Nama File</dt>
-                                            <dd class="col-sm-4 mb-0"><?= $file['FILE']; ?></dd>
+                                            <dd class="col-sm-4 mb-0"><small><?= $file['FILE']; ?></small></dd>
                                             <dt class="col-sm-2">Upload On</dt>
                                             <?php
                                             $tgl_out = date("Y-m-d", strtotime($file['CREATED_ON']));
