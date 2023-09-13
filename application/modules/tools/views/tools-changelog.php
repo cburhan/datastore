@@ -52,8 +52,8 @@
                                                             $jam_out = date("H:i:s", strtotime($v['CREATED_ON']));
                                                             ?>
                                                             <small class="text-muted"><?= tgl_indo($tgl_out) . " " . $jam_out; ?></small>
-                                                            <div class="border border-2 mt-2">
-                                                                <pre class="text-muted"><?= $v['DETAIL']; ?></pre>
+                                                            <div class="alert alert-dark mb-0" role="alert" style="font-family: var(--bs-font-monospace);">
+                                                                <span class="text-muted font-size-12"><?= $v['DETAIL']; ?></span>
                                                             </div>
                                                         </div>
                                                     </li>

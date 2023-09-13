@@ -45,6 +45,7 @@ class Tools_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('apps_ver');
+        $this->db->order_by('CREATED_ON', 'DESC');
         return $this->db->get();
     }
 
