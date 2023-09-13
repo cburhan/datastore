@@ -182,9 +182,9 @@ class Bio_master extends MY_Controller
         $id = decrypt_url($id);
 
         $bio = $this->BioMaster_model->getBioMasterById($id);
-        unlink('public/upload_file/bio_master/' . $bio['FILE']);
         $delete = $this->BioMaster_model->deleteBioMaster($id);
         if ($delete) {
+            unlink('public/upload_file/bio_master/' . $bio['FILE']);
             $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <strong>Sukses!</strong> Data Master Biomassa berhasil dihapus.

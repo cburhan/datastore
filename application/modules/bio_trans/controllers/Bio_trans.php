@@ -177,9 +177,9 @@ class Bio_trans extends MY_Controller
         $id = decrypt_url($id);
 
         $bio = $this->BioTrans_model->getBioTransById($id);
-        unlink('public/upload_file/bio_trans/' . $bio['FILE']);
-        $delete = $this->BioTrans_model->deleteBioTrans($bio);
+        $delete = $this->BioTrans_model->deleteBioTrans($id);
         if ($delete) {
+            unlink('public/upload_file/bio_trans/' . $bio['FILE']);
             $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <strong>Sukses!</strong> Data Transaksi Biomassa berhasil dihapus.
