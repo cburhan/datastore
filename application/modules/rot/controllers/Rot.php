@@ -94,9 +94,9 @@ class Rot extends MY_Controller
             $tahun = $this->input->post('tahun');
             $time_name = date('YmdHis', strtotime($time));
             if ($tipe == 1) {
-                $file_name = 'ROT_S_' . $tahun . '_' . $time_name;
+                $file_name = $time_name . '_ROT_S_' . $tahun;
             } else if ($tipe == 2) {
-                $file_name = 'ROT_F_' . $tahun . '_' . $time_name;
+                $file_name = $time_name . '_ROT_F_' . $tahun;
             }
             $data_rot = array(
                 'TAHUN'         => $tahun,

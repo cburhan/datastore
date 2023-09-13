@@ -94,7 +94,7 @@ class Bio_master extends MY_Controller
             cek_csrf();
             $time = date('Y-m-d H:i:s');
             $time_name = date('YmdHis', strtotime($time));
-            $file_name = 'BIO_MASTER_' . $tipe_text . '_' . $time_name;
+            $file_name = $time_name . '_BIO_MASTER_' . $tipe_text;
             $data_bio = array(
                 'TIPE'          => $tipe,
                 'TIPE_TEXT'     => $tipe_text,

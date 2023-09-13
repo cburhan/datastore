@@ -89,7 +89,7 @@ class Bio_trans extends MY_Controller
             $time_name = date('YmdHis', strtotime($time));
             $bulan = $this->input->post('bulan');
             $tahun = $this->input->post('tahun');
-            $file_name = 'BIO_TRANS_' . $bulan . '_' . $tahun . '_' . $time_name;
+            $file_name = $time_name . '_BIO_TRANS_' . $bulan . '_' . $tahun;
             $data_bio = array(
                 'BULAN'         => bulan($bulan),
                 'BLN'           => $bulan,

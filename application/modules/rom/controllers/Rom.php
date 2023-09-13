@@ -106,9 +106,9 @@ class Rom extends MY_Controller
             $week = $this->input->post('week');
             $time_name = date('YmdHis', strtotime($time));
             if ($tipe == 1) {
-                $file_name = 'ROM_S_W' . $week . '_' . $bulan . '_' . $tahun . '_' . $time_name;
+                $file_name = $time_name . '_ROM_S_W' . $week . '_' . $bulan . '_' . $tahun;
             } else if ($tipe == 2) {
-                $file_name = 'ROM_F_W' . $week . '_' . $bulan . '_' . $tahun . '_' . $time_name;
+                $file_name = $time_name . '_ROM_F_W' . $week . '_' . $bulan . '_' . $tahun;
             }
             $data_rom = array(
                 'WEEK'          => $week,

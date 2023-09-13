@@ -98,12 +98,11 @@ class Rob extends MY_Controller
             $tipe = $this->input->post('tipe');
             $bulan = $this->input->post('bulan');
             $tahun = $this->input->post('tahun');
-            //$file_name = generate_filename_rob($this->input->post('tipe'), $this->input->post('bulan'), $this->input->post('tahun'), $time);
             $time_name = date('YmdHis', strtotime($time));
             if ($tipe == 1) {
-                $file_name = 'ROB_S_' . $bulan . '_' . $tahun . '_' . $time_name;
+                $file_name = $time_name . '_ROB_S_' . $bulan . '_' . $tahun;
             } else if ($tipe == 2) {
-                $file_name = 'ROB_F_' . $bulan . '_' . $tahun . '_' . $time_name;
+                $file_name = $time_name . '_ROB_F_' . $bulan . '_' . $tahun;
             }
             $data_rob = array(
                 'BULAN'         => bulan($bulan),
