@@ -94,14 +94,24 @@ class Rob extends MY_Controller
             $this->load->view('rob-add', $data);
         } else {
             cek_csrf();
-            $file_name = generate_filename_rob($this->input->post('tipe'), $this->input->post('bulan'), $this->input->post('tahun'));
+            $time = date('Y-m-d H:i:s');
+            $tipe = $this->input->post('tipe');
+            $bulan = $this->input->post('bulan');
+            $tahun = $this->input->post('tahun');
+            //$file_name = generate_filename_rob($this->input->post('tipe'), $this->input->post('bulan'), $this->input->post('tahun'), $time);
+            $time_name = date('YmdHis', strtotime($time));
+            if ($tipe == 1) {
+                $file_name = 'ROB_S_' . $bulan . '_' . $tahun . '_' . $time_name;
+            } else if ($tipe == 2) {
+                $file_name = 'ROB_F_' . $bulan . '_' . $tahun . '_' . $time_name;
+            }
             $data_rob = array(
-                'BULAN'         => bulan($this->input->post('bulan')),
-                'BLN'           => $this->input->post('bulan'),
-                'TAHUN'         => $this->input->post('tahun'),
-                'TIPE'          => $this->input->post('tipe'),
+                'BULAN'         => bulan($bulan),
+                'BLN'           => $bulan,
+                'TAHUN'         => $tahun,
+                'TIPE'          => $tipe,
                 'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => date('Y-m-d H:i:s')
+                'CREATED_ON'    => $time
             );
             $add_id = $this->Rob_model->addRob($data_rob);
             $this->do_upload($this->input->post('tipe'), $add_id, $file_name);

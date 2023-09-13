@@ -89,12 +89,20 @@ class Rot extends MY_Controller
             $this->load->view('rot-add', $data);
         } else {
             cek_csrf();
-            $file_name = generate_filename_rot($this->input->post('tipe'), $this->input->post('tahun'));
+            $time = date('Y-m-d H:i:s');
+            $tipe = $this->input->post('tipe');
+            $tahun = $this->input->post('tahun');
+            $time_name = date('YmdHis', strtotime($time));
+            if ($tipe == 1) {
+                $file_name = 'ROT_S_' . $tahun . '_' . $time_name;
+            } else if ($tipe == 2) {
+                $file_name = 'ROT_F_' . $tahun . '_' . $time_name;
+            }
             $data_rot = array(
-                'TAHUN'         => $this->input->post('tahun'),
-                'TIPE'          => $this->input->post('tipe'),
+                'TAHUN'         => $tahun,
+                'TIPE'          => $tipe,
                 'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => date('Y-m-d H:i:s')
+                'CREATED_ON'    => $time
             );
             $add_id = $this->Rot_model->addRot($data_rot);
             $this->do_upload($this->input->post('tipe'), $add_id, $file_name);

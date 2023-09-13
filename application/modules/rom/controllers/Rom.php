@@ -99,15 +99,25 @@ class Rom extends MY_Controller
             $this->load->view('rom-add', $data);
         } else {
             cek_csrf();
-            $file_name = generate_filename_rom($this->input->post('tipe'), $this->input->post('week'), $this->input->post('bulan'), $this->input->post('tahun'));
+            $time = date('Y-m-d H:i:s');
+            $tipe = $this->input->post('tipe');
+            $bulan = $this->input->post('bulan');
+            $tahun = $this->input->post('tahun');
+            $week = $this->input->post('week');
+            $time_name = date('YmdHis', strtotime($time));
+            if ($tipe == 1) {
+                $file_name = 'ROM_S_W' . $week . '_' . $bulan . '_' . $tahun . '_' . $time_name;
+            } else if ($tipe == 2) {
+                $file_name = 'ROM_F_W' . $week . '_' . $bulan . '_' . $tahun . '_' . $time_name;
+            }
             $data_rom = array(
-                'WEEK'          => $this->input->post('week'),
-                'BULAN'         => bulan($this->input->post('bulan')),
-                'BLN'           => $this->input->post('bulan'),
-                'TAHUN'         => $this->input->post('tahun'),
-                'TIPE'          => $this->input->post('tipe'),
+                'WEEK'          => $week,
+                'BULAN'         => bulan($bulan),
+                'BLN'           => $bulan,
+                'TAHUN'         => $tahun,
+                'TIPE'          => $tipe,
                 'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => date('Y-m-d H:i:s')
+                'CREATED_ON'    => $time
             );
             $add_id = $this->Rom_model->addRom($data_rom);
             $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
