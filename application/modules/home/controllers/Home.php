@@ -17,6 +17,15 @@ class Home extends MY_Controller
     {
         $data['ptitle']     = "Home";
         $data['title']      = "Home";
+
+        //DISK
+        $totalDiskSpace = disk_total_space('/');
+        $freeDiskSpace = disk_free_space('/');
+        $usedDiskSpace = $totalDiskSpace - $freeDiskSpace;
+        $data['totaldisk'] = $totalDiskSpace;
+        $data['freedisk'] = $freeDiskSpace;
+        $data['useddisk'] = $usedDiskSpace;
+
         $this->load->view('home-view', $data);
     }
 }

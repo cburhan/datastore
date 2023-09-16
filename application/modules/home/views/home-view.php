@@ -30,9 +30,9 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="row justify-content-center mb-5">
+                                        <div class="row justify-content-center mb-0">
                                             <div class="col-lg-8">
-                                                <div class="text-center faq-title pt-4 pb-4">
+                                                <div class="text-center faq-title">
                                                     <div>
                                                         <i class="ion ion-ios-ribbon text-primary h1"></i>
                                                     </div>
@@ -40,6 +40,79 @@
                                                     <p class="text-muted mb-0">Selamat datang di <strong>P2EP Data Store</strong>.</p>
                                                     <p class="text-muted mb-0"><strong>P2EP Data Store</strong> digunakan sebagai tools dalam melakukan upload Manual Data Feeding <strong>P2EP</strong>.</p>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-7">
+                                                <div class="row">
+                                                    <h4 class="card-title mb-4">Disk Space</h4>
+                                                    <div class="col-lg-6">
+                                                        <dl class="row mb-0">
+                                                            <dt class="col-sm-6">
+                                                                <p class="text-muted mb-0">Used Disk Space</p>
+                                                            </dt>
+                                                            <dd class="col-sm-6">
+                                                                <h5 class="mb-0 font-size-15"><?= formatBytes($useddisk); ?></h5>
+                                                            </dd>
+                                                            <dt class="col-sm-6">
+                                                                <p class="text-muted mb-0">Free Disk Space</p>
+                                                            </dt>
+                                                            <dd class="col-sm-6">
+                                                                <h5 class="mb-0 font-size-15"><?= formatBytes($freedisk); ?></h5>
+                                                            </dd>
+                                                            <dt class="col-sm-6">
+                                                                <p class="text-muted mb-0">Total Disk Space</p>
+                                                            </dt>
+                                                            <dd class="col-sm-6">
+                                                                <h5 class="mb-0 font-size-15"><?= formatBytes($totaldisk); ?></h5>
+                                                            </dd>
+                                                        </dl>
+                                                    </div>
+                                                    <div class="col-lg-5">
+                                                        <div id="pie-chart" class="mb-0">
+                                                            <div id="pie-chart-container" class="flot-charts flot-charts-height">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-5">
+                                                <h4 class="card-title mb-4">Apps</h4>
+                                                <dl class="row mb-0">
+                                                    <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Version</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h5 class="mb-0 font-size-15"><?= lastVersion()['VER']; ?></h5>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Last Update</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <?php
+                                                        $tgl = date("Y-m-d", strtotime(lastVersion()['CREATED_ON']));
+                                                        $jam = date("H:i:s", strtotime(lastVersion()['CREATED_ON']));
+                                                        ?>
+                                                        <h5 class="mb-0 font-size-15"><?= tgl_indonesia($tgl) . ' ' . $jam; ?></h5>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Maintener</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <ul class="ps-3">
+                                                            <li>
+                                                                <h5 class=" mb-0 font-size-15">Miftahu Choirul Burhan</h5>
+                                                            </li>
+                                                            <li>
+                                                                <h5 class="mb-0 font-size-15">Reza Kamaluddin Isman</h5>
+                                                            </li>
+                                                        </ul>
+                                                    </dd>
+                                                </dl>
                                             </div>
                                         </div>
                                     </div>
@@ -59,6 +132,57 @@
 
         <!-- JAVASCRIPT -->
         <?php $this->load->view('template/js'); ?>
+        <script src="<?= base_url('assets/'); ?>libs/flot-charts/jquery.flot.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/flot-charts/jquery.flot.time.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/jquery.flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/flot-charts/jquery.flot.resize.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/flot-charts/jquery.flot.pie.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/flot-charts/jquery.flot.selection.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/flot-charts/jquery.flot.stack.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/flot.curvedlines/curvedLines.js"></script>
+        <script src="<?= base_url('assets/'); ?>libs/flot-charts/jquery.flot.crosshair.js"></script>
+        <script>
+            ! function(n) {
+                "use strict";
+
+                function t() {
+                    this.$body = n("body"), this.$realData = []
+                }
+                t.prototype.createPieGraph = function(t, a, o, e) {
+                    a = [{
+                        label: a[0],
+                        data: o[0]
+                    }, {
+                        label: a[1],
+                        data: o[1]
+                    }], o = {
+                        series: {
+                            pie: {
+                                show: !0,
+                                radius: 1
+                            }
+                        },
+                        legend: {
+                            show: !0,
+                            backgroundColor: "transparent"
+                        },
+                        grid: {
+                            hoverable: !0,
+                            clickable: !0
+                        },
+                        colors: e,
+                        height: '10%',
+                    };
+                    n.plot(n(t), a, o)
+                }, t.prototype.init = function() {
+                    this.createPieGraph("#pie-chart #pie-chart-container", ["Used", "Free"], [<?= $useddisk; ?>, <?= $freedisk; ?>], ["#3c4ccf", "#02a499"]);
+                }, n.FlotChart = new t, n.FlotChart.Constructor = t
+            }(window.jQuery),
+            function() {
+                "use strict";
+                window.jQuery.FlotChart.init()
+            }();
+        </script>
 </body>
 
 </html>
