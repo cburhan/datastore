@@ -38,6 +38,9 @@ class Home extends MY_Controller
         $data['freedisk'] = $freeDiskSpace;
         $data['useddisk'] = $usedDiskSpace;
 
+        //USER
+        $data['user'] = $this->Home_model->getTotalUser();
+
         $this->load->view('home-view', $data);
     }
 }

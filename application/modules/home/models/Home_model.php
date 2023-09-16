@@ -40,4 +40,11 @@ class Home_model extends CI_Model
         $this->db->from('bio_master');
         return $this->db->get()->row_array();
     }
+
+    public function getTotalUser()
+    {
+        $this->db->select('COUNT(ID) as U');
+        $this->db->from('user');
+        return $this->db->get()->row_array();
+    }
 }

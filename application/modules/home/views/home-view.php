@@ -111,7 +111,7 @@
                                     </div>
                                 </div>
                                 <div class="card">
-                                    <div class="card-body">
+                                    <div class="card-body pb-0">
                                         <div class="row">
                                             <div class="col-lg-7">
                                                 <div class="row">
@@ -164,6 +164,12 @@
                                                         $jam = date("H:i:s", strtotime(lastVersion()['CREATED_ON']));
                                                         ?>
                                                         <h5 class="mb-0 font-size-15 text-primary"><?= tgl_indonesia($tgl) . ' ' . $jam; ?></h5>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Total User</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h5 class="mb-0 font-size-15 text-primary"><?= $user['U']; ?> Users</h5>
                                                     </dd>
                                                     <dt class="col-sm-4">
                                                         <p class="text-muted mb-0">Maintener</p>
