@@ -16,7 +16,7 @@
                                 <h5 class="text-white font-size-20 mb-0"><?= apps()['NAME']; ?></h5>
                                 <p class="text-white-50">Silahkan Log In untuk masuk ke sistem</p>
                                 <a href="index.html" class="logo logo-admin">
-                                    <img src="<?= base_url('public/apps/') . apps()['LOGO']; ?>" height="24" alt="logo">
+                                    <img src="<?= base_url('public/apps/') . apps()['LOGO']; ?>" height="32" alt="logo">
                                 </a>
                             </div>
                         </div>
