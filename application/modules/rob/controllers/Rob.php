@@ -34,19 +34,19 @@ class Rob extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<div class="text-center">' . $no . '</div>';
-            $sub_array[] = $row->FILE;
-            $sub_array[] = $row->BULAN;
-            $sub_array[] = $row->TAHUN;
+            $sub_array[] = '<div class="text-center"><small>' . $no . '</small></div>';
+            $sub_array[] = '<small>' . $row->FILE . '</small>';
+            $sub_array[] = '<small>' . $row->BULAN . '</small>';
+            $sub_array[] = '<small>' . $row->TAHUN . '</small>';
             if ($row->TIPE == 1) {
                 $sub_array[] = '<span class="badge bg-sm bg-info">SEMENTARA</span>';
             } else if ($row->TIPE == 2) {
                 $sub_array[] = '<span class="badge bg-sm bg-success">FINAL</span>';
             }
-            $sub_array[] = $row->CREATED_BY;
+            $sub_array[] = '<small>' . $row->CREATED_BY . '</small>';
             $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
             $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = tgl_indo($tgl_out) . ' ' . $jam_out;
+            $sub_array[] = '<small>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</small>';
             $detail = NULL;
             $del = NULL;
 
@@ -98,29 +98,38 @@ class Rob extends MY_Controller
             $tipe = $this->input->post('tipe');
             $bulan = $this->input->post('bulan');
             $tahun = $this->input->post('tahun');
-            $time_name = date('YmdHis', strtotime($time));
-            if ($tipe == 1) {
-                $file_name = $time_name . '_ROB_S_' . $bulan . '_' . $tahun;
-            } else if ($tipe == 2) {
-                $file_name = $time_name . '_ROB_F_' . $bulan . '_' . $tahun;
-            }
-            $data_rob = array(
-                'BULAN'         => bulan($bulan),
-                'BLN'           => $bulan,
-                'TAHUN'         => $tahun,
-                'TIPE'          => $tipe,
-                'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => $time
-            );
-            $add_id = $this->Rob_model->addRob($data_rob);
-            $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
-            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+            $cek_rob = cek_rob_f($bulan, $tahun);
+            if ($tipe == 1 && $cek_rob['count'] != 0) {
+                $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Sukses!</strong> Data ROB berhasil ditambah.
+                        <strong>Gagal!</strong> Data ROB Bulan ' . bulan($bulan) . ' Tahun ' . $tahun . ' sudah ada yang Final.
                         </div>';
-            $this->session->set_flashdata('flash', $flash);
-            $ket = 'Menambah data <strong>Rencana Operasi Bulanan</strong> periode <strong>' . $data_rob['BULAN'] . ' ' . $data_rob['TAHUN'] . '</strong>';
-            activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+                $this->session->set_flashdata('flash', $flash);
+            } else {
+                $time_name = date('YmdHis', strtotime($time));
+                if ($tipe == 1) {
+                    $file_name = $time_name . '_ROB_S_' . $bulan . '_' . $tahun;
+                } else if ($tipe == 2) {
+                    $file_name = $time_name . '_ROB_F_' . $bulan . '_' . $tahun;
+                }
+                $data_rob = array(
+                    'BULAN'         => bulan($bulan),
+                    'BLN'           => $bulan,
+                    'TAHUN'         => $tahun,
+                    'TIPE'          => $tipe,
+                    'CREATED_BY'    => get_session_name(),
+                    'CREATED_ON'    => $time
+                );
+                $add_id = $this->Rob_model->addRob($data_rob);
+                $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
+                $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <strong>Sukses!</strong> Data ROB berhasil ditambah.
+                            </div>';
+                $this->session->set_flashdata('flash', $flash);
+                $ket = 'Menambah data <strong>Rencana Operasi Bulanan</strong> periode <strong>' . $data_rob['BULAN'] . ' ' . $data_rob['TAHUN'] . '</strong>';
+                activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+            }
             redirect('rob');
         }
     }

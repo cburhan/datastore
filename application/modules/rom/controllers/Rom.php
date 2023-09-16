@@ -104,30 +104,39 @@ class Rom extends MY_Controller
             $bulan = $this->input->post('bulan');
             $tahun = $this->input->post('tahun');
             $week = $this->input->post('week');
-            $time_name = date('YmdHis', strtotime($time));
-            if ($tipe == 1) {
-                $file_name = $time_name . '_ROM_S_W' . $week . '_' . $bulan . '_' . $tahun;
-            } else if ($tipe == 2) {
-                $file_name = $time_name . '_ROM_F_W' . $week . '_' . $bulan . '_' . $tahun;
-            }
-            $data_rom = array(
-                'WEEK'          => $week,
-                'BULAN'         => bulan($bulan),
-                'BLN'           => $bulan,
-                'TAHUN'         => $tahun,
-                'TIPE'          => $tipe,
-                'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => $time
-            );
-            $add_id = $this->Rom_model->addRom($data_rom);
-            $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
-            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+            $cek_rom = cek_rom_f($week, $bulan, $tahun);
+            if ($tipe == 1 && $cek_rom['count'] != 0) {
+                $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Sukses!</strong> Data ROM berhasil ditambah.
+                        <strong>Gagal!</strong> Data ROM W' . $week . ' Bulan ' . bulan($bulan) . ' Tahun ' . $tahun . ' sudah ada yang Final.
                         </div>';
-            $this->session->set_flashdata('flash', $flash);
-            $ket = 'Menambah data <strong>Rencana Operasi Mingguan</strong> periode <strong>' . $data_rom['BULAN'] . ' ' . $data_rom['TAHUN'] . '</strong>';
-            activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+                $this->session->set_flashdata('flash', $flash);
+            } else {
+                $time_name = date('YmdHis', strtotime($time));
+                if ($tipe == 1) {
+                    $file_name = $time_name . '_ROM_S_W' . $week . '_' . $bulan . '_' . $tahun;
+                } else if ($tipe == 2) {
+                    $file_name = $time_name . '_ROM_F_W' . $week . '_' . $bulan . '_' . $tahun;
+                }
+                $data_rom = array(
+                    'WEEK'          => $week,
+                    'BULAN'         => bulan($bulan),
+                    'BLN'           => $bulan,
+                    'TAHUN'         => $tahun,
+                    'TIPE'          => $tipe,
+                    'CREATED_BY'    => get_session_name(),
+                    'CREATED_ON'    => $time
+                );
+                $add_id = $this->Rom_model->addRom($data_rom);
+                $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
+                $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <strong>Sukses!</strong> Data ROM berhasil ditambah.
+                            </div>';
+                $this->session->set_flashdata('flash', $flash);
+                $ket = 'Menambah data <strong>Rencana Operasi Mingguan</strong> periode <strong>' . $data_rom['BULAN'] . ' ' . $data_rom['TAHUN'] . '</strong>';
+                activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+            }
             redirect('rom');
         }
     }

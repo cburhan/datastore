@@ -29,6 +29,7 @@ class Rom_model extends CI_Model
         } else {
             $this->db->order_by('TAHUN', 'DESC');
             $this->db->order_by('BLN', 'DESC');
+            $this->db->order_by('WEEK', 'DESC');
             $this->db->order_by('TIPE', 'DESC');
             $this->db->order_by('CREATED_ON', 'DESC');
         }

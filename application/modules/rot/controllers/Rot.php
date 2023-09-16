@@ -92,27 +92,36 @@ class Rot extends MY_Controller
             $time = date('Y-m-d H:i:s');
             $tipe = $this->input->post('tipe');
             $tahun = $this->input->post('tahun');
-            $time_name = date('YmdHis', strtotime($time));
-            if ($tipe == 1) {
-                $file_name = $time_name . '_ROT_S_' . $tahun;
-            } else if ($tipe == 2) {
-                $file_name = $time_name . '_ROT_F_' . $tahun;
-            }
-            $data_rot = array(
-                'TAHUN'         => $tahun,
-                'TIPE'          => $tipe,
-                'CREATED_BY'    => get_session_name(),
-                'CREATED_ON'    => $time
-            );
-            $add_id = $this->Rot_model->addRot($data_rot);
-            $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
-            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+            $cek_rot = cek_rot_f($tahun);
+            if ($tipe == 1 && $cek_rot['count'] != 0) {
+                $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Sukses!</strong> Data ROT berhasil ditambah.
+                        <strong>Gagal!</strong> Data ROT Tahun ' . $tahun . ' sudah ada yang Final.
                         </div>';
-            $this->session->set_flashdata('flash', $flash);
-            $ket = 'Menambah data <strong>Rencana Operasi Tahunan</strong> tahun <strong>' . $data_rot['TAHUN'] . '</strong>';
-            activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+                $this->session->set_flashdata('flash', $flash);
+            } else {
+                $time_name = date('YmdHis', strtotime($time));
+                if ($tipe == 1) {
+                    $file_name = $time_name . '_ROT_S_' . $tahun;
+                } else if ($tipe == 2) {
+                    $file_name = $time_name . '_ROT_F_' . $tahun;
+                }
+                $data_rot = array(
+                    'TAHUN'         => $tahun,
+                    'TIPE'          => $tipe,
+                    'CREATED_BY'    => get_session_name(),
+                    'CREATED_ON'    => $time
+                );
+                $add_id = $this->Rot_model->addRot($data_rot);
+                $this->do_upload($this->input->post('tipe'), $add_id, $file_name);
+                $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            <strong>Sukses!</strong> Data ROT berhasil ditambah.
+                            </div>';
+                $this->session->set_flashdata('flash', $flash);
+                $ket = 'Menambah data <strong>Rencana Operasi Tahunan</strong> tahun <strong>' . $data_rot['TAHUN'] . '</strong>';
+                activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+            }
             redirect('rot');
         }
     }

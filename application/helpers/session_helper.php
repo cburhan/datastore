@@ -207,3 +207,51 @@ function lastVersion()
     $query = $CI->db->get();
     return $query->row_array();
 }
+
+function cek_rot_f($tahun)
+{
+    $CI = &get_instance();
+    $CI->load->database();
+
+    $CI->db->select('COUNT(*) as count');
+    $CI->db->from('rot');
+    $CI->db->where('TIPE', 2);
+    $CI->db->where('TAHUN', $tahun);
+    $query = $CI->db->get();
+    $result = $query->row_array();
+
+    return $result;
+}
+
+function cek_rob_f($bulan, $tahun)
+{
+    $CI = &get_instance();
+    $CI->load->database();
+
+    $CI->db->select('COUNT(*) as count');
+    $CI->db->from('rob');
+    $CI->db->where('TIPE', 2);
+    $CI->db->where('BLN', $bulan);
+    $CI->db->where('TAHUN', $tahun);
+    $query = $CI->db->get();
+    $result = $query->row_array();
+
+    return $result;
+}
+
+function cek_rom_f($week, $bulan, $tahun)
+{
+    $CI = &get_instance();
+    $CI->load->database();
+
+    $CI->db->select('COUNT(*) as count');
+    $CI->db->from('rom');
+    $CI->db->where('TIPE', 2);
+    $CI->db->where('WEEK', $week);
+    $CI->db->where('BLN', $bulan);
+    $CI->db->where('TAHUN', $tahun);
+    $query = $CI->db->get();
+    $result = $query->row_array();
+
+    return $result;
+}
