@@ -44,6 +44,72 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <div class="card-body">
+                                                <div class="mb-1">
+                                                    <div class="float-start mini-stat-img me-4">
+                                                        <img src="<?= base_url('assets/images/ro.png'); ?>" alt="" style="max-width: 38px !important">
+                                                    </div>
+                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>RENCANA OPERASI</h6>
+                                                    <h4 class="fw-medium font-size-24"><?= $ro_total; ?></h4>
+                                                </div>
+                                                <div class="pt-2">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data ROT</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $rot['ROT']; ?></p>
+                                                        </dd>
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data ROB</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $rob['ROB']; ?></p>
+                                                        </dd>
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data ROM</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $rom['ROM']; ?></p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <div class="card-body">
+                                                <div class="mb-1">
+                                                    <div class="float-start mini-stat-img me-4">
+                                                        <img src="<?= base_url('assets/images/bio.png'); ?>" alt="" style="max-width: 38px !important">
+                                                    </div>
+                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>BIOMASSA</h6>
+                                                    <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
+                                                </div>
+                                                <div class="pt-2">
+                                                    <dl class="row mb-4">
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data Transaksi</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $bio_t['BIO_T']; ?></p>
+                                                        </dd>
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data Master</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $bio_m['BIO_M']; ?></p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -56,19 +122,19 @@
                                                                 <p class="text-muted mb-0">Used Disk Space</p>
                                                             </dt>
                                                             <dd class="col-sm-6">
-                                                                <h5 class="mb-0 font-size-15"><?= formatBytes($useddisk); ?></h5>
+                                                                <h5 class="mb-0 font-size-15 text-primary"><?= formatBytes($useddisk); ?></h5>
                                                             </dd>
                                                             <dt class="col-sm-6">
                                                                 <p class="text-muted mb-0">Free Disk Space</p>
                                                             </dt>
                                                             <dd class="col-sm-6">
-                                                                <h5 class="mb-0 font-size-15"><?= formatBytes($freedisk); ?></h5>
+                                                                <h5 class="mb-0 font-size-15 text-success"><?= formatBytes($freedisk); ?></h5>
                                                             </dd>
                                                             <dt class="col-sm-6">
                                                                 <p class="text-muted mb-0">Total Disk Space</p>
                                                             </dt>
                                                             <dd class="col-sm-6">
-                                                                <h5 class="mb-0 font-size-15"><?= formatBytes($totaldisk); ?></h5>
+                                                                <h5 class="mb-0 font-size-15 text-info"><?= formatBytes($totaldisk); ?></h5>
                                                             </dd>
                                                         </dl>
                                                     </div>
@@ -87,7 +153,7 @@
                                                         <p class="text-muted mb-0">Version</p>
                                                     </dt>
                                                     <dd class="col-sm-8">
-                                                        <h5 class="mb-0 font-size-15"><?= lastVersion()['VER']; ?></h5>
+                                                        <h5 class="mb-0 font-size-15 text-primary"><?= lastVersion()['VER']; ?></h5>
                                                     </dd>
                                                     <dt class="col-sm-4">
                                                         <p class="text-muted mb-0">Last Update</p>
@@ -97,13 +163,13 @@
                                                         $tgl = date("Y-m-d", strtotime(lastVersion()['CREATED_ON']));
                                                         $jam = date("H:i:s", strtotime(lastVersion()['CREATED_ON']));
                                                         ?>
-                                                        <h5 class="mb-0 font-size-15"><?= tgl_indonesia($tgl) . ' ' . $jam; ?></h5>
+                                                        <h5 class="mb-0 font-size-15 text-primary"><?= tgl_indonesia($tgl) . ' ' . $jam; ?></h5>
                                                     </dd>
                                                     <dt class="col-sm-4">
                                                         <p class="text-muted mb-0">Maintener</p>
                                                     </dt>
                                                     <dd class="col-sm-8">
-                                                        <ul class="ps-3">
+                                                        <ul class="ps-3 text-primary">
                                                             <li>
                                                                 <h5 class=" mb-0 font-size-15">Miftahu Choirul Burhan</h5>
                                                             </li>
