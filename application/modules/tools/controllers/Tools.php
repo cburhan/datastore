@@ -85,7 +85,7 @@ class Tools extends MY_Controller
                         <strong>Gagal!</strong> ' . strip_tags($error) . '
                         </div>';
             $this->session->set_flashdata('flash', $flash);
-            redirect('tools/show_apps');
+            redirect('tools/apps');
         } else {
             cek_csrf();
             $upload = $this->upload->data();
