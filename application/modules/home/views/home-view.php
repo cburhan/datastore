@@ -52,7 +52,7 @@
                                                     <div class="float-start mini-stat-img me-4">
                                                         <img src="<?= base_url('assets/images/ro.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
-                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>RENCANA OPERASI</h6>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>RENCANA OPERASI</h6>
                                                     <h4 class="fw-medium font-size-24"><?= $ro_total; ?></h4>
                                                 </div>
                                                 <div class="pt-2">
@@ -87,7 +87,7 @@
                                                     <div class="float-start mini-stat-img me-4">
                                                         <img src="<?= base_url('assets/images/bio.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
-                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>BIOMASSA</h6>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>BIOMASSA</h6>
                                                     <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
                                                 </div>
                                                 <div class="pt-2">
@@ -116,7 +116,7 @@
                                                     <div class="float-start mini-stat-img me-4">
                                                         <img src="<?= base_url('assets/images/gas.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
-                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>GAS</h6>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>GAS</h6>
                                                     <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
                                                 </div>
                                                 <div class="pt-2">
@@ -145,7 +145,7 @@
                                                     <div class="float-start mini-stat-img me-4">
                                                         <img src="<?= base_url('assets/images/bbm.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
-                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>BBM</h6>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>BBM</h6>
                                                     <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
                                                 </div>
                                                 <div class="pt-2">
