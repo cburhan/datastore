@@ -268,3 +268,12 @@ function formatBytes($bytes, $precision = 2)
 
     return round($bytes, $precision) . ' ' . $units[$pow];
 }
+
+function get_pembangkit($kode)
+{
+    $CI = &get_instance();
+    $CI->load->model('pembangkit/Pembangkit_model');
+
+    $kit = $CI->Pembangkit_model->getPembangkitByKode($kode)->row_array();
+    return $kit['NAMA_PEMBANGKIT'];
+}

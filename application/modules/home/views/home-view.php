@@ -109,6 +109,163 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <div class="card-body">
+                                                <div class="mb-1">
+                                                    <div class="float-start mini-stat-img me-4">
+                                                        <img src="<?= base_url('assets/images/gas.png'); ?>" alt="" style="max-width: 38px !important">
+                                                    </div>
+                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>GAS</h6>
+                                                    <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
+                                                </div>
+                                                <div class="pt-2">
+                                                    <dl class="row mb-4">
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data Transaksi</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $bio_t['BIO_T']; ?></p>
+                                                        </dd>
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data Master</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $bio_m['BIO_M']; ?></p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <div class="card-body">
+                                                <div class="mb-1">
+                                                    <div class="float-start mini-stat-img me-4">
+                                                        <img src="<?= base_url('assets/images/bbm.png'); ?>" alt="" style="max-width: 38px !important">
+                                                    </div>
+                                                    <h6 class="font-size-12 text-uppercase text-white-50 mb-1">TOTAL DATA<br>BBM</h6>
+                                                    <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
+                                                </div>
+                                                <div class="pt-2">
+                                                    <dl class="row mb-4">
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data Transaksi</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $bio_t['BIO_T']; ?></p>
+                                                        </dd>
+                                                        <dt class="col-sm-8">
+                                                            <p class="text-white-50 mb-0">Data Master</p>
+                                                        </dt>
+                                                        <dd class="col-sm-4 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $bio_m['BIO_M']; ?></p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="card mini-stat bg-white">
+                                            <div class="card-body">
+                                                <h4 class="card-title mb-4">Latest ROT File</h4>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-centered table-nowrap mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">File</th>
+                                                                <th scope="col">Upload By</th>
+                                                                <th scope="col">Upload On</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php if ($last_rot != NULL) { ?>
+                                                                <?php foreach ($last_rot as $d) : ?>
+                                                                    <tr>
+                                                                        <td><?= $d['FILE']; ?></td>
+                                                                        <td><?= $d['CREATED_BY']; ?></td>
+                                                                        <?php $tgl = date("Y-m-d", strtotime($d['CREATED_ON']));
+                                                                        $jam = date("H:i:s", strtotime($d['CREATED_ON'])); ?>
+                                                                        <td><?= $tgl . ' ' . $jam; ?></td>
+                                                                    </tr>
+                                                                <?php endforeach; ?>
+                                                            <?php } else { ?>
+                                                                <tr>
+                                                                    <td colspan="3" class="text-center">Tidak Ada Data</td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title mb-4">Latest ROB File</h4>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-centered table-nowrap mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">File</th>
+                                                                <th scope="col">Upload By</th>
+                                                                <th scope="col">Upload On</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php if ($last_rob != NULL) { ?>
+                                                                <?php foreach ($last_rob as $d) : ?>
+                                                                    <tr>
+                                                                        <td><?= $d['FILE']; ?></td>
+                                                                        <td><?= $d['CREATED_BY']; ?></td>
+                                                                        <?php $tgl = date("Y-m-d", strtotime($d['CREATED_ON']));
+                                                                        $jam = date("H:i:s", strtotime($d['CREATED_ON'])); ?>
+                                                                        <td><?= $tgl . ' ' . $jam; ?></td>
+                                                                    </tr>
+                                                                <?php endforeach; ?>
+                                                            <?php } else { ?>
+                                                                <tr>
+                                                                    <td colspan="3" class="text-center">Tidak Ada Data</td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title mb-4">Latest ROM File</h4>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover table-centered table-nowrap mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">File</th>
+                                                                <th scope="col">Upload By</th>
+                                                                <th scope="col">Upload On</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php if ($last_rom != NULL) { ?>
+                                                                <?php foreach ($last_rom as $d) : ?>
+                                                                    <tr>
+                                                                        <td><?= $d['FILE']; ?></td>
+                                                                        <td><?= $d['CREATED_BY']; ?></td>
+                                                                        <?php $tgl = date("Y-m-d", strtotime($d['CREATED_ON']));
+                                                                        $jam = date("H:i:s", strtotime($d['CREATED_ON'])); ?>
+                                                                        <td><?= $tgl . ' ' . $jam; ?></td>
+                                                                    </tr>
+                                                                <?php endforeach; ?>
+                                                            <?php } else { ?>
+                                                                <tr>
+                                                                    <td colspan="3" class="text-center">Tidak Ada Data</td>
+                                                                </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="card">
                                     <div class="card-body pb-0">

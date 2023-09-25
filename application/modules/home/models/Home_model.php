@@ -47,4 +47,31 @@ class Home_model extends CI_Model
         $this->db->from('user');
         return $this->db->get()->row_array();
     }
+
+    public function getLastRot()
+    {
+        $this->db->select('*');
+        $this->db->from('rot');
+        $this->db->order_by('ID', 'DESC');
+        $this->db->limit(5);
+        return $this->db->get()->result_array();
+    }
+
+    public function getLastRob()
+    {
+        $this->db->select('*');
+        $this->db->from('rob');
+        $this->db->order_by('ID', 'DESC');
+        $this->db->limit(5);
+        return $this->db->get()->result_array();
+    }
+
+    public function getLastRom()
+    {
+        $this->db->select('*');
+        $this->db->from('rom');
+        $this->db->order_by('ID', 'DESC');
+        $this->db->limit(5);
+        return $this->db->get()->result_array();
+    }
 }

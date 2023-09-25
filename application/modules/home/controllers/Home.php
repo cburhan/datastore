@@ -38,6 +38,11 @@ class Home extends MY_Controller
         $data['freedisk'] = $freeDiskSpace;
         $data['useddisk'] = $usedDiskSpace;
 
+        //LAST RO
+        $data['last_rot'] = $this->Home_model->getLastRot();
+        $data['last_rob'] = $this->Home_model->getLastRob();
+        $data['last_rom'] = $this->Home_model->getLastRom();
+
         //USER
         $data['user'] = $this->Home_model->getTotalUser();
 
