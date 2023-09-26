@@ -81,14 +81,11 @@
                                                         <th class="p-1 text-center align-middle">
                                                             <smalls>#</smalls>
                                                         </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Kode Pembangkit</smalls>
+                                                        </th>
                                                         <th class="p-1 align-middle">
                                                             <smalls>Pembangkit</smalls>
-                                                        </th>
-                                                        <th class="p-1 text-center align-middle">
-                                                            <smalls>Kepemilikan</smalls>
-                                                        </th>
-                                                        <th class="p-1 text-center align-middle">
-                                                            <smalls>Regional</smalls>
                                                         </th>
                                                         <th class="p-1 text-center align-middle">
                                                             <smalls>Kapasitas Maksimum Penyimpanan Bio</smalls>
@@ -109,23 +106,20 @@
                                                                     <td class="p-1 text-center">
                                                                         <smalls><?= $i; ?>
                                                                     </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['A'] != NULL ? $f['A'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
                                                                     <td class="p-1">
-                                                                        <smalls><?= ($f['A'] != NULL ? $f['A'] : 'No data'); ?></smalls>
+                                                                        <smalls><?= ($f['A'] != NULL ? get_pembangkit($f['A']) : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalls><?= ($f['B'] != NULL ? $f['B'] : 'No data'); ?></smalls>
+                                                                        <smalls><?= ($f['C'] != NULL ? $f['C'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalls><?= ($f['C'] != NULL ? $f['C'] : 'No data'); ?></smalls>
+                                                                        <smalls><?= ($f['D'] != NULL ? $f['D'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalls><?= ($f['D'] != NULL ? $f['D'] : 'No data'); ?></smalls>
-                                                                    </td>
-                                                                    <td class="p-1 text-center">
-                                                                        <smalls><?= ($f['E'] != NULL ? $f['E'] : 'No data'); ?></smalls>
-                                                                    </td>
-                                                                    <td class="p-1 text-center">
-                                                                        <smalls><?= ($f['F'] != NULL ? $f['F'] : 'No data'); ?></smalls>
+                                                                        <smalls><?= ($f['E'] != NULL ? $f['E'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                     </td>
                                                                 </tr>
                                                             <?php endif; ?>
