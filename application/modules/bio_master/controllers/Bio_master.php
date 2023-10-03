@@ -86,6 +86,9 @@ class Bio_master extends MY_Controller
         } else if ($tipe == 3) {
             $tipe_text = 'AMANDEMEN';
             $tipe_color = 'warning';
+        } else if ($tipe == 4) {
+            $tipe_text = 'PEMASOK';
+            $tipe_color = 'success';
         }
 
         if ($this->form_validation->run() == FALSE) {

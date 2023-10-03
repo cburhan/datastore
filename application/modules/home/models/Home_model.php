@@ -41,6 +41,48 @@ class Home_model extends CI_Model
         return $this->db->get()->row_array();
     }
 
+    public function getGaspipaTrans()
+    {
+        $this->db->select('COUNT(ID) as GP_T');
+        $this->db->from('gaspipa_trans');
+        return $this->db->get()->row_array();
+    }
+
+    public function getGaspipaMaster()
+    {
+        $this->db->select('COUNT(ID) as GP_M');
+        $this->db->from('gaspipa_master');
+        return $this->db->get()->row_array();
+    }
+
+    public function getLngTrans()
+    {
+        $this->db->select('COUNT(ID) as LNG_T');
+        $this->db->from('lng_trans');
+        return $this->db->get()->row_array();
+    }
+
+    public function getLngMaster()
+    {
+        $this->db->select('COUNT(ID) as LNG_M');
+        $this->db->from('lng_master');
+        return $this->db->get()->row_array();
+    }
+
+    public function getBbmTrans()
+    {
+        $this->db->select('COUNT(ID) as BBM_T');
+        $this->db->from('bbm_trans');
+        return $this->db->get()->row_array();
+    }
+
+    public function getBbmMaster()
+    {
+        $this->db->select('COUNT(ID) as BBM_M');
+        $this->db->from('bbm_master');
+        return $this->db->get()->row_array();
+    }
+
     public function getTotalUser()
     {
         $this->db->select('COUNT(ID) as U');

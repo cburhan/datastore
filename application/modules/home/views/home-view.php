@@ -45,61 +45,67 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xl-3 col-md-6">
+                                    <div class="col-xl-4 col-md-6">
                                         <div class="card mini-stat bg-primary text-white">
                                             <div class="card-body">
-                                                <div class="mb-1">
+                                                <div class="mb-0">
                                                     <div class="float-start mini-stat-img me-4">
                                                         <img src="<?= base_url('assets/images/ro.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
-                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>RENCANA OPERASI</h6>
-                                                    <h4 class="fw-medium font-size-24"><?= $ro_total; ?></h4>
-                                                </div>
-                                                <div class="pt-2">
-                                                    <dl class="row mb-0">
-                                                        <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data ROT</p>
-                                                        </dt>
-                                                        <dd class="col-sm-4 text-end mb-0">
-                                                            <p class="fw-medium mb-0"><?= $rot['ROT']; ?></p>
-                                                        </dd>
-                                                        <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data ROB</p>
-                                                        </dt>
-                                                        <dd class="col-sm-4 text-end mb-0">
-                                                            <p class="fw-medium mb-0"><?= $rob['ROB']; ?></p>
-                                                        </dd>
-                                                        <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data ROM</p>
-                                                        </dt>
-                                                        <dd class="col-sm-4 text-end mb-0">
-                                                            <p class="fw-medium mb-0"><?= $rom['ROM']; ?></p>
-                                                        </dd>
-                                                    </dl>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>RENCANA OPERASI TAHUNAN</h6>
+                                                    <h4 class="fw-medium font-size-24 mb-0"><?= $rot['ROT']; ?></h4>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-xl-3 col-md-6">
+                                    <div class="col-xl-4 col-md-6">
                                         <div class="card mini-stat bg-primary text-white">
                                             <div class="card-body">
-                                                <div class="mb-1">
+                                                <div class="mb-0">
+                                                    <div class="float-start mini-stat-img me-4">
+                                                        <img src="<?= base_url('assets/images/ro.png'); ?>" alt="" style="max-width: 38px !important">
+                                                    </div>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>RENCANA OPERASI BULANAN</h6>
+                                                    <h4 class="fw-medium font-size-24 mb-0"><?= $rob['ROB']; ?></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-md-6">
+                                        <div class="card mini-stat bg-primary text-white">
+                                            <div class="card-body">
+                                                <div class="mb-0">
+                                                    <div class="float-start mini-stat-img me-4">
+                                                        <img src="<?= base_url('assets/images/ro.png'); ?>" alt="" style="max-width: 38px !important">
+                                                    </div>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>RENCANA OPERASI MINGGUAN</h6>
+                                                    <h4 class="fw-medium font-size-24 mb-0"><?= $rom['ROM']; ?></h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card mini-stat bg-success text-white">
+                                            <div class="card-body">
+                                                <div class="mb-0">
                                                     <div class="float-start mini-stat-img me-4">
                                                         <img src="<?= base_url('assets/images/bio.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
                                                     <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>BIOMASSA</h6>
-                                                    <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
+                                                    <h4 class="fw-medium font-size-24 mb-0"><?= $bio_total; ?></h4>
                                                 </div>
                                                 <div class="pt-2">
-                                                    <dl class="row mb-4">
+                                                    <dl class="row mb-0">
                                                         <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data Transaksi</p>
+                                                            <p class="text-white mb-0">Data Transaksi</p>
                                                         </dt>
                                                         <dd class="col-sm-4 text-end mb-0">
                                                             <p class="fw-medium mb-0"><?= $bio_t['BIO_T']; ?></p>
                                                         </dd>
                                                         <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data Master</p>
+                                                            <p class="text-white mb-0">Data Master</p>
                                                         </dt>
                                                         <dd class="col-sm-4 text-end mb-0">
                                                             <p class="fw-medium mb-0"><?= $bio_m['BIO_M']; ?></p>
@@ -110,28 +116,28 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-6">
-                                        <div class="card mini-stat bg-primary text-white">
+                                        <div class="card mini-stat bg-info text-white">
                                             <div class="card-body">
-                                                <div class="mb-1">
+                                                <div class="mb-0">
                                                     <div class="float-start mini-stat-img me-4">
-                                                        <img src="<?= base_url('assets/images/gas.png'); ?>" alt="" style="max-width: 38px !important">
+                                                        <img src="<?= base_url('assets/images/gaspipe.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
-                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>GAS</h6>
-                                                    <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>GAS PIPA</h6>
+                                                    <h4 class="fw-medium font-size-24 mb-0"><?= $gp_total; ?></h4>
                                                 </div>
                                                 <div class="pt-2">
-                                                    <dl class="row mb-4">
-                                                        <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data Transaksi</p>
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-10">
+                                                            <p class="text-white mb-0">Data Transaksi</p>
                                                         </dt>
-                                                        <dd class="col-sm-4 text-end mb-0">
-                                                            <p class="fw-medium mb-0"><?= $bio_t['BIO_T']; ?></p>
+                                                        <dd class="col-sm-2 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $gpt['GP_T']; ?></p>
                                                         </dd>
-                                                        <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data Master</p>
+                                                        <dt class="col-sm-10">
+                                                            <p class="text-white mb-0">Data Master</p>
                                                         </dt>
-                                                        <dd class="col-sm-4 text-end mb-0">
-                                                            <p class="fw-medium mb-0"><?= $bio_m['BIO_M']; ?></p>
+                                                        <dd class="col-sm-2 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $gpm['GP_M']; ?></p>
                                                         </dd>
                                                     </dl>
                                                 </div>
@@ -139,28 +145,57 @@
                                         </div>
                                     </div>
                                     <div class="col-xl-3 col-md-6">
-                                        <div class="card mini-stat bg-primary text-white">
+                                        <div class="card mini-stat bg-danger text-white">
                                             <div class="card-body">
-                                                <div class="mb-1">
+                                                <div class="mb-0">
+                                                    <div class="float-start mini-stat-img me-4">
+                                                        <img src="<?= base_url('assets/images/lng.png'); ?>" alt="" style="max-width: 38px !important">
+                                                    </div>
+                                                    <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>LNG</h6>
+                                                    <h4 class="fw-medium font-size-24 mb-0"><?= $lng_total; ?></h4>
+                                                </div>
+                                                <div class="pt-2">
+                                                    <dl class="row mb-0">
+                                                        <dt class="col-sm-10">
+                                                            <p class="text-white mb-0">Data Transaksi</p>
+                                                        </dt>
+                                                        <dd class="col-sm-2 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $lngt['LNG_T']; ?></p>
+                                                        </dd>
+                                                        <dt class="col-sm-10">
+                                                            <p class="text-white mb-0">Data Master</p>
+                                                        </dt>
+                                                        <dd class="col-sm-2 text-end mb-0">
+                                                            <p class="fw-medium mb-0"><?= $lngm['LNG_M']; ?></p>
+                                                        </dd>
+                                                    </dl>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6">
+                                        <div class="card mini-stat bg-warning text-white">
+                                            <div class="card-body">
+                                                <div class="mb-0">
                                                     <div class="float-start mini-stat-img me-4">
                                                         <img src="<?= base_url('assets/images/bbm.png'); ?>" alt="" style="max-width: 38px !important">
                                                     </div>
                                                     <h6 class="font-size-12 text-uppercase text-white mb-1">TOTAL DATA<br>BBM</h6>
-                                                    <h4 class="fw-medium font-size-24"><?= $bio_total; ?></h4>
+                                                    <h4 class="fw-medium font-size-24 mb-0"><?= $bbm_total; ?></h4>
                                                 </div>
                                                 <div class="pt-2">
-                                                    <dl class="row mb-4">
+                                                    <dl class="row mb-0">
                                                         <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data Transaksi</p>
+                                                            <p class="text-white mb-0">Data Transaksi</p>
                                                         </dt>
                                                         <dd class="col-sm-4 text-end mb-0">
-                                                            <p class="fw-medium mb-0"><?= $bio_t['BIO_T']; ?></p>
+                                                            <p class="fw-medium mb-0"><?= $bbmt['BBM_T']; ?></p>
                                                         </dd>
                                                         <dt class="col-sm-8">
-                                                            <p class="text-white-50 mb-0">Data Master</p>
+                                                            <p class="text-white mb-0">Data Master</p>
                                                         </dt>
                                                         <dd class="col-sm-4 text-end mb-0">
-                                                            <p class="fw-medium mb-0"><?= $bio_m['BIO_M']; ?></p>
+                                                            <p class="fw-medium mb-0"><?= $bbmm['BBM_M']; ?></p>
                                                         </dd>
                                                     </dl>
                                                 </div>

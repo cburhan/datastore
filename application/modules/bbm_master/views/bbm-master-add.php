@@ -43,7 +43,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form method="POST" action="<?= base_url('bio_master/add'); ?>" enctype="multipart/form-data">
+                                        <form method="POST" action="<?= base_url('bbm_master/add'); ?>" enctype="multipart/form-data">
                                             <?= csrf(); ?>
                                             <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Tipe</label>
@@ -70,7 +70,7 @@
                                                 <div class="col-sm-10 offset-sm-1 text-center">
                                                     <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1" onclick="return confirmUpload()"></i>Simpan</button>
                                                     <button class="btn btn-sm btn-light waves-effect waves-light" type="reset"><i class="ion ion-md-refresh me-1"></i>Reset</button>
-                                                    <button class="btn btn-sm btn-outline-warning waves-effect waves-light" onclick="window.location.href = '<?= base_url('bio_master'); ?>';" type="button"><i class="ion ion-md-close me-1"></i>Batal</button>
+                                                    <button class="btn btn-sm btn-outline-warning waves-effect waves-light" onclick="window.location.href = '<?= base_url('bbm_master'); ?>';" type="button"><i class="ion ion-md-close me-1"></i>Batal</button>
                                                 </div>
                                             </div>
                                             <hr>

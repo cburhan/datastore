@@ -40,7 +40,7 @@
                             <div class="col-md-4">
                                 <div class="float-end d-none d-md-block">
                                     <div class="dropdown">
-                                        <button class="btn btn-sm btn-outline-warning waves-effect waves-light" type="button" onclick="window.location.href = '<?= base_url('bio_trans'); ?>';">
+                                        <button class="btn btn-sm btn-outline-warning waves-effect waves-light" type="button" onclick="window.location.href = '<?= base_url('lng_trans'); ?>';">
                                             <i class="ion ion-md-arrow-back me-1"></i> Kembali
                                         </button>
                                     </div>
@@ -83,7 +83,7 @@
                                                     <th class="p-1 align-middle">
                                                         <smalls>Pembangkit</smalls>
                                                     </th>
-                                                    <th class="p-1 align-middle">
+                                                    <th class="p-1 text-center align-middle">
                                                         <smalls>Pemasok</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
@@ -95,7 +95,7 @@
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Tahun</smalls>
                                                     </th>
-                                                    <th class="p-1 align-middle">
+                                                    <th class="p-1 text-center align-middle">
                                                         <smalls>No Kontrak</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
@@ -103,15 +103,6 @@
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Tgl Selesai Kontrak</smalls>
-                                                    </th>
-                                                    <th class="p-1 align-middle">
-                                                        <smalls>No Amd</smalls>
-                                                    </th>
-                                                    <th class="p-1 text-center align-middle">
-                                                        <smalls>Tgl Mulai Amd</smalls>
-                                                    </th>
-                                                    <th class="p-1 text-center align-middle">
-                                                        <smalls>Tgl Selesai Amd</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Harga Satuan</smalls>
@@ -139,21 +130,27 @@
                                                                     <smalls><?= $i; ?>
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <smalls><?= ($f['A'] != NULL ? get_pembangkit($f['A']) : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1">
-                                                                    <smalls><?= ($f['D'] != NULL ? $f['D'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1">
-                                                                    <smalls><?= ($f['E'] != NULL ? $f['E'] : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['B'] != NULL ? $f['B'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['F'] != NULL ? bulan($f['F']) : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['C'] != NULL ? $f['C'] : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['D'] != NULL ? $f['D'] : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['E'] != NULL ? bulan($f['E']) : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['F'] != NULL ? $f['F'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['G'] != NULL ? $f['G'] : 'No data'); ?></smalls>
                                                                 </td>
-                                                                <td class="p-1">
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['H'] != NULL ? $f['H'] : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
                                                                     <smalls><?= ($f['I'] != NULL ? $f['I'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
@@ -162,29 +159,14 @@
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['K'] != NULL ? $f['K'] : 'No data'); ?></smalls>
                                                                 </td>
-                                                                <td class="p-1">
+                                                                <td class="p-1 text-center">
+                                                                    <smalls><?= ($f['L'] != NULL ? $f['L'] : 'No data'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1 text-center">
                                                                     <smalls><?= ($f['M'] != NULL ? $f['M'] : 'No data'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['N'] != NULL ? $f['N'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['O'] != NULL ? $f['O'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['P'] != NULL ? $f['P'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['Q'] != NULL ? $f['Q'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['R'] != NULL ? $f['R'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['S'] != NULL ? $f['S'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['T'] != NULL ? $f['T'] : 'No data'); ?></smalls>
                                                                 </td>
                                                             </tr>
                                                         <?php endif; ?>

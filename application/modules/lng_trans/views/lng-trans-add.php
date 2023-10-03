@@ -34,7 +34,7 @@
                         <div class="row align-items-center mb-2">
                             <div class="col-md-8">
                                 <h6 class="page-title mb-0"><?= $ptitle; ?></h6>
-                                <p class="card-text">#Add Data <?= $title; ?></p>
+                                <p class="card-text">#Add Data <?= $title; ?> Bulanan</p>
                             </div>
                         </div>
                         <!-- end page title -->
@@ -43,23 +43,35 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                        <form method="POST" action="<?= base_url('bio_master/add'); ?>" enctype="multipart/form-data">
+                                        <form method="POST" action="<?= base_url('lng_trans/add'); ?>" enctype="multipart/form-data">
                                             <?= csrf(); ?>
                                             <div class="row mb-3">
-                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Tipe</label>
+                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Bulan</label>
                                                 <div class="col-sm-2">
-                                                    <select name="tipe" class="form-control tipe <?= form_error('tipe', 'is-invalid '); ?>">
+                                                    <select name="bulan" class="form-control bulan <?= form_error('bulan', 'is-invalid '); ?>">
                                                         <option></option>
-                                                        <option value="1" <?= set_select('tipe', 1) ?>>PEMBANGKIT</option>
-                                                        <option value="4" <?= set_select('tipe', 3) ?>>PEMASOK</option>
-                                                        <option value="2" <?= set_select('tipe', 2) ?>>KONTRAK</option>
-                                                        <option value="3" <?= set_select('tipe', 3) ?>>AMANDEMEN</option>
+                                                        <?php for ($i = 1; $i <= 12; $i++) { ?>
+                                                            <option value="<?= $i; ?>" <?= set_select('bulan', $i) ?>><?= bulan($i); ?></option>
+                                                        <?php } ?>
                                                     </select>
-                                                    <?= form_error('tipe', '<div class="invalid-feedback">', '</div>'); ?>
+                                                    <?= form_error('bulan', '<div class="invalid-feedback">', '</div>'); ?>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
-                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">File Master Bio</label>
+                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Tahun</label>
+                                                <div class="col-sm-2">
+                                                    <select name="tahun" class="form-control tahun <?= form_error('tahun', 'is-invalid '); ?>">
+                                                        <option></option>
+                                                        <?php $currentYear = date("Y");
+                                                        for ($i = $currentYear; $i <= $currentYear + 5; $i++) { ?>
+                                                            <option value="<?= $i; ?>" <?= set_select('tahun', $i) ?>><?= $i; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                    <?= form_error('tahun', '<div class="invalid-feedback">', '</div>'); ?>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">File Trans Gas Pipa</label>
                                                 <div class="col-sm-6">
                                                     <input type="file" name="bio" class="filestyle <?= form_error('bio', 'is-invalid '); ?>" data-buttonname="btn-secondary" required>
                                                     <?= form_error('bio', '<div class="invalid-feedback">', '</div>'); ?>
@@ -68,18 +80,11 @@
                                             <hr>
                                             <div class="mb-3 row">
                                                 <div class="col-sm-10 offset-sm-1 text-center">
-                                                    <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1" onclick="return confirmUpload()"></i>Simpan</button>
+                                                    <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1"></i>Simpan</button>
                                                     <button class="btn btn-sm btn-light waves-effect waves-light" type="reset"><i class="ion ion-md-refresh me-1"></i>Reset</button>
-                                                    <button class="btn btn-sm btn-outline-warning waves-effect waves-light" onclick="window.location.href = '<?= base_url('bio_master'); ?>';" type="button"><i class="ion ion-md-close me-1"></i>Batal</button>
+                                                    <button class="btn btn-sm btn-outline-warning waves-effect waves-light" onclick="window.location.href = '<?= base_url('lng_trans'); ?>';" type="button"><i class="ion ion-md-close me-1"></i>Batal</button>
                                                 </div>
                                             </div>
-                                            <hr>
-                                            <p class="mb-3 font-14">
-                                                <span class="text-primary"><strong>Sebelum mengupload harap perhatikan hal-hal berikut:</strong></span><br>
-                                                1. Data pada kolom yang kosong atau empty atau NULL diisi dengan <span class="text-primary"><strong>0</strong></span><br>
-                                                2. Delimiter atau pemisah bilangan desimal menggunakan <span class="text-primary"><strong>titik (.)</strong></span> contoh <span class="text-primary"><strong>125.76</strong></span><br>
-                                                3. Delimiter atau pemisah pada bilangan ribuan tidak digunakan, contoh <span class="text-primary"><strong>1000000</strong></span> bukan <span class="text-danger"><strong>1.000.000</strong></span><br>
-                                            </p>
                                         </form>
                                     </div>
                                 </div>
@@ -107,14 +112,13 @@
             $(function() {
                 'use strict'
 
-                $(".tipe").select2({
-                    placeholder: 'Pilih Tipe'
+                $(".bulan").select2({
+                    placeholder: 'Pilih Bulan'
+                });
+                $(".tahun").select2({
+                    placeholder: 'Pilih Tahun'
                 });
             });
-
-            function confirmUpload() {
-                return confirm("Apakah anda yakin?\nFormat value pada kolom harus sesuai dengan ketentuan berikut:\n1. Data pada kolom yang kosong atau empty atau NULL diisi dengan 0\n2. Delimiter atau pemisah bilangan desimal menggunakan titik (.) contoh 125.76\n3. Delimiter atau pemisah pada bilangan ribuan tidak digunakan, contoh 1000000 bukan 1.000.000")
-            }
         </script>
 </body>
 

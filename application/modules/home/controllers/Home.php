@@ -23,12 +23,26 @@ class Home extends MY_Controller
         $data['rot'] = $this->Home_model->getTotalRot();
         $data['rob'] = $this->Home_model->getTotalRob();
         $data['rom'] = $this->Home_model->getTotalRom();
-        $data['ro_total'] = $data['rot']['ROT'] + $data['rob']['ROB'] + $data['rom']['ROM'];
 
         //BIO
         $data['bio_m'] = $this->Home_model->getBioMaster();
         $data['bio_t'] = $this->Home_model->getBioTrans();
         $data['bio_total'] = $data['bio_m']['BIO_M'] + $data['bio_t']['BIO_T'];
+
+        //GAS PIPA
+        $data['gpm'] = $this->Home_model->getGaspipaMaster();
+        $data['gpt'] = $this->Home_model->getGaspipaTrans();
+        $data['gp_total'] = $data['gpm']['GP_M'] + $data['gpt']['GP_T'];
+
+        //LNG
+        $data['lngm'] = $this->Home_model->getLngMaster();
+        $data['lngt'] = $this->Home_model->getLngTrans();
+        $data['lng_total'] = $data['lngm']['LNG_M'] + $data['lngt']['LNG_T'];
+
+        //BBM
+        $data['bbmm'] = $this->Home_model->getBbmMaster();
+        $data['bbmt'] = $this->Home_model->getBbmTrans();
+        $data['bbm_total'] = $data['bbmm']['BBM_M'] + $data['bbmt']['BBM_T'];
 
         //DISK
         $totalDiskSpace = disk_total_space('/');
