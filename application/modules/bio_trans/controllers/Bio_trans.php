@@ -152,7 +152,7 @@ class Bio_trans extends MY_Controller
     public function detail($id)
     {
         $data['ptitle'] = "Biomassa";
-        $data['title']  = "Transaksi";
+        $data['title']  = "Transaksi Bio";
 
         $id = decrypt_url($id);
 
