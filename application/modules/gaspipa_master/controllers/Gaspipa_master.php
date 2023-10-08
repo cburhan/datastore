@@ -187,7 +187,7 @@ class Gaspipa_master extends MY_Controller
         $bio = $this->GaspipaMaster_model->getGaspipaMasterById($id);
         $delete = $this->GaspipaMaster_model->deleteGaspipaMaster($id);
         if ($delete) {
-            unlink('public/upload_file/lng_master/' . $bio['FILE']);
+            unlink('public/upload_file/gaspipa_master/' . $bio['FILE']);
             $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <strong>Sukses!</strong> Data Master Gas Pipa berhasil dihapus.
