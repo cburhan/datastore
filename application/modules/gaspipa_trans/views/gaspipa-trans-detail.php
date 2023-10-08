@@ -83,11 +83,8 @@
                                                     <th class="p-1 align-middle">
                                                         <smalls>Pembangkit</smalls>
                                                     </th>
-                                                    <th class="p-1 text-center align-middle">
+                                                    <th class="p-1 align-middle">
                                                         <smalls>Pemasok</smalls>
-                                                    </th>
-                                                    <th class="p-1 text-center align-middle">
-                                                        <smalls>Jenis Biomassa</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Bulan</smalls>
@@ -95,7 +92,7 @@
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Tahun</smalls>
                                                     </th>
-                                                    <th class="p-1 text-center align-middle">
+                                                    <th class="p-1 align-middle">
                                                         <smalls>No Kontrak</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
@@ -104,20 +101,17 @@
                                                     <th class="p-1 text-center align-middle">
                                                         <smalls>Tgl Selesai Kontrak</smalls>
                                                     </th>
-                                                    <th class="p-1 text-center align-middle">
-                                                        <smalls>Harga Satuan</smalls>
+                                                    <th class="p-1 align-middle">
+                                                        <smalls>No Amd</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
-                                                        <smalls>Kalori Kontrak</smalls>
+                                                        <smalls>Tgl Mulai Amd</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
-                                                        <smalls>Kalori Realisasi</smalls>
+                                                        <smalls>Tgl Selesai Amd</smalls>
                                                     </th>
                                                     <th class="p-1 text-center align-middle">
-                                                        <smalls>Volume Konfirmasi</smalls>
-                                                    </th>
-                                                    <th class="p-1 text-center align-middle">
-                                                        <smalls>Volume Realisasi</smalls>
+                                                        <smalls>Realisasi Penyerapan Gas (MMBTU)</smalls>
                                                     </th>
                                                 </thead>
                                                 <tbody>
@@ -130,43 +124,41 @@
                                                                     <smalls><?= $i; ?>
                                                                 </td>
                                                                 <td class="p-1">
-                                                                    <smalls><?= ($f['B'] != NULL ? $f['B'] : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['A'] != NULL ? get_pembangkit($f['A']) : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <smalls><?= ($f['D'] != NULL ? $f['D'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['C'] != NULL ? $f['C'] : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['M'] != NULL ? bulan($f['M']) : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['D'] != NULL ? $f['D'] : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['N'] != NULL ? $f['N'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <smalls><?= ($f['F'] != NULL ? $f['F'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['E'] != NULL ? bulan($f['E']) : 'No data'); ?></smalls>
+                                                                    <?php $c = date('Y-m-d', strtotime($f['G'])); ?>
+                                                                    <smalls><?= ($f['G'] != NULL ? tgl_indo($c) : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['F'] != NULL ? $f['F'] : 'No data'); ?></smalls>
+                                                                    <?php $c = date('Y-m-d', strtotime($f['H'])); ?>
+                                                                    <smalls><?= ($f['H'] != NULL ? tgl_indo($c) : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                </td>
+                                                                <td class="p-1">
+                                                                    <smalls><?= ($f['J'] != NULL ? $f['J'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['G'] != NULL ? $f['G'] : 'No data'); ?></smalls>
+                                                                    <?php $c = date('Y-m-d', strtotime($f['K'])); ?>
+                                                                    <smalls><?= ($f['K'] != NULL ? tgl_indo($c) : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['H'] != NULL ? $f['H'] : 'No data'); ?></smalls>
+                                                                    <?php $c = date('Y-m-d', strtotime($f['L'])); ?>
+                                                                    <smalls><?= ($f['L'] != NULL ? tgl_indo($c) : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['I'] != NULL ? $f['I'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['J'] != NULL ? $f['J'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['K'] != NULL ? $f['K'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['L'] != NULL ? $f['L'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['M'] != NULL ? $f['M'] : 'No data'); ?></smalls>
-                                                                </td>
-                                                                <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['N'] != NULL ? $f['N'] : 'No data'); ?></smalls>
+                                                                    <smalls><?= ($f['O'] != NULL ? $f['O'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                             </tr>
                                                         <?php endif; ?>
