@@ -140,7 +140,7 @@
                                                                         <smalls><?= ($f['H'] !== NULL ? $f['H'] : ($f['H'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalls><?= ($f['I'] != NULL ? $f['I'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                        <smalls><?= ($f['I'] != NULL ? bulan($f['I']) : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                     </td>
                                                                     <td class="p-1 text-center">
                                                                         <smalls><?= ($f['J'] != NULL ? $f['J'] : '<span class="text-danger">No data</span>'); ?></smalls>
