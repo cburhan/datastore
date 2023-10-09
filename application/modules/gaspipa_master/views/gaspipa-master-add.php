@@ -51,7 +51,7 @@
                                                     <select name="tipe" class="form-control tipe <?= form_error('tipe', 'is-invalid '); ?>">
                                                         <option></option>
                                                         <option value="1" <?= set_select('tipe', 1) ?>>PEMBANGKIT</option>
-                                                        <option value="4" <?= set_select('tipe', 3) ?>>PEMASOK</option>
+                                                        <option value="4" <?= set_select('tipe', 4) ?>>PEMASOK</option>
                                                         <option value="2" <?= set_select('tipe', 2) ?>>KONTRAK</option>
                                                         <option value="3" <?= set_select('tipe', 3) ?>>AMANDEMEN</option>
                                                     </select>

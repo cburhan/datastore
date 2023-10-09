@@ -89,6 +89,9 @@ class Lng_master extends MY_Controller
         } else if ($tipe == 4) {
             $tipe_text = 'PEMASOK';
             $tipe_color = 'success';
+        } else if ($tipe == 5) {
+            $tipe_text = 'FSRU';
+            $tipe_color = 'secondary';
         }
 
         if ($this->form_validation->run() == FALSE) {

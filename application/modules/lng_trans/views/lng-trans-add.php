@@ -71,6 +71,17 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
+                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Tipe</label>
+                                                <div class="col-sm-2">
+                                                    <select name="tipe" class="form-control tipe <?= form_error('tipe', 'is-invalid '); ?>">
+                                                        <option></option>
+                                                        <option value="1" <?= set_select('tipe', 1) ?>>ALOKASI</option>
+                                                        <option value="2" <?= set_select('tipe', 2) ?>>REALISASI</option>
+                                                    </select>
+                                                    <?= form_error('tipe', '<div class="invalid-feedback">', '</div>'); ?>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">File Trans Gas Pipa</label>
                                                 <div class="col-sm-6">
                                                     <input type="file" name="bio" class="filestyle <?= form_error('bio', 'is-invalid '); ?>" data-buttonname="btn-secondary" required>
@@ -117,6 +128,9 @@
                 });
                 $(".tahun").select2({
                     placeholder: 'Pilih Tahun'
+                });
+                $(".tipe").select2({
+                    placeholder: 'Pilih Tipe'
                 });
             });
         </script>

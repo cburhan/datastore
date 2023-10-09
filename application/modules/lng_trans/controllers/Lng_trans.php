@@ -38,6 +38,7 @@ class Lng_trans extends MY_Controller
             $sub_array[] = $row->FILE;
             $sub_array[] = $row->BULAN;
             $sub_array[] = $row->TAHUN;
+            $sub_array[] = '<span class="badge bg-sm bg-' . $row->TIPE_COLOR . '">' . $row->TIPE_TEXT . '</span>';
             $sub_array[] = $row->CREATED_BY;
             $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
             $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
@@ -81,6 +82,15 @@ class Lng_trans extends MY_Controller
             'required' => 'Tahun harus dipilih'
         ]);
 
+        $tipe = $this->input->post('tipe');
+        if ($tipe == 1) {
+            $tipe_text = 'ALOKASI';
+            $tipe_color = 'primary';
+        } else if ($tipe == 2) {
+            $tipe_text = 'REALISASI';
+            $tipe_color = 'success';
+        }
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('lng-trans-add', $data);
         } else {
@@ -89,11 +99,14 @@ class Lng_trans extends MY_Controller
             $time_name = date('YmdHis', strtotime($time));
             $bulan = $this->input->post('bulan');
             $tahun = $this->input->post('tahun');
-            $file_name = $time_name . '_LNG_TRANS_' . $bulan . '_' . $tahun;
+            $file_name = $time_name . '_LNG_TRANS_' . $tipe_text . '_' . $bulan . '_' . $tahun;
             $data_bio = array(
                 'BULAN'         => bulan($bulan),
                 'BLN'           => $bulan,
                 'TAHUN'         => $tahun,
+                'TIPE'          => $tipe,
+                'TIPE_TEXT'     => $tipe_text,
+                'TIPE_COLOR'    => $tipe_color,
                 'CREATED_BY'    => get_session_name(),
                 'CREATED_ON'    => $time
             );

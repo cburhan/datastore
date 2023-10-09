@@ -227,34 +227,34 @@
                                                                         <smalld><?= ($f['J'] != NULL ? $f['J'] : 'No data'); ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['K'] !== NULL ? $f['K'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['K'] !== NULL ? $f['K'] : ($f['K'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
                                                                         <smalld><?= ($f['L'] !== NULL ? $f['L'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['M'] !== NULL ? $f['M'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['M'] !== NULL ? $f['M'] : ($f['M'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['N'] !== NULL ? $f['N'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['N'] !== NULL ? $f['N'] : ($f['N'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['O'] !== NULL ? $f['O'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['O'] !== NULL ? $f['O'] : ($f['O'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['P'] !== NULL ? $f['P'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['P'] !== NULL ? $f['P'] : ($f['P'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['Q'] !== NULL ? $f['Q'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['Q'] !== NULL ? $f['Q'] : ($f['Q'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['R'] !== NULL ? $f['R'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['R'] !== NULL ? $f['R'] : ($f['R'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['S'] !== NULL ? $f['S'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['S'] !== NULL ? $f['S'] : ($f['S'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                     <td class="p-1 text-center">
-                                                                        <smalld><?= ($f['T'] !== NULL ? $f['T'] : ($f['L'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
+                                                                        <smalld><?= ($f['T'] !== NULL ? $f['T'] : ($f['T'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalld>
                                                                     </td>
                                                                 </tr>
                                                             <?php endif; ?>

@@ -7,7 +7,10 @@ class LngTrans_model extends CI_Model
     }
 
     //LNG TRANS
-    var $select_column = array('ID', 'BULAN', 'BLN', 'TAHUN', 'FILE', 'CREATED_BY', 'CREATED_ON');
+    var $select_column = array(
+        'ID', 'BULAN', 'BLN', 'TAHUN', 'FILE', 'CREATED_BY', 'CREATED_ON',
+        'TIPE', 'TIPE_TEXT', 'TIPE_COLOR'
+    );
     var $order_column = array('ID', 'TAHUN', 'CREATED_BY');
 
     public function make_query()
