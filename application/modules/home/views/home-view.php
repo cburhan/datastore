@@ -364,6 +364,24 @@
                                                         <h5 class="mb-0 font-size-15 text-primary"><?= $user['U']; ?> Users</h5>
                                                     </dd>
                                                     <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Framework</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h5 class="mb-0 font-size-15 text-primary">Codeigniter <?= CI_VERSION; ?></h5>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Language</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h5 class="mb-0 font-size-15 text-primary">PHP <?= phpversion(); ?></h5>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Database</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h5 class="mb-0 font-size-15 text-primary">MySQL <?= $this->db->version(); ?></h5>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
                                                         <p class="text-muted mb-0">Maintener</p>
                                                     </dt>
                                                     <dd class="col-sm-8">
