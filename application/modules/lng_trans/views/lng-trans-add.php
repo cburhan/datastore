@@ -76,6 +76,7 @@
                                                     <select name="tipe" class="form-control tipe <?= form_error('tipe', 'is-invalid '); ?>">
                                                         <option></option>
                                                         <option value="1" <?= set_select('tipe', 1) ?>>ALOKASI</option>
+                                                        <option value="3" <?= set_select('tipe', 3) ?>>ALOKASI BULANAN</option>
                                                         <option value="2" <?= set_select('tipe', 2) ?>>REALISASI</option>
                                                     </select>
                                                     <?= form_error('tipe', '<div class="invalid-feedback">', '</div>'); ?>

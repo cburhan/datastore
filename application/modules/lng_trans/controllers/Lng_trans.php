@@ -86,6 +86,9 @@ class Lng_trans extends MY_Controller
         if ($tipe == 1) {
             $tipe_text = 'ALOKASI';
             $tipe_color = 'primary';
+        } else if ($tipe == 3) {
+            $tipe_text = 'ALOKASI BULANAN';
+            $tipe_color = 'info';
         } else if ($tipe == 2) {
             $tipe_text = 'REALISASI';
             $tipe_color = 'success';
