@@ -34,15 +34,15 @@ class Lng_trans extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<div class="text-center">' . $no . '</div>';
-            $sub_array[] = $row->FILE;
-            $sub_array[] = $row->BULAN;
-            $sub_array[] = $row->TAHUN;
+            $sub_array[] = '<div class="text-center"><small>' . $no . '</small></div>';
+            $sub_array[] = '<small>' . $row->FILE . '</small>';
+            $sub_array[] = '<small>' . $row->BULAN . '</small>';
+            $sub_array[] = '<small>' . $row->TAHUN . '</small>';
             $sub_array[] = '<span class="badge bg-sm bg-' . $row->TIPE_COLOR . '">' . $row->TIPE_TEXT . '</span>';
-            $sub_array[] = $row->CREATED_BY;
+            $sub_array[] = '<small>' . $row->CREATED_BY . '</small>';
             $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
             $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = tgl_indo($tgl_out) . ' ' . $jam_out;
+            $sub_array[] = '<small>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</small>';
             $detail = NULL;
             $del = NULL;
 

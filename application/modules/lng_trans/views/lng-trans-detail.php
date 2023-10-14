@@ -223,6 +223,161 @@
                                                 </table>
                                             </div>
                                         </div>
+
+                                        <div class="card-body">
+                                            <div class="input-group">
+                                                <span class="input-group-text">Cari Data</span>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Masukkan Keyword" id="search">
+                                                <button class="btn btn-sm light btn-dark" type="button" id="btn-reset"><i class="fa-solid fa-refresh me-1"></i>Reset</button>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="mytable" class="table table-bordered nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>#</smalls>
+                                                        </th>
+                                                        <th class="p-1 align-middle">
+                                                            <smalls>FSRU</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Tanggal</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Source</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Stok Awal (MMBTU)</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Realisasi Penerimaan (MMBTU)</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Realisasi Pemakaian (MMBTU)</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Stok Akhir (MMBTU)</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Periode Bulan</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Periode Tahun</smalls>
+                                                        </th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $i = 0;
+                                                        $s = 1; ?>
+                                                        <?php foreach ($sheet as $f) : ?>
+                                                            <?php if ($s > 1) : ?>
+                                                                <tr>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= $i; ?>
+                                                                    </td>
+                                                                    <td class="p-1">
+                                                                        <smalls><?= ($f['B'] != NULL ? $f['B'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['C'] != NULL ? $f['C'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['D'] != NULL ? $f['D'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['E'] !== NULL ? $f['E'] : ($f['E'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['F'] !== NULL ? $f['F'] : ($f['F'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['G'] !== NULL ? $f['G'] : ($f['G'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['H'] !== NULL ? $f['H'] : ($f['H'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['I'] != NULL ? bulan($f['I']) : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['J'] != NULL ? $f['J'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                            <?php $i++;
+                                                            $s++; ?>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    <?php } else if ($file['TIPE'] == 3) { ?>
+
+                                        <div class="card-body">
+                                            <div class="input-group">
+                                                <span class="input-group-text">Cari Data</span>
+                                                <input type="text" class="form-control form-control-sm" placeholder="Masukkan Keyword" id="search">
+                                                <button class="btn btn-sm light btn-dark" type="button" id="btn-reset"><i class="fa-solid fa-refresh me-1"></i>Reset</button>
+                                            </div>
+                                            <div class="table-responsive">
+                                                <table id="mytable" class="table table-bordered nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                                                    <thead>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>#</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>ID FSRU</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>FSRU</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Alokasi Bulanan</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Periode Bulan</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Periode Tahun</smalls>
+                                                        </th>
+                                                        <th class="p-1 text-center align-middle">
+                                                            <smalls>Status</smalls>
+                                                        </th>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $i = 0;
+                                                        $s = 1; ?>
+                                                        <?php foreach ($sheet as $f) : ?>
+                                                            <?php if ($s > 1) : ?>
+                                                                <tr>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= $i; ?>
+                                                                    </td>
+                                                                    <td class="p-1">
+                                                                        <smalls><?= ($f['B'] != NULL ? $f['B'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['C'] != NULL ? $f['C'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['C'] != NULL ? get_pembangkit($f['C']) : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['E'] !== NULL ? bulan($f['E']) : ($f['E'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['F'] != NULL ? $f['F'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    </td>
+                                                                    <td class="p-1 text-center">
+                                                                        <smalls><?= ($f['G'] !== NULL ? $f['G'] : ($f['G'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
+                                                                    </td>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                            <?php $i++;
+                                                            $s++; ?>
+                                                        <?php endforeach; ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     <?php } ?>
                                 </div>
                             </div>
