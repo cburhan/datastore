@@ -149,7 +149,7 @@
                                                                     </smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['D'] != NULL ? $f['D'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    <smalls><?= ($f['D'] !== NULL ? $f['D'] : ($f['D'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
                                                                     <smalls><?= ($f['E'] != NULL ? bulan($f['E']) : '<span class="text-danger">No data</span>'); ?></smalls>
@@ -158,13 +158,13 @@
                                                                     <smalls><?= ($f['F'] != NULL ? $f['F'] : '<span class="text-danger">No data</span>'); ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['G'] != NULL ? $f['G'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    <smalls><?= ($f['G'] !== NULL ? $f['G'] : ($f['G'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['H'] != NULL ? $f['H'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    <smalls><?= ($f['H'] !== NULL ? $f['H'] : ($f['H'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
                                                                 </td>
                                                                 <td class="p-1 text-center">
-                                                                    <smalls><?= ($f['I'] != NULL ? $f['I'] : '<span class="text-danger">No data</span>'); ?></smalls>
+                                                                    <smalls><?= ($f['I'] !== NULL ? $f['I'] : ($f['I'] === 0 ? '0' : '<span class="text-danger">No data</span>')) ?></smalls>
                                                                 </td>
                                                             </tr>
                                                         <?php endif; ?>
