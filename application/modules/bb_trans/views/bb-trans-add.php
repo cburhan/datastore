@@ -76,7 +76,7 @@
                                                     <select name="model" class="form-control model <?= form_error('model', 'is-invalid '); ?>">
                                                         <option></option>
                                                         <option value="1" <?= (set_value('tipe') == 1) ? " selected='selected'" : "" ?>>GCV FORECAST</option>
-                                                        <option value="2" <?= (set_value('tipe') == 2) ? " selected='selected'" : "" ?>>ALOKASIs</option>
+                                                        <option value="2" <?= (set_value('tipe') == 2) ? " selected='selected'" : "" ?>>ALOKASI</option>
                                                         <option value="3" <?= (set_value('tipe') == 3) ? " selected='selected'" : "" ?>>PENJADWALAN</option>
                                                         <option value="4" <?= (set_value('tipe') == 4) ? " selected='selected'" : "" ?>>LEAD TIME</option>
                                                     </select>

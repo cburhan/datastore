@@ -112,7 +112,7 @@ class Bb_trans extends MY_Controller
             if ($model == 1) {
                 $file_name = $time_name . '_P2EP_BBO_ML_KUALITAS_BATUBARA_' . $bulan . '_' . $tahun;
             } else if ($model == 2) {
-                $file_name = $time_name . '_P2EP_BBO_ALOKASIs_' . $bulan . '_' . $tahun;
+                $file_name = $time_name . '_P2EP_BBO_ALOKASI_' . $bulan . '_' . $tahun;
             } else if ($model == 3) {
                 $file_name = $time_name . '_P2EP_BBO_PENJADWALAN_' . $bulan . '_' . $tahun;
             } else if ($model == 4) {

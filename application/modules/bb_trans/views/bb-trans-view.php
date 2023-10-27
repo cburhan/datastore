@@ -63,7 +63,7 @@
                                                     <th>File</th>
                                                     <th>Bulan</th>
                                                     <th>Tahun</th>
-                                                    <th>Models</th>
+                                                    <th>Model</th>
                                                     <th>Upload By</th>
                                                     <th>Upload On</th>
                                                     <?php if (check_button('detail') > 0 || check_button('delete') > 0) {
