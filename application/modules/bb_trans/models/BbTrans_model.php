@@ -7,7 +7,10 @@ class BbTrans_model extends CI_Model
     }
 
     //BB TRANS
-    var $select_column = array('ID', 'BULAN', 'BLN', 'TAHUN', 'FILE', 'CREATED_BY', 'CREATED_ON');
+    var $select_column = array(
+        'ID', 'BULAN', 'BLN', 'TAHUN', 'MODEL', 'MODEL_COLOR', 'MODEL_TEXT',
+        'FILE', 'CREATED_BY', 'CREATED_ON'
+    );
     var $order_column = array('ID', 'TAHUN', 'CREATED_BY');
 
     public function make_query()

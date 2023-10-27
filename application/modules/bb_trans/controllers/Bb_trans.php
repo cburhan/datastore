@@ -34,14 +34,15 @@ class Bb_trans extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<div class="text-center">' . $no . '</div>';
-            $sub_array[] = $row->FILE;
-            $sub_array[] = $row->BULAN;
-            $sub_array[] = $row->TAHUN;
-            $sub_array[] = $row->CREATED_BY;
+            $sub_array[] = '<div class="text-center"><small>' . $no . '</small></div>';
+            $sub_array[] = '<small>' . $row->FILE . '</small>';
+            $sub_array[] = '<small>' . $row->BULAN . '</small>';
+            $sub_array[] = '<small>' . $row->TAHUN . '</small>';
+            $sub_array[] = '<span class="badge bg-sm bg-' . $row->MODEL_COLOR . '"><small>' . $row->MODEL_TEXT . '</small></span>';
+            $sub_array[] = '<small>' . $row->CREATED_BY . '</small>';
             $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
             $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = tgl_indo($tgl_out) . ' ' . $jam_out;
+            $sub_array[] = '<small>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</small>';
             $detail = NULL;
             $del = NULL;
 
@@ -81,6 +82,25 @@ class Bb_trans extends MY_Controller
             'required' => 'Tahun harus dipilih'
         ]);
 
+        $this->form_validation->set_rules('model', 'Model', 'required', [
+            'required' => 'Model harus dipilih'
+        ]);
+
+        $model = $this->input->post('model');
+        if ($model == 1) {
+            $model_text = 'GCV FORECAST';
+            $model_color = 'warning';
+        } else if ($model == 2) {
+            $model_text = 'ALOKASI';
+            $model_color = 'primary';
+        } else if ($model == 3) {
+            $model_text = 'PENJADWALAN';
+            $model_color = 'info';
+        } else if ($model == 4) {
+            $model_text = 'LEAD TIME';
+            $model_color = 'success';
+        }
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('bb-trans-add', $data);
         } else {
@@ -89,11 +109,22 @@ class Bb_trans extends MY_Controller
             $time_name = date('YmdHis', strtotime($time));
             $bulan = $this->input->post('bulan');
             $tahun = $this->input->post('tahun');
-            $file_name = $time_name . '_BB_TRANS_' . $bulan . '_' . $tahun;
+            if ($model == 1) {
+                $file_name = $time_name . '_P2EP_BBO_ML_KUALITAS_BATUBARA_' . $bulan . '_' . $tahun;
+            } else if ($model == 2) {
+                $file_name = $time_name . '_P2EP_BBO_ALOKASI_' . $bulan . '_' . $tahun;
+            } else if ($model == 3) {
+                $file_name = $time_name . '_P2EP_BBO_PENJADWALAN_' . $bulan . '_' . $tahun;
+            } else if ($model == 4) {
+                $file_name = $time_name . '_P2EP_BBO_LEADTIME_' . $bulan . '_' . $tahun;
+            }
             $data_bio = array(
                 'BULAN'         => bulan($bulan),
                 'BLN'           => $bulan,
                 'TAHUN'         => $tahun,
+                'MODEL'         => $model,
+                'MODEL_COLOR'   => $model_color,
+                'MODEL_TEXT'    => $model_text,
                 'CREATED_BY'    => get_session_name(),
                 'CREATED_ON'    => $time
             );

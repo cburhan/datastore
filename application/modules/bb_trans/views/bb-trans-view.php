@@ -63,6 +63,7 @@
                                                     <th>File</th>
                                                     <th>Bulan</th>
                                                     <th>Tahun</th>
+                                                    <th>Model</th>
                                                     <th>Upload By</th>
                                                     <th>Upload On</th>
                                                     <?php if (check_button('detail') > 0 || check_button('delete') > 0) {
@@ -121,7 +122,7 @@
                         "type": "POST"
                     },
                     'columnDefs': [{
-                        "targets": [0, 2, 3, 4, 5],
+                        "targets": [0, 2, 3, 4, 5, 6],
                         "className": "text-center",
                     }]
                 });

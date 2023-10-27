@@ -71,6 +71,19 @@
                                                 </div>
                                             </div>
                                             <div class="row mb-3">
+                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Model</label>
+                                                <div class="col-sm-2">
+                                                    <select name="model" class="form-control model <?= form_error('model', 'is-invalid '); ?>">
+                                                        <option></option>
+                                                        <option value="1" <?= (set_value('tipe') == 1) ? " selected='selected'" : "" ?>>GCV FORECAST</option>
+                                                        <option value="2" <?= (set_value('tipe') == 2) ? " selected='selected'" : "" ?>>ALOKASI</option>
+                                                        <option value="3" <?= (set_value('tipe') == 3) ? " selected='selected'" : "" ?>>PENJADWALAN</option>
+                                                        <option value="4" <?= (set_value('tipe') == 4) ? " selected='selected'" : "" ?>>LEAD TIME</option>
+                                                    </select>
+                                                    <?= form_error('model', '<div class="invalid-feedback">', '</div>'); ?>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">File Trans Bio</label>
                                                 <div class="col-sm-6">
                                                     <input type="file" name="bio" class="filestyle <?= form_error('bio', 'is-invalid '); ?>" data-buttonname="btn-secondary" required>
@@ -117,6 +130,9 @@
                 });
                 $(".tahun").select2({
                     placeholder: 'Pilih Tahun'
+                });
+                $(".model").select2({
+                    placeholder: 'Pilih Model'
                 });
             });
         </script>
