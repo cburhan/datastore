@@ -342,6 +342,12 @@
                                                 <h4 class="card-title mb-4">Apps</h4>
                                                 <dl class="row mb-0">
                                                     <dt class="col-sm-4">
+                                                        <p class="text-muted mb-0">Environment</p>
+                                                    </dt>
+                                                    <dd class="col-sm-8">
+                                                        <h5 class="mb-0 font-size-15 text-primary"><?= apps()['ENV_TEXT']; ?></h5>
+                                                    </dd>
+                                                    <dt class="col-sm-4">
                                                         <p class="text-muted mb-0">Version</p>
                                                     </dt>
                                                     <dd class="col-sm-8">
