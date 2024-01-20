@@ -36,12 +36,7 @@ class Bio_trans extends MY_Controller
             $sub_array = array();
             $sub_array[] = '<div class="text-center">' . $no . '</div>';
             $sub_array[] = $row->FILE;
-            $sub_array[] = $row->BULAN;
-            $sub_array[] = $row->TAHUN;
-            $sub_array[] = $row->CREATED_BY;
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = tgl_indo($tgl_out) . ' ' . $jam_out;
+            $sub_array[] = $row->BULAN . ' ' . $row->TAHUN;
             $detail = NULL;
             $del = NULL;
 
@@ -106,6 +101,21 @@ class Bio_trans extends MY_Controller
             $this->session->set_flashdata('flash', $flash);
             $ket = 'Menambah data <strong>Transaksi Biomassa</strong> periode <strong>' . $data_bio['BULAN'] . ' ' . $data_bio['TAHUN'] . '</strong>';
             activity_log(get_session_id(), get_session_name(), 'Biomassa', 'ADD', 'success', $ket);
+
+            $subject = 'Data Biomasa Transaksi ' . $data_bio['BULAN'] . ' ' . $data_bio['TAHUN'];
+            $data_email = array(
+                "modul"     => "BIOMASA",
+                "modul_id"  => $add_id,
+                "bulan"     => $data_bio['BULAN'],
+                "tahun"     => $data_bio['TAHUN'],
+                "file"      => $file_name,
+                "time"      => $time,
+                "color"     => "succcess",
+                "url"       => "bio_trans/detail/" . encrypt_url($add_id)
+            );
+            $message = 'User ' . get_session_name() . ' telah melakukan upload data ' . $data_email['modul'] . ' TRANSAKSI periode ' . $data_email['bulan'] . ' ' . $data_email['tahun'] . ' dengan nama file ' . $data_email['file'];
+            send_notification(get_session_id(), $data_email, $subject, 'email/bio_trans', $message);
+
             redirect('bio_trans');
         }
     }

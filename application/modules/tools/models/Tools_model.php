@@ -9,7 +9,7 @@ class Tools_model extends CI_Model
     //APPS
     public function getApps()
     {
-        $this->db->select('ID, NAME, LOGO, LOGO_BIG, BG');
+        $this->db->select('ID, NAME, LOGO, LOGO_BIG, BG, ENV, ENV_TEXT');
         $this->db->from('apps');
         $this->db->where('ID', 1);
         return $this->db->get();

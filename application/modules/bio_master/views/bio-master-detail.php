@@ -60,17 +60,23 @@
                                     <div class="card-body border-bottom border-1">
                                         <dl class="row mb-0">
                                             <dt class="col-sm-2">Master</dt>
-                                            <dd class="col-sm-4 mb-0"><?= $file['TIPE_TEXT']; ?></dd>
-                                            <dt class="col-sm-2">Upload By</dt>
-                                            <dd class="col-sm-4 mb-0"><?= $file['CREATED_BY']; ?></dd>
+                                            <dd class="col-sm-8 mb-0"><?= $file['TIPE_TEXT']; ?></dd>
+                                        </dl>
+                                        <dl class="row mb-0">
                                             <dt class="col-sm-2">Nama File</dt>
-                                            <dd class="col-sm-4 mb-0"><small><?= $file['FILE']; ?></small></dd>
+                                            <dd class="col-sm-8 mb-0"><?= $file['FILE']; ?></dd>
+                                        </dl>
+                                        <dl class="row mb-0">
+                                            <dt class="col-sm-2">Upload By</dt>
+                                            <dd class="col-sm-8 mb-0"><?= $file['CREATED_BY']; ?></dd>
+                                        </dl>
+                                        <dl class="row mb-0">
                                             <dt class="col-sm-2">Upload On</dt>
                                             <?php
                                             $tgl_out = date("Y-m-d", strtotime($file['CREATED_ON']));
                                             $jam_out = date("H:i:s", strtotime($file['CREATED_ON']));
                                             ?>
-                                            <dd class="col-sm-4 mb-0"><?= tgl_indo($tgl_out) . " " . $jam_out; ?></dd>
+                                            <dd class="col-sm-8 mb-0"><?= tgl_indo($tgl_out) . " " . $jam_out; ?></dd>
                                         </dl>
                                     </div>
                                     <?php if ($file['TIPE'] == 1) { ?>

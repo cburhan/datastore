@@ -63,7 +63,7 @@
                                                     <select name="tahun" class="form-control tahun <?= form_error('tahun', 'is-invalid '); ?>">
                                                         <option></option>
                                                         <?php $currentYear = date("Y");
-                                                        for ($i = $currentYear; $i <= $currentYear + 5; $i++) { ?>
+                                                        for ($i = $currentYear - 1; $i <= $currentYear + 5; $i++) { ?>
                                                             <option value="<?= $i; ?>" <?= set_select('tahun', $i) ?>><?= $i; ?></option>
                                                         <?php } ?>
                                                     </select>
@@ -80,11 +80,18 @@
                                             <hr>
                                             <div class="mb-3 row">
                                                 <div class="col-sm-10 offset-sm-1 text-center">
-                                                    <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1"></i>Simpan</button>
+                                                    <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit" onclick="return confirmUpload()"><i class="ion ion-md-save me-1"></i>Simpan</button>
                                                     <button class="btn btn-sm btn-light waves-effect waves-light" type="reset"><i class="ion ion-md-refresh me-1"></i>Reset</button>
                                                     <button class="btn btn-sm btn-outline-warning waves-effect waves-light" onclick="window.location.href = '<?= base_url('bio_trans'); ?>';" type="button"><i class="ion ion-md-close me-1"></i>Batal</button>
                                                 </div>
                                             </div>
+                                            <hr>
+                                            <p class="mb-3 font-14">
+                                                <span class="text-primary"><strong>Sebelum mengupload harap perhatikan hal-hal berikut:</strong></span><br>
+                                                1. Data pada kolom yang kosong atau empty atau NULL diisi dengan <span class="text-primary"><strong>0</strong></span><br>
+                                                2. Delimiter atau pemisah bilangan desimal menggunakan <span class="text-primary"><strong>titik (.)</strong></span> contoh <span class="text-primary"><strong>125.76</strong></span><br>
+                                                3. Delimiter atau pemisah pada bilangan ribuan tidak digunakan, contoh <span class="text-primary"><strong>1000000</strong></span> bukan <span class="text-danger"><strong>1.000.000</strong></span><br>
+                                            </p>
                                         </form>
                                     </div>
                                 </div>
@@ -119,6 +126,10 @@
                     placeholder: 'Pilih Tahun'
                 });
             });
+
+            function confirmUpload() {
+                return confirm("Apakah anda yakin?\nFormat value pada kolom harus sesuai dengan ketentuan berikut:\n1. Data pada kolom yang kosong atau empty atau NULL diisi dengan 0\n2. Delimiter atau pemisah bilangan desimal menggunakan titik (.) contoh 125.76\n3. Delimiter atau pemisah pada bilangan ribuan tidak digunakan, contoh 1000000 bukan 1.000.000")
+            }
         </script>
 </body>
 

@@ -34,19 +34,14 @@ class Rob extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<div class="text-center"><small>' . $no . '</small></div>';
-            $sub_array[] = '<small>' . $row->FILE . '</small>';
-            $sub_array[] = '<small>' . $row->BULAN . '</small>';
-            $sub_array[] = '<small>' . $row->TAHUN . '</small>';
+            $sub_array[] = '<div class="text-center">' . $no . '</div>';
+            $sub_array[] = $row->FILE;
+            $sub_array[] = $row->BULAN . ' ' . $row->TAHUN;
             if ($row->TIPE == 1) {
                 $sub_array[] = '<span class="badge bg-sm bg-info">SEMENTARA</span>';
             } else if ($row->TIPE == 2) {
                 $sub_array[] = '<span class="badge bg-sm bg-success">FINAL</span>';
             }
-            $sub_array[] = '<small>' . $row->CREATED_BY . '</small>';
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = '<small>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</small>';
             $detail = NULL;
             $del = NULL;
 
@@ -109,8 +104,10 @@ class Rob extends MY_Controller
                 $time_name = date('YmdHis', strtotime($time));
                 if ($tipe == 1) {
                     $file_name = $time_name . '_ROB_S_' . $bulan . '_' . $tahun;
+                    $rob_email = "Sementara";
                 } else if ($tipe == 2) {
                     $file_name = $time_name . '_ROB_F_' . $bulan . '_' . $tahun;
+                    $rob_email = "Final";
                 }
                 $data_rob = array(
                     'BULAN'         => bulan($bulan),
@@ -129,6 +126,21 @@ class Rob extends MY_Controller
                 $this->session->set_flashdata('flash', $flash);
                 $ket = 'Menambah data <strong>Rencana Operasi Bulanan</strong> periode <strong>' . $data_rob['BULAN'] . ' ' . $data_rob['TAHUN'] . '</strong>';
                 activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+
+                $subject = 'Data ROB ' . $data_rob['BULAN'] . ' ' . $data_rob['TAHUN'];
+                $data_email = array(
+                    "modul"     => "ROB",
+                    "modul_id"  => $add_id,
+                    "tipe"      => $rob_email,
+                    "bulan"     => $data_rob['BULAN'],
+                    "tahun"     => $data_rob['TAHUN'],
+                    "file"      => $file_name,
+                    "time"      => $time,
+                    "color"     => "primary",
+                    "url"       => "rob/detail/" . encrypt_url($add_id)
+                );
+                $message = 'User ' . get_session_name() . ' telah melakukan upload data ' . $data_email['modul'] . ' ' . $data_email['tipe'] . ' periode ' . $data_email['bulan'] . ' ' . $data_email['tahun'] . ' dengan nama file ' . $data_email['file'];
+                send_notification(get_session_id(), $data_email, $subject, 'email/rob', $message);
             }
             redirect('rob');
         }

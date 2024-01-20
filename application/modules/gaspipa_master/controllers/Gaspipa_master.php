@@ -37,10 +37,6 @@ class Gaspipa_master extends MY_Controller
             $sub_array[] = '<div class="text-center">' . $no . '</div>';
             $sub_array[] = $row->FILE;
             $sub_array[] = '<span class="badge bg-sm bg-' . $row->TIPE_COLOR . '">' . $row->TIPE_TEXT . '</span>';
-            $sub_array[] = $row->CREATED_BY;
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = tgl_indo($tgl_out) . ' ' . $jam_out;
             $detail = NULL;
             $del = NULL;
 
@@ -114,6 +110,20 @@ class Gaspipa_master extends MY_Controller
             $this->session->set_flashdata('flash', $flash);
             $ket = 'Menambah data <strong>Master Gas Pipa</strong> data <strong>' . $tipe_text . '</strong>';
             activity_log(get_session_id(), get_session_name(), 'Gas Pipa', 'ADD', 'success', $ket);
+
+            $subject = 'Data Gas Pipa Master ' . $tipe_text;
+            $data_email = array(
+                "modul"     => "GAS PIPA",
+                "modul_id"  => $add_id,
+                "tipe"      => $tipe_text,
+                "file"      => $file_name,
+                "time"      => $time,
+                "color"     => "succcess",
+                "url"       => "gaspipa_master/detail/" . encrypt_url($add_id)
+            );
+            $message = 'User ' . get_session_name() . ' telah melakukan upload data ' . $data_email['modul'] . ' MASTER ' . $data_email['tipe'] . ' dengan nama file ' . $data_email['file'];
+            send_notification(get_session_id(), $data_email, $subject, 'email/gaspipa_master', $message);
+
             redirect('gaspipa_master');
         }
     }

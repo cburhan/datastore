@@ -34,15 +34,10 @@ class Bb_trans extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<div class="text-center"><small>' . $no . '</small></div>';
-            $sub_array[] = '<small>' . $row->FILE . '</small>';
-            $sub_array[] = '<small>' . $row->BULAN . '</small>';
-            $sub_array[] = '<small>' . $row->TAHUN . '</small>';
-            $sub_array[] = '<span class="badge bg-sm bg-' . $row->MODEL_COLOR . '"><small>' . $row->MODEL_TEXT . '</small></span>';
-            $sub_array[] = '<small>' . $row->CREATED_BY . '</small>';
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = '<small>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</small>';
+            $sub_array[] = '<div class="text-center">' . $no . '</div>';
+            $sub_array[] = $row->FILE;
+            $sub_array[] = $row->BULAN . ' ' . $row->TAHUN;
+            $sub_array[] = '<span class="badge bg-sm bg-' . $row->MODEL_COLOR . '">' . $row->MODEL_TEXT . '</span>';
             $detail = NULL;
             $del = NULL;
 
@@ -137,6 +132,22 @@ class Bb_trans extends MY_Controller
             $this->session->set_flashdata('flash', $flash);
             $ket = 'Menambah data <strong>Transaksi Batubara</strong> periode <strong>' . $data_bio['BULAN'] . ' ' . $data_bio['TAHUN'] . '</strong>';
             activity_log(get_session_id(), get_session_name(), 'Batubara', 'ADD', 'success', $ket);
+
+            $subject = 'Data Batubara Transaksi ' . $data_bio['MODEL_TEXT'] . ' ' . $data_bio['BULAN'] . ' ' . $data_bio['TAHUN'];
+            $data_email = array(
+                "modul"     => "BATUBARA",
+                "modul_id"  => $add_id,
+                "model"     => $data_bio['MODEL_TEXT'],
+                "bulan"     => $data_bio['BULAN'],
+                "tahun"     => $data_bio['TAHUN'],
+                "file"      => $file_name,
+                "time"      => $time,
+                "color"     => "succcess",
+                "url"       => "bb_trans/detail/" . encrypt_url($add_id)
+            );
+            $message = 'User ' . get_session_name() . ' telah melakukan upload data ' . $data_email['modul'] . ' TRANSAKSI ' . $data_email['model'] . ' periode ' . $data_email['bulan'] . ' ' . $data_email['tahun'] . ' dengan nama file ' . $data_email['file'];
+            send_notification(get_session_id(), $data_email, $subject, 'email/bb_trans', $message);
+
             redirect('bb_trans');
         }
     }
@@ -187,15 +198,15 @@ class Bb_trans extends MY_Controller
 
         $id = decrypt_url($id);
 
-        $bio = $this->BbTrans_model->getBbTransById($id);
-        if ($bio != NULL) {
-            $path = 'public/upload_file/bb_trans/' . $bio['FILE'];
+        $bb = $this->BbTrans_model->getBbTransById($id);
+        if ($bb != NULL) {
+            $path = 'public/upload_file/bb_trans/' . $bb['FILE'];
 
             $this->load->library('Excel');
             $excelreader = new PHPExcel_Reader_Excel2007();
             $loadexcel = $excelreader->load($path);
             $data['sheet'] = $loadexcel->getActiveSheet()->toArray(null, true, true, true);
-            $data['file'] = $bio;
+            $data['file'] = $bb;
 
             $this->load->view('bb-trans-detail', $data);
         } else {

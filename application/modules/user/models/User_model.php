@@ -121,6 +121,14 @@ class User_model extends CI_Model
         }
     }
 
+    public function getUserNotId($user_id)
+    {
+        $this->db->select('ID, USERNAME, FULLNAME, EMAIL');
+        $this->db->from('user');
+        $this->db->where('ID!=', $user_id);
+        return $this->db->get();
+    }
+
     //USER GROUP ROLE
     public function getUserRole($user_id)
     {

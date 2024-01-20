@@ -37,10 +37,6 @@ class Lng_master extends MY_Controller
             $sub_array[] = '<div class="text-center">' . $no . '</div>';
             $sub_array[] = $row->FILE;
             $sub_array[] = '<span class="badge bg-sm bg-' . $row->TIPE_COLOR . '">' . $row->TIPE_TEXT . '</span>';
-            $sub_array[] = $row->CREATED_BY;
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = tgl_indo($tgl_out) . ' ' . $jam_out;
             $detail = NULL;
             $del = NULL;
 
@@ -91,7 +87,7 @@ class Lng_master extends MY_Controller
             $tipe_color = 'success';
         } else if ($tipe == 5) {
             $tipe_text = 'FSRU';
-            $tipe_color = 'secondary';
+            $tipe_color = 'dark';
         }
 
         if ($this->form_validation->run() == FALSE) {
@@ -117,6 +113,20 @@ class Lng_master extends MY_Controller
             $this->session->set_flashdata('flash', $flash);
             $ket = 'Menambah data <strong>Master LNG</strong> data <strong>' . $tipe_text . '</strong>';
             activity_log(get_session_id(), get_session_name(), 'LNG', 'ADD', 'success', $ket);
+
+            $subject = 'Data LNG Master ' . $tipe_text;
+            $data_email = array(
+                "modul"     => "LNG",
+                "modul_id"  => $add_id,
+                "tipe"      => $tipe_text,
+                "file"      => $file_name,
+                "time"      => $time,
+                "color"     => "succcess",
+                "url"       => "lng_master/detail/" . encrypt_url($add_id)
+            );
+            $message = 'User ' . get_session_name() . ' telah melakukan upload data ' . $data_email['modul'] . ' MASTER ' . $data_email['tipe'] . ' dengan nama file ' . $data_email['file'];
+            send_notification(get_session_id(), $data_email, $subject, 'email/lng_master', $message);
+
             redirect('lng_master');
         }
     }

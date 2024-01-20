@@ -192,7 +192,7 @@ function get_user($username)
 function apps()
 {
     $CI = &get_instance();
-    $CI->db->select('NAME, LOGO, LOGO_BIG, BG');
+    $CI->db->select('NAME, LOGO, LOGO_BIG, BG, ENV, ENV_TEXT');
     $CI->db->from('apps');
     return $CI->db->get()->row_array();
 }

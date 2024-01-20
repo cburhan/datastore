@@ -42,10 +42,6 @@ class Rot extends MY_Controller
             } else if ($row->TIPE == 2) {
                 $sub_array[] = '<span class="badge bg-sm bg-success">FINAL</span>';
             }
-            $sub_array[] = $row->CREATED_BY;
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = tgl_indo($tgl_out) . ' ' . $jam_out;
             $detail = NULL;
             $del = NULL;
 
@@ -103,8 +99,10 @@ class Rot extends MY_Controller
                 $time_name = date('YmdHis', strtotime($time));
                 if ($tipe == 1) {
                     $file_name = $time_name . '_ROT_S_' . $tahun;
+                    $rot_email = "Sementara";
                 } else if ($tipe == 2) {
                     $file_name = $time_name . '_ROT_F_' . $tahun;
+                    $rot_email = "Final";
                 }
                 $data_rot = array(
                     'TAHUN'         => $tahun,
@@ -121,6 +119,20 @@ class Rot extends MY_Controller
                 $this->session->set_flashdata('flash', $flash);
                 $ket = 'Menambah data <strong>Rencana Operasi Tahunan</strong> tahun <strong>' . $data_rot['TAHUN'] . '</strong>';
                 activity_log(get_session_id(), get_session_name(), 'Rencana Operasi', 'ADD', 'success', $ket);
+
+                $subject = 'Data ROT ' .  $data_rot['TAHUN'];
+                $data_email = array(
+                    "modul"     => "ROT",
+                    "modul_id"  => $add_id,
+                    "tipe"      => $rot_email,
+                    "tahun"     => $data_rot['TAHUN'],
+                    "file"      => $file_name,
+                    "time"      => $time,
+                    "color"     => "primary",
+                    "url"       => "rot/detail/" . encrypt_url($add_id)
+                );
+                $message = 'User ' . get_session_name() . ' telah melakukan upload data ' . $data_email['modul'] . ' ' . $data_email['tipe'] . ' periode ' . $data_email['tahun'] . ' dengan nama file ' . $data_email['file'];
+                send_notification(get_session_id(), $data_email, $subject, 'email/rot', $message);
             }
             redirect('rot');
         }

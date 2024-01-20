@@ -63,7 +63,7 @@
                                                     <select name="tahun" class="form-control tahun <?= form_error('tahun', 'is-invalid '); ?>">
                                                         <option></option>
                                                         <?php $currentYear = date("Y");
-                                                        for ($i = $currentYear; $i <= $currentYear + 5; $i++) { ?>
+                                                        for ($i = $currentYear - 1; $i <= $currentYear + 5; $i++) { ?>
                                                             <option value="<?= $i; ?>" <?= set_select('tahun', $i) ?>><?= $i; ?></option>
                                                         <?php } ?>
                                                     </select>

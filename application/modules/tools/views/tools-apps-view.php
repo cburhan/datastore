@@ -50,6 +50,15 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
+                                                        <th scope="row" style="width: 200px;" class="align-middle">Environment</th>
+                                                        <td class="align-middle"><span class="text-primary"><strong><?= $apps['ENV_TEXT']; ?></strong></span></td>
+                                                        <td style="width: 100px;" class="align-middle text-center">
+                                                            <?php if (check_button('change_env_apps') > 0) { ?>
+                                                                <button class="btn btn-warning btn-sm waves-effect" type="button" data-bs-toggle="modal" data-bs-target="#env"><i class="ion ion-md-color-filter me-1"></i>Edit</button>
+                                                            <?php } ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                         <th scope="row" style="width: 200px;" class="align-middle">Logo Kecil</th>
                                                         <td class="align-middle">
                                                             <?php if ($apps['LOGO'] != NULL) { ?>
@@ -133,6 +142,45 @@
                                     <label class="col-sm-4 col-form-label">Nama Aplikasi<span class="text-danger">*</span></label>
                                     <div class="col-sm-8">
                                         <input type="text" name="name" class="form-control" value="<?= $apps['NAME']; ?>" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <div class="form-control-wrap">
+                                            <button type="button" class="btn btn-sm btn-secondary waves-effect waves-light" data-bs-dismiss="modal"><i class="ion ion-md-close me-1"></i>Close</button>
+                                            <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1"></i>Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        <?php } ?>
+
+        <?php if (check_button('change_env_apps') > 0) { ?>
+            <div class="modal fade" id="env" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="env">Change Environment Apps</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="<?= base_url('tools/change_env_apps'); ?>">
+                                <?= csrf(); ?>
+                                <div class="row">
+                                    <label class="col-sm-4 col-form-label">Nama ENV<span class="text-danger">*</span></label>
+                                    <div class="col-sm-8">
+                                        <select name="env" class="form-control <?= form_error('env', 'is-invalid '); ?>">
+                                            <option value="1" <?= ($apps['ENV']) ? " selected='selected'" : "" ?>>PRODUCTION</option>
+                                            <option value="2" <?= ($apps['ENV'] == 2) ? " selected='selected'" : "" ?>>TRAINING</option>
+                                            <option value="3" <?= ($apps['ENV'] == 3) ? " selected='selected'" : "" ?>>DEVELOPMENT</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <hr>
@@ -286,6 +334,7 @@
         <!-- JAVASCRIPT -->
         <?php $this->load->view('template/js'); ?>
         <script src="<?= base_url('assets/'); ?>libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+
         <script>
             $(function() {
                 'use strict'

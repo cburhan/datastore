@@ -69,7 +69,7 @@
                                             <hr>
                                             <div class="mb-3 row">
                                                 <div class="col-sm-10 offset-sm-1 text-center">
-                                                    <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1" onclick="return confirmUpload()"></i>Simpan</button>
+                                                    <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit" onclick="return confirmUpload()"><i class="ion ion-md-save me-1" onclick="return confirmUpload()"></i>Simpan</button>
                                                     <button class="btn btn-sm btn-light waves-effect waves-light" type="reset"><i class="ion ion-md-refresh me-1"></i>Reset</button>
                                                     <button class="btn btn-sm btn-outline-warning waves-effect waves-light" onclick="window.location.href = '<?= base_url('lng_master'); ?>';" type="button"><i class="ion ion-md-close me-1"></i>Batal</button>
                                                 </div>

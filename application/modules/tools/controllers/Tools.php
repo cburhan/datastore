@@ -595,4 +595,48 @@ class Tools extends MY_Controller
 
         $this->load->view('tools-changelog', $data);
     }
+
+    public function change_env_apps()
+    {
+        $apps   = $this->Tools_model->getApps()->row_array();
+
+        if ($apps['ENV'] != $this->input->post('env')) {
+            $this->form_validation->set_rules('env', 'env', 'required|is_unique[apps.ENV]', [
+                'required'      => 'Environment harus dipilih',
+                'is_unique'     => 'Environment sudah ada'
+            ]);
+        } else {
+            $this->form_validation->set_rules('env', 'env', 'required', [
+                'required'      => 'Environment tidak boleh kosong'
+            ]);
+        }
+
+        if ($this->form_validation->run() == FALSE) {
+            $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Gagal!</strong> ' . validation_errors() . '
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            redirect('tools/apps');
+        } else {
+            cek_csrf();
+            if ($this->input->post('env') == 1) {
+                $env_text = 'PRODUCTION';
+            } else if ($this->input->post('env') == 2) {
+                $env_text = 'TRAINING';
+            } else if ($this->input->post('env') == 3) {
+                $env_text = 'DEVELOPMENT';
+            }
+            $data = array("ENV" => $this->input->post('env'), "ENV_TEXT" => $env_text);
+            $this->Tools_model->editApps($data);
+            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Sukses!</strong> Nama Apps berhasil diubah.
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            $ket = 'Mengubah <strong>ENVIRONMENT</strong> dari <strong>' . $apps['ENV_TEXT'] . '</strong> menjadi <strong>' . $env_text . '</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Tools', 'UPDATE', 'primary', $ket);
+            redirect('tools/apps');
+        }
+    }
 }

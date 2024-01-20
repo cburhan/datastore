@@ -67,113 +67,52 @@
                 </button>
             </div>
 
+            <?php $notification = notif(get_session_id()); ?>
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item noti-icon waves-effect" id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="mdi mdi-bell-outline"></i>
-                    <span class="badge bg-danger rounded-pill">3</span>
+                    <span class="badge bg-danger rounded-pill"><?= count($notification); ?></span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-notifications-dropdown">
                     <div class="p-3">
                         <div class="row align-items-center">
                             <div class="col">
-                                <h5 class="m-0 font-size-16"> Notifications (258) </h5>
+                                <h5 class="m-0 font-size-16"> Notifications (<?= count($notification); ?>) </h5>
                             </div>
                         </div>
                     </div>
                     <div data-simplebar style="max-height: 230px;">
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar-xs">
-                                        <span class="avatar-title bg-success rounded-circle font-size-16">
-                                            <i class="mdi mdi-cart-outline"></i>
-                                        </span>
+                        <?php if ($notification != NULL) { ?>
+                            <?php foreach ($notification as $notif) { ?>
+                                <a href="<?= base_url('notif/readThenRedirect/') . encrypt_url($notif['ID']); ?>" class="text-reset notification-item">
+                                    <div class="d-flex">
+                                        <div class="flex-shrink-0 me-3">
+                                            <div class="avatar-xs">
+                                                <span class="avatar-title bg-<?= $notif['COLOR']; ?> rounded-circle font-size-16">
+                                                    <i class="ti ti-<?= $notif['ICON']; ?>"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <h6 class="mb-1"><?= $notif['SUBJECT']; ?></h6>
+                                            <div class="font-size-12 text-muted">
+                                                <p class="mb-1"><?= $notif['MESSAGE']; ?></p>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">Your order is placed</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">Dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                </div>
+                                </a>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <div class="d-grid">
+                                <a class="btn btn-sm font-size-14 text-center">
+                                    Tidak ada notifikasi
+                                </a>
                             </div>
-                        </a>
-
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar-xs">
-                                        <span class="avatar-title bg-warning rounded-circle font-size-16">
-                                            <i class="mdi mdi-message-text-outline"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">New Message received</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">You have 87 unread messages</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar-xs">
-                                        <span class="avatar-title bg-info rounded-circle font-size-16">
-                                            <i class="mdi mdi-glass-cocktail"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">Your item is shipped</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">It is a long established fact that a reader will</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar-xs">
-                                        <span class="avatar-title bg-primary rounded-circle font-size-16">
-                                            <i class="mdi mdi-cart-outline"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">Your order is placed</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">Dummy text of the printing and typesetting industry.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a href="" class="text-reset notification-item">
-                            <div class="d-flex">
-                                <div class="flex-shrink-0 me-3">
-                                    <div class="avatar-xs">
-                                        <span class="avatar-title bg-danger rounded-circle font-size-16">
-                                            <i class="mdi mdi-message-text-outline"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <h6 class="mb-1">New Message received</h6>
-                                    <div class="font-size-12 text-muted">
-                                        <p class="mb-1">You have 87 unread messages</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                        <?php } ?>
                     </div>
                     <div class="p-2 border-top">
                         <div class="d-grid">
-                            <a class="btn btn-sm btn-link font-size-14 text-center" href="javascript:void(0)">
+                            <a class="btn btn-sm btn-link font-size-14 text-center" href="<?= base_url('notif'); ?>">
                                 View all
                             </a>
                         </div>

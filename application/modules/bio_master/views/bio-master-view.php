@@ -62,8 +62,6 @@
                                                     <th style="width: 25px;">#</th>
                                                     <th>File</th>
                                                     <th>Tipe</th>
-                                                    <th>Upload By</th>
-                                                    <th>Upload On</th>
                                                     <?php if (check_button('detail') > 0 || check_button('delete') > 0) {
                                                     ?>
                                                         <th class="text-center" style="width: 100px;">Actions</th>
@@ -120,7 +118,7 @@
                         "type": "POST"
                     },
                     'columnDefs': [{
-                        "targets": [0, 2, 3, 4],
+                        "targets": [0, 2, 3],
                         "className": "text-center",
                     }]
                 });

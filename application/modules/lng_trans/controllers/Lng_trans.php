@@ -34,15 +34,10 @@ class Lng_trans extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<div class="text-center"><small>' . $no . '</small></div>';
-            $sub_array[] = '<small>' . $row->FILE . '</small>';
-            $sub_array[] = '<small>' . $row->BULAN . '</small>';
-            $sub_array[] = '<small>' . $row->TAHUN . '</small>';
+            $sub_array[] = '<div class="text-center">' . $no . '</div>';
+            $sub_array[] =  $row->FILE;
+            $sub_array[] = $row->BULAN . ' ' . $row->TAHUN;
             $sub_array[] = '<span class="badge bg-sm bg-' . $row->TIPE_COLOR . '">' . $row->TIPE_TEXT . '</span>';
-            $sub_array[] = '<small>' . $row->CREATED_BY . '</small>';
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = '<small>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</small>';
             $detail = NULL;
             $del = NULL;
 
@@ -80,6 +75,10 @@ class Lng_trans extends MY_Controller
 
         $this->form_validation->set_rules('tahun', 'Tahun', 'required', [
             'required' => 'Tahun harus dipilih'
+        ]);
+
+        $this->form_validation->set_rules('tipe', 'Tipe', 'required', [
+            'required' => 'Tipe harus dipilih'
         ]);
 
         $tipe = $this->input->post('tipe');
@@ -122,6 +121,22 @@ class Lng_trans extends MY_Controller
             $this->session->set_flashdata('flash', $flash);
             $ket = 'Menambah data <strong>Transaksi LNG</strong> periode <strong>' . $data_bio['BULAN'] . ' ' . $data_bio['TAHUN'] . '</strong>';
             activity_log(get_session_id(), get_session_name(), 'LNG', 'ADD', 'success', $ket);
+
+            $subject = 'Data LNG Transaksi ' . $data_bio['TIPE_TEXT'] . ' ' . $data_bio['BULAN'] . ' ' . $data_bio['TAHUN'];
+            $data_email = array(
+                "modul"     => "LNG",
+                "modul_id"  => $add_id,
+                "tipe"      => $data_bio['TIPE_TEXT'],
+                "bulan"     => $data_bio['BULAN'],
+                "tahun"     => $data_bio['TAHUN'],
+                "file"      => $file_name,
+                "time"      => $time,
+                "color"     => "succcess",
+                "url"       => "lng_trans/detail/" . encrypt_url($add_id)
+            );
+            $message = 'User ' . get_session_name() . ' telah melakukan upload data ' . $data_email['modul'] . ' TRANSAKSI ' . $data_email['tipe'] . ' periode ' . $data_email['bulan'] . ' ' . $data_email['tahun'] . ' dengan nama file ' . $data_email['file'];
+            send_notification(get_session_id(), $data_email, $subject, 'email/lng_trans', $message);
+
             redirect('lng_trans');
         }
     }

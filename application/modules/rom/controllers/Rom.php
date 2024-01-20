@@ -34,20 +34,15 @@ class Rom extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<small>' . $no . '</small>';
-            $sub_array[] = '<small>' . $row->FILE . '</small>';
-            $sub_array[] = '<small>W' . $row->WEEK . '</small>';
-            $sub_array[] = '<small>' . $row->BULAN . '</small>';
-            $sub_array[] = '<small>' . $row->TAHUN . '</small>';
+            $sub_array[] = $no;
+            $sub_array[] = $row->FILE;
+            $sub_array[] = 'W' . $row->WEEK . '';
+            $sub_array[] = $row->BULAN . ' ' . $row->TAHUN;
             if ($row->TIPE == 1) {
                 $sub_array[] = '<span class="badge bg-sm bg-info">SEMENTARA</span>';
             } else if ($row->TIPE == 2) {
                 $sub_array[] = '<span class="badge bg-sm bg-success">FINAL</span>';
             }
-            $sub_array[] = '<small>' . $row->CREATED_BY . '</small>';
-            $tgl_out = date("Y-m-d", strtotime($row->CREATED_ON));
-            $jam_out = date("H:i:s", strtotime($row->CREATED_ON));
-            $sub_array[] = '<small>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</small>';
             $detail = NULL;
             $del = NULL;
 
