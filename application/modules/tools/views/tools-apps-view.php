@@ -62,7 +62,7 @@
                                                         <th scope="row" style="width: 200px;" class="align-middle">Logo Kecil</th>
                                                         <td class="align-middle">
                                                             <?php if ($apps['LOGO'] != NULL) { ?>
-                                                                <a class="logo" href="<?= base_url('public/apps/') . $apps['LOGO']; ?>">
+                                                                <a class="logos" href="<?= base_url('public/apps/') . $apps['LOGO']; ?>">
                                                                     <img src="<?= base_url('public/apps/') . $apps['LOGO']; ?>" alt="" class="img-thumbnail rounded me-2" width="50">
                                                                 </a>
                                                             <?php } else { ?>
@@ -339,7 +339,7 @@
             $(function() {
                 'use strict'
 
-                $(".logo").magnificPopup({
+                $(".logos").magnificPopup({
                     type: "image",
                     closeOnContentClick: !0,
                     closeBtnInside: !1,

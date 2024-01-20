@@ -3,7 +3,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a class="logo logo-dark">
+                <a class="logo logo-dark" href="<?= base_url(); ?>">
                     <span class="logo-sm">
                         <img src="<?= base_url('public/apps/') . apps()['LOGO']; ?>" alt="" height="22">
                     </span>
@@ -12,7 +12,7 @@
                     </span>
                 </a>
 
-                <a class="logo logo-light">
+                <a class="logo logo-light" href="<?= base_url(); ?>">
                     <span class="logo-sm">
                         <img src="<?= base_url('public/apps/') . apps()['LOGO']; ?>" alt="" height="22">
                     </span>
