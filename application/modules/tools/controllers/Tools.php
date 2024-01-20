@@ -469,13 +469,13 @@ class Tools extends MY_Controller
             $max_minor = $this->Ver_model->max_minor();
             if ($this->input->post('tipe') == 1) {
                 $major = (int) $max_major['MAJOR'] + 1;
-                $fitur = (int) $max_fitur['FITUR'];
-                $minor = (int) $max_minor['MINOR'];
+                $fitur = 0;
+                $minor = 0;
                 $tipe = "MAJOR";
             } else if ($this->input->post('tipe') == 2) {
                 $major = (int) $max_major['MAJOR'];
                 $fitur = (int) $max_fitur['FITUR'] + 1;
-                $minor = (int) $max_minor['MINOR'];
+                $minor = 0;
                 $tipe = "FITUR";
             } else if ($this->input->post('tipe') == 3) {
                 $major = (int) $max_major['MAJOR'];
