@@ -176,10 +176,10 @@
                                                             <smalls>Pemasok</smalls>
                                                         </th>
                                                         <th class="p-1 text-center align-middle">
-                                                            <smalls>Volume per Tahun</smalls>
+                                                            <smalls>Jenis</smalls>
                                                         </th>
                                                         <th class="p-1 text-center align-middle">
-                                                            <smalls>Jenis</smalls>
+                                                            <smalls>Volume per Tahun</smalls>
                                                         </th>
                                                         <th class="p-1 text-center align-middle">
                                                             <smalls>Kalori</smalls>
