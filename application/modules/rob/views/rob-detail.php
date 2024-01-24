@@ -143,6 +143,8 @@
                                                                             <span class="text-primary">GAS LNG</span>
                                                                         <?php } else if ($f['C'] == 15) { ?>
                                                                             <span class="text-primary">BBM</span>
+                                                                        <?php } else if ($f['C'] == 16) { ?>
+                                                                            <span class="text-primary">GAS PIPA & LNG</span>
                                                                         <?php } else { ?>
                                                                             <span class="text-danger">Data Tidak Valid</span>
                                                                         <?php } ?>
