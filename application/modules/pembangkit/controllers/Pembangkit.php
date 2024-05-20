@@ -147,7 +147,7 @@ class Pembangkit extends MY_Controller
                 $milik_label = 'IPP';
             }
 
-            $data_menu = array(
+            $data_kit = array(
                 'KODE_PEMBANGKIT'   => generate_kode_pembangkit($this->input->post('milik')),
                 'NAMA_PEMBANGKIT'   => strtoupper($this->input->post('nama')),
                 'KEPEMILIKAN_ID'    => $milik,
@@ -171,13 +171,13 @@ class Pembangkit extends MY_Controller
                 'CREATED_ON'        => date('Y-m-d H:i:s'),
                 'CHANGED_BY'        => get_session_name()
             );
-            $add_id = $this->Pembangkit_model->addPembangkit($data_menu);
+            $add_id = $this->Pembangkit_model->addPembangkit($data_kit);
             $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         <strong>Sukses!</strong> Data berhasil ditambah.
                         </div>';
             $this->session->set_flashdata('flash', $flash);
-            $ket = 'Menambah data <strong>Menu</strong> dengan <strong>ID #' . $add_id . '</strong>';
+            $ket = 'Menambah data <strong>Pembangkit</strong> dengan <strong>ID #' . $add_id . '</strong>';
             activity_log(get_session_id(), get_session_name(), 'Pembangkit', 'ADD', 'success', $ket);
             redirect('pembangkit');
         }
