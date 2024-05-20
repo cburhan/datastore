@@ -23,3 +23,35 @@ function activity_log($id, $user, $modul, $action, $color, $ket)
     );
     $CI->db->insert('user_activity_log', $data);
 }
+
+function generate_kode_pembangkit($milik)
+{
+    $CI = &get_instance();
+    $CI->load->database();
+
+    $CI->db->select('COUNT(*) as count');
+    $CI->db->from('pembangkit');
+    $query = $CI->db->get();
+    $result = $query->row_array();
+
+    $count = $result['count'] + 1;
+    $kode_pembangkit = $milik . '' . str_pad($count, 4, '0', STR_PAD_LEFT);
+
+    return $kode_pembangkit;
+}
+
+function seq_pembangkit()
+{
+    $CI = &get_instance();
+    $CI->load->database();
+
+    $CI->db->select('COUNT(*) as count');
+    $CI->db->from('pembangkit');
+    $query = $CI->db->get();
+    $result = $query->row_array();
+
+    $count = $result['count'] + 1;
+    $seq = str_pad($count, 0, '0', STR_PAD_LEFT);
+
+    return $seq;
+}

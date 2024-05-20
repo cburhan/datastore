@@ -31,26 +31,19 @@
                                 <h6 class="page-title mb-0"><?= $title; ?></h6>
                                 <p class="card-text">#List Data <?= $title; ?></p>
                             </div>
-                            <div class="col-md-4">
-                                <div class="float-end d-none d-md-block">
-                                    <div class="dropdown">
-                                        <?php if (check_button('publish') > 0) {
-                                        ?>
-                                            <button class="btn btn-sm btn-success" type="button" onclick="window.location.href = '<?= base_url('pembangkit/publish'); ?>';">
-                                                <i class="ion ion-md-rocket me-1"></i> Publish
-                                            </button>
-                                        <?php }
-                                        ?>
-                                        <?php if (check_button('add') > 0) {
-                                        ?>
-                                            <button class="btn btn-sm btn-primary" type="button" onclick="window.location.href = '<?= base_url('pembangkit/add'); ?>';">
+                            <?php if (check_button('add') > 0) {
+                            ?>
+                                <div class="col-md-4">
+                                    <div class="float-end d-none d-md-block">
+                                        <div class="dropdown">
+                                            <button class="btn btn-sm btn-primary" type="button" onclick="window.location.href = '<?= base_url('kit_regional/add'); ?>';">
                                                 <i class="ion ion-md-add me-1"></i> Add Data
                                             </button>
-                                        <?php }
-                                        ?>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <?php }
+                            ?>
                         </div>
                         <!-- end page title -->
                         <?= $this->session->flashdata('flash'); ?>
@@ -67,11 +60,7 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 25px;">#</th>
-                                                    <th>Kode</th>
-                                                    <th>Nama</th>
-                                                    <th>Daya Terpasang</th>
                                                     <th>Regional</th>
-                                                    <th>Sistem Transmisi</th>
                                                     <th>Status</th>
                                                     <?php if (check_button('edit') > 0 || check_button('delete') > 0) {
                                                     ?>
@@ -124,11 +113,11 @@
                     "serverSide": true,
                     "pageLength": 10,
                     "ajax": {
-                        "url": "<?php echo site_url('pembangkit/get_data'); ?>",
+                        "url": "<?php echo site_url('kit_regional/get_data'); ?>",
                         "type": "POST"
                     },
                     'columnDefs': [{
-                        "targets": [0, 3, 6],
+                        "targets": [0, 2],
                         "className": "text-center",
                     }]
                 });

@@ -7,8 +7,8 @@ class Pembangkit_model extends CI_Model
     }
 
     //PEMABNGKIT
-    var $select_column = array('ID', 'KODE_PEMBANGKIT', 'NAMA_PEMBANGKIT');
-    var $order_column = array('ID', 'KODE_PEMBANGKIT', 'NAMA_PEMBANGKIT');
+    var $select_column = array('ID', 'KODE_PEMBANGKIT', 'NAMA_PEMBANGKIT', 'KEPEMILIKAN', 'DAYA_TERPASANG', 'REGIONAL', 'SISTEM', 'IS_ACTIVE', 'SEQUENCE');
+    var $order_column = array('ID', 'KODE_PEMBANGKIT', 'NAMA_PEMBANGKIT', 'KEPEMILIKAN', 'DAYA_TERPASANG', 'REGIONAL', 'SISTEM', 'IS_ACTIVE', 'SEQUENCE');
 
     public function make_query()
     {
@@ -16,14 +16,19 @@ class Pembangkit_model extends CI_Model
         $this->db->from('pembangkit');
 
         if (isset($_POST['search']['value'])) {
+            $this->db->group_start();
             $this->db->like('KODE_PEMBANGKIT', $_POST['search']['value']);
             $this->db->or_like('NAMA_PEMBANGKIT', $_POST['search']['value']);
+            $this->db->or_like('DAYA_TERPASANG', $_POST['search']['value']);
+            $this->db->or_like('REGIONAL', $_POST['search']['value']);
+            $this->db->or_like('SISTEM', $_POST['search']['value']);
+            $this->db->group_end();
         }
 
         if (isset($_POST['order'])) {
             $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
-            $this->db->order_by('ID', 'ASC');
+            $this->db->order_by('SEQUENCE', 'ASC');
         }
     }
 
@@ -103,5 +108,39 @@ class Pembangkit_model extends CI_Model
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    public function addPembangkitPublish($data)
+    {
+        $this->db->insert('pembangkit_publish', $data);
+        if ($this->db->affected_rows() > 0) {
+            return $this->db->insert_id();
+        } else {
+            return NULL;
+        }
+    }
+
+    public function addPembangkitPublishFile($data)
+    {
+        $this->db->insert('pembangkit_publish_file', $data);
+        if ($this->db->affected_rows() > 0) {
+            return $this->db->insert_id();
+        } else {
+            return NULL;
+        }
+    }
+
+    public function editPembangkitPublishFile($data, $id)
+    {
+        $update = $this->db->update('pembangkit_publish_file', $data, array('ID' => $id));
+        return $update;
+    }
+
+    public function getPembangkitPublish()
+    {
+        $this->db->select('KODE_PEMBANGKIT, TIPE, NAMA_PEMBANGKIT, KEPEMILIKAN, DAYA_TERPASANG, SISTEM, REGIONAL, IS_BATUBARA, IS_GASPIPA, IS_LNG, IS_BIOMASA, IS_BBM, ID_BBO, IS_ACTIVE');
+        $this->db->from('pembangkit');
+        $this->db->order_by('ID ASC');
+        return $this->db->get();
     }
 }

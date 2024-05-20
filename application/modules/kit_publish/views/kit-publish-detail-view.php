@@ -5,6 +5,17 @@
     <?php $this->load->view('template/head'); ?>
     <link href="<?= base_url('assets/'); ?>libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/'); ?>libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .smalls,
+        smalls {
+            font-size: 70%;
+        }
+
+        .smalld,
+        smalld {
+            font-size: 60%;
+        }
+    </style>
 </head>
 
 <body data-sidebar="dark">
@@ -28,26 +39,19 @@
                     <div class="page-title-box">
                         <div class="row align-items-center mb-2">
                             <div class="col-md-8">
-                                <h6 class="page-title mb-0"><?= $title; ?></h6>
-                                <p class="card-text">#List Data <?= $title; ?></p>
+                                <h6 class="page-title mb-0">Detail Data <?= $title; ?></h6>
+                                <?php
+                                $tgl_out = date("Y-m-d", strtotime($pub['PUBLISH_ON']));
+                                $jam_out = date("H:i:s", strtotime($pub['PUBLISH_ON']));;
+                                ?>
+                                <p class="card-text">Publish By <?= '<strong>' . $pub['PUBLISH_BY'] . '</strong> On <strong>' . tgl_indo($tgl_out) . ' ' . $jam_out . '</strong>'; ?></p>
                             </div>
                             <div class="col-md-4">
                                 <div class="float-end d-none d-md-block">
                                     <div class="dropdown">
-                                        <?php if (check_button('publish') > 0) {
-                                        ?>
-                                            <button class="btn btn-sm btn-success" type="button" onclick="window.location.href = '<?= base_url('pembangkit/publish'); ?>';">
-                                                <i class="ion ion-md-rocket me-1"></i> Publish
-                                            </button>
-                                        <?php }
-                                        ?>
-                                        <?php if (check_button('add') > 0) {
-                                        ?>
-                                            <button class="btn btn-sm btn-primary" type="button" onclick="window.location.href = '<?= base_url('pembangkit/add'); ?>';">
-                                                <i class="ion ion-md-add me-1"></i> Add Data
-                                            </button>
-                                        <?php }
-                                        ?>
+                                        <button class="btn btn-sm btn-outline-warning waves-effect waves-light" type="button" onclick="window.location.href = '<?= base_url('kit_publish'); ?>';">
+                                            <i class="ion ion-md-arrow-back me-1"></i> Kembali
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -66,18 +70,48 @@
                                         <table id="mytable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 25px;">#</th>
-                                                    <th>Kode</th>
-                                                    <th>Nama</th>
-                                                    <th>Daya Terpasang</th>
-                                                    <th>Regional</th>
-                                                    <th>Sistem Transmisi</th>
-                                                    <th>Status</th>
-                                                    <?php if (check_button('edit') > 0 || check_button('delete') > 0) {
-                                                    ?>
-                                                        <th class="text-center" style="width: 100px;">Actions</th>
-                                                    <?php }
-                                                    ?>
+                                                    <th style="width: 25px;">
+                                                        <smalls>#</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>KODE PEMBANGKIT</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>TIPE</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>NAMA PEMBANGKIT</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>KEPEMILIKAN</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>REGIONAL</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>SISTEM</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>DAYA TERPASANG</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>BB</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>GAS</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>LNG</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>BIO</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>BBM</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>STATUS</smalls>
+                                                    </th>
                                                 </tr>
                                             </thead>
                                         </table>
@@ -124,11 +158,11 @@
                     "serverSide": true,
                     "pageLength": 10,
                     "ajax": {
-                        "url": "<?php echo site_url('pembangkit/get_data'); ?>",
+                        "url": "<?= site_url('kit_publish/get_data_detail/') . $detail_id; ?>",
                         "type": "POST"
                     },
                     'columnDefs': [{
-                        "targets": [0, 3, 6],
+                        "targets": [0, 7, 8, 9, 10, 11, 12, 13],
                         "className": "text-center",
                     }]
                 });
@@ -140,10 +174,6 @@
                     $('#mytable').DataTable().search(this.value).draw();
                 });
             });
-
-            function confirmDelete() {
-                return confirm("Apakah anda yakin untuk menghapus data ini?")
-            }
         </script>
 </body>
 
