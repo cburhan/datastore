@@ -7,11 +7,11 @@
 
 <?php
 if (apps()['ENV'] == 1) {
-    $env_color = 'primary';
+    $env_color = 'info';
 } elseif (apps()['ENV'] == 2) {
     $env_color = 'success';
 } elseif (apps()['ENV'] == 3) {
-    $env_color = 'info';
+    $env_color = 'primary';
 }
 ?>
 
