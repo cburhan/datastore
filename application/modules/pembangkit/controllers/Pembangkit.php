@@ -420,6 +420,19 @@ class Pembangkit extends MY_Controller
         $this->session->set_flashdata('flash', $flash);
         $ket = 'Mempublish data <strong>Pembangkit</strong>';
         activity_log(get_session_id(), get_session_name(), 'Pembangkit', 'PUBLISH', 'success', $ket);
+
+        $subject = 'Publish Master Pembangkit';
+        $data_email = array(
+            "modul"     => "Pembangkit",
+            "modul_id"  => $file_id,
+            "file"      => $file_name,
+            "time"      => $date,
+            "color"     => "primary",
+            "url"       => "kit_publish/detail/" . encrypt_url($file_id)
+        );
+        $message = 'User ' . get_session_name() . ' telah melakukan Publish Master ' . $data_email['modul'] . ' dengan nama file ' . $data_email['file'];
+        send_notification(get_session_id(), $data_email, $subject, 'email/pembangkit', $message);
+
         redirect('kit_publish');
     }
 }

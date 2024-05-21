@@ -17,7 +17,7 @@ if (apps()['ENV'] == 1) {
 
 <body style="background-image:url('<?= base_url('public/apps/') . apps()['BG']; ?>'); background-position-y:top; background-size:cover;">
     <div class="account-pages my-5 pt-5 mb-0">
-        <div class="container pt-3">
+        <div class="container pt-5">
             <div class="row justify-content-center">
                 <div class="col-md-8 col-lg-6 col-xl-4">
                     <div class="card overflow-hidden">
@@ -25,16 +25,16 @@ if (apps()['ENV'] == 1) {
                             <div class="text-primary text-center p-4">
                                 <h5 class="text-white font-size-20 mb-0"><?= apps()['NAME'] . ' ' . apps()['ENV_TEXT']; ?></h5>
                                 <p class="text-white-50">Silahkan Log In untuk masuk ke sistem</p>
-                                <a href="index.html" class="logo logo-admin">
-                                    <img src="<?= base_url('public/apps/') . apps()['LOGO']; ?>" height="32" alt="logo">
+                                <a class="logo logo-admin">
+                                    <img src="<?= base_url('public/apps/') . apps()['LOGO']; ?>" height="100" alt="logo">
                                 </a>
                             </div>
                         </div>
 
-                        <div class="card-body p-4 pt-3 pb-0">
+                        <div class="card-body p-4 pt-5 pb-0">
                             <div class="pt-5 pb-2">
-                                <?= $this->session->flashdata('flash'); ?>
-                                <form method="POST" action="<?= base_url('auth'); ?>">
+                                <form method="POST" action="<?= base_url('auth'); ?>" class="pt-3">
+                                    <?= $this->session->flashdata('flash'); ?>
                                     <?= csrf(); ?>
                                     <div class="mb-2">
                                         <label class="form-label" for="username">Username</label>
