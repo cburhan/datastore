@@ -127,6 +127,12 @@ class Pembangkit extends MY_Controller
                 $data['is_bb'] = false;
             }
         }
+
+        $this->form_validation->set_rules('mesin', 'Mesin', 'required', [
+            'required'      => 'Kode Mesin tidak boleh kosong'
+        ]);
+
+
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('pembangkit-add', $data);
         } else {
@@ -165,6 +171,7 @@ class Pembangkit extends MY_Controller
                 'SISTEM_ID'         => $this->input->post('sis'),
                 'SISTEM'            => $sis['SISTEM'],
                 'ID_BBO'            => $this->input->post('bbo'),
+                'KODE_MESIN'        => $this->input->post('mesin'),
                 'SEQUENCE'          => seq_pembangkit(),
                 'IS_ACTIVE'         => 1,
                 'CREATED_BY'        => get_session_name(),
@@ -231,6 +238,10 @@ class Pembangkit extends MY_Controller
             $this->form_validation->set_rules('energi_primer[]', 'Energi Primer', 'required', [
                 'required'      => 'Energi Primer harus dipilih minimal satu'
             ]);
+
+            $this->form_validation->set_rules('mesin', 'Mesin', 'required', [
+                'required'      => 'Kode Mesin tidak boleh kosong'
+            ]);
         }
 
         if ($this->form_validation->run() == FALSE) {
@@ -274,6 +285,7 @@ class Pembangkit extends MY_Controller
                 'SISTEM_ID'         => $this->input->post('sis'),
                 'SISTEM'            => $sis['SISTEM'],
                 'ID_BBO'            => $this->input->post('bbo'),
+                'KODE_MESIN'        => $this->input->post('mesin'),
                 'IS_ACTIVE'         => $this->input->post('status'),
                 'CHANGED_BY'        => get_session_name()
             );
@@ -358,6 +370,7 @@ class Pembangkit extends MY_Controller
                 'IS_BIOMASA'        => $kit['IS_BIOMASA'],
                 'IS_BBM'            => $kit['IS_BBM'],
                 'ID_BBO'            => $kit['ID_BBO'],
+                'KODE_MESIN'        => $kit['KODE_MESIN'],
                 'IS_ACTIVE'         => $kit['IS_ACTIVE'],
                 'PUBLISH_BY'        => get_session_name(),
                 'PUBLISH_ON'        => $date
@@ -382,6 +395,7 @@ class Pembangkit extends MY_Controller
                 'IS_BIOMASA'        => $item['IS_BIOMASA'],
                 'IS_BBM'            => $item['IS_BBM'],
                 'ID_BBO'            => $item['ID_BBO'],
+                'KODE_MESIN'        => $item['KODE_MESIN'],
                 'IS_ACTIVE'         => $item['IS_ACTIVE'],
                 'PUBLISH_BY'        => get_session_name(),
                 'PUBLISH_ON'        => $date

@@ -61,7 +61,7 @@
                                                 <label for="example-text-input" class="col-sm-3 offset-sm-1 col-form-label">Target Pemakaian</label>
                                                 <div class="col-sm-4">
                                                     <div class="input-group">
-                                                        <input type="text" name="target" class="form-control text-end <?= form_error('target', 'is-invalid '); ?>" value="<?= $bio['TARGET_PEMAKAIAN_BIO']; ?>">
+                                                        <input type="text" name="target" class="form-control text-end <?= form_error('target', 'is-invalid '); ?>" value="<?= $bio['TARGET_PEMAKAIAN_BIO']; ?>" autofocus>
                                                         <button class="btn btn-primary" type="button">MT/Tahun</button>
                                                         <?= form_error('target', '<div class="invalid-feedback">', '</div>'); ?>
                                                     </div>

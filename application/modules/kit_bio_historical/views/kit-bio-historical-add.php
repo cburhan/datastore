@@ -48,7 +48,7 @@
                                             <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-3 offset-sm-1 col-form-label">Tahun</label>
                                                 <div class="col-sm-2">
-                                                    <select name="tahun" class="form-control tahun <?= form_error('tahun', 'is-invalid '); ?>">
+                                                    <select name="tahun" class="form-control tahun <?= form_error('tahun', 'is-invalid '); ?>" autofocus>
                                                         <option></option>
                                                         <?php $currentYear = date("Y");
                                                         for ($i = $currentYear - 1; $i <= $currentYear + 1; $i++) { ?>

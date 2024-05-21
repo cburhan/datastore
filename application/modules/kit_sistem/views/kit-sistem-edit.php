@@ -48,7 +48,7 @@
                                             <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Sistem</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" name="sistem" class="form-control <?= form_error('sistem', 'is-invalid '); ?>" placeholder="Sistem" value="<?= $sis['SISTEM']; ?>">
+                                                    <input type="text" name="sistem" class="form-control <?= form_error('sistem', 'is-invalid '); ?>" placeholder="Sistem" value="<?= $sis['SISTEM']; ?>" autofocus>
                                                     <?= form_error('sistem', '<div class="invalid-feedback">', '</div>'); ?>
                                                 </div>
                                             </div>

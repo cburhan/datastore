@@ -48,7 +48,7 @@
                                             <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Regional</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" name="regional" class="form-control <?= form_error('regional', 'is-invalid '); ?>" placeholder="Regional" value="<?= $reg['REGIONAL']; ?>">
+                                                    <input type="text" name="regional" class="form-control <?= form_error('regional', 'is-invalid '); ?>" placeholder="Regional" value="<?= $reg['REGIONAL']; ?>" autofocus>
                                                     <?= form_error('regional', '<div class="invalid-feedback">', '</div>'); ?>
                                                 </div>
                                             </div>

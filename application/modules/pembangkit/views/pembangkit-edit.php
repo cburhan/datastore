@@ -54,7 +54,7 @@
                                             <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Tipe Pembangkit</label>
                                                 <div class="col-sm-2">
-                                                    <select name="tipe" class="form-control tipe <?= form_error('tipe', 'is-invalid '); ?>">
+                                                    <select name="tipe" class="form-control tipe <?= form_error('tipe', 'is-invalid '); ?>" autofocus>
                                                         <option></option>
                                                         <?php foreach ($tipe as $m) : ?>
                                                             <option <?php if ($m['ID'] == $kit['TIPE_ID']) {
@@ -154,6 +154,13 @@
                                                 <div class="col-sm-2">
                                                     <input type="text" name="bbo" class="form-control <?= form_error('bbo', 'is-invalid '); ?>" placeholder="ID BBO" value="<?= $kit['ID_BBO']; ?>">
                                                     <?= form_error('bbo', '<div class="invalid-feedback">', '</div>'); ?>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Kode Mesin</label>
+                                                <div class="col-sm-6">
+                                                    <textarea name="mesin" class="form-control <?= form_error('mesin', 'is-invalid '); ?>" rows="5"><?= $kit['KODE_MESIN']; ?></textarea>
+                                                    <?= form_error('mesin', '<div class="invalid-feedback">', '</div>'); ?>
                                                 </div>
                                             </div>
                                             <div class="row mb-3">

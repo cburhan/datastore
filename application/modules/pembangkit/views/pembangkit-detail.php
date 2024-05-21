@@ -132,6 +132,12 @@
                                                 </div>
                                             <?php } ?>
                                             <div class="row">
+                                                <label for="example-text-input" class="col-sm-4 col-form-label">Kode Mesin</label>
+                                                <div class="col-sm-8">
+                                                    <p class="mt-1 mb-0 text-primary"><strong><?= $kit['KODE_MESIN']; ?></strong></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
                                                 <label for="example-text-input" class="col-sm-4 col-form-label">Status</label>
                                                 <div class="col-sm-8 pt-2">
                                                     <?php if ($kit['IS_ACTIVE'] == 1) { ?>

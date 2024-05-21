@@ -138,7 +138,7 @@ class Pembangkit_model extends CI_Model
 
     public function getPembangkitPublish()
     {
-        $this->db->select('KODE_PEMBANGKIT, TIPE, NAMA_PEMBANGKIT, KEPEMILIKAN, DAYA_TERPASANG, SISTEM, REGIONAL, IS_BATUBARA, IS_GASPIPA, IS_LNG, IS_BIOMASA, IS_BBM, ID_BBO, IS_ACTIVE');
+        $this->db->select('KODE_PEMBANGKIT, TIPE, NAMA_PEMBANGKIT, KEPEMILIKAN, DAYA_TERPASANG, SISTEM, REGIONAL, IS_BATUBARA, IS_GASPIPA, IS_LNG, IS_BIOMASA, IS_BBM, ID_BBO, KODE_MESIN, IS_ACTIVE');
         $this->db->from('pembangkit');
         $this->db->order_by('ID ASC');
         return $this->db->get();

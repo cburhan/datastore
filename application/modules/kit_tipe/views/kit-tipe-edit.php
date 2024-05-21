@@ -48,7 +48,7 @@
                                             <div class="row mb-3">
                                                 <label for="example-text-input" class="col-sm-2 offset-sm-2 col-form-label">Tipe</label>
                                                 <div class="col-sm-6">
-                                                    <input type="text" name="tipe" class="form-control <?= form_error('tipe', 'is-invalid '); ?>" placeholder="Tipe" value="<?= $tipe['TIPE']; ?>">
+                                                    <input type="text" name="tipe" class="form-control <?= form_error('tipe', 'is-invalid '); ?>" placeholder="Tipe" value="<?= $tipe['TIPE']; ?>" autofocus>
                                                     <?= form_error('tipe', '<div class="invalid-feedback">', '</div>'); ?>
                                                 </div>
                                             </div>
