@@ -23,11 +23,11 @@ function check_user_role($role_id, $user_id)
 function get_role_access($role_id)
 {
     $CI = &get_instance();
-    $CI->db->select('b.TITLE, a.SUB_MENU_ID');
+    $CI->db->select('b.TITLE, a.SUB_MENU_ID, b.CLASS_METHOD');
     $CI->db->from('user_access_menu a');
     $CI->db->join('user_sub_menu b', 'a.SUB_MENU_ID = b.ID');
     $CI->db->where('a.ROLE_ID', $role_id);
-    $CI->db->order_by('a.SUB_MENU_ID');
+    $CI->db->order_by('b.CLASS_METHOD');
     return $CI->db->get()->result_array();
 }
 
@@ -194,6 +194,14 @@ function apps()
     $CI = &get_instance();
     $CI->db->select('NAME, LOGO, LOGO_BIG, BG, ENV, ENV_TEXT');
     $CI->db->from('apps');
+    return $CI->db->get()->row_array();
+}
+
+function api()
+{
+    $CI = &get_instance();
+    $CI->db->select('DATABASE, SCHEMA, INTEGRASI_TOKEN, INTEGRASI_LOAD');
+    $CI->db->from('apps_api');
     return $CI->db->get()->row_array();
 }
 

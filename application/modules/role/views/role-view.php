@@ -5,6 +5,17 @@
     <?php $this->load->view('template/head'); ?>
     <link href="<?= base_url('assets/'); ?>libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/'); ?>libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .smalls,
+        smalls {
+            font-size: 90%;
+        }
+
+        .smalld,
+        smalld {
+            font-size: 85%;
+        }
+    </style>
 </head>
 
 <body data-sidebar="dark">
@@ -59,12 +70,20 @@
                                         <table id="mytable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 25px;">#</th>
-                                                    <th>Role</th>
-                                                    <th>Akses</th>
+                                                    <th style="width: 25px;">
+                                                        <smalls>#</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Role</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Akses</smalls>
+                                                    </th>
                                                     <?php if (check_button('access') > 0 || check_button('edit') > 0 || check_button('delete') > 0) {
                                                     ?>
-                                                        <th class="text-center" style="width: 100px;">Actions</th>
+                                                        <th class="text-center" style="width: 100px;">
+                                                            <smalls>Actions</smalls>
+                                                        </th>
                                                     <?php }
                                                     ?>
                                                 </tr>
@@ -111,7 +130,7 @@
                     "ordering": false,
                     "processing": true,
                     "serverSide": true,
-                    "pageLength": 5,
+                    "pageLength": 10,
                     "ajax": {
                         "url": "<?php echo site_url('role/get_data'); ?>",
                         "type": "POST"

@@ -345,108 +345,59 @@ class Pembangkit extends MY_Controller
 
     public function publish()
     {
-        $pembangkit   = $this->Pembangkit_model->getPembangkit()->result_array();
-        $date = date('Y-m-d H:i:s');
+        $kit        = $this->Pembangkit_model->getPembangkit()->result_array();
+        $publish_on = date('Y-m-d H:i:s');
 
-        $data_file = array(
-            'PUBLISH_BY'        => get_session_name(),
-            'PUBLISH_ON'        => $date
-        );
-        $file_id = $this->Pembangkit_model->addPembangkitPublishFile($data_file);
+        $token      = get_token();
+        $db         = api()['DATABASE'];
+        $schema     = api()['SCHEMA'];
+        $table      = 'DATASTORE_INTEGRASI_PEMBANGKIT';
+        $table_name = $db . '.' . $schema . '.' . $table;
 
-        foreach ($pembangkit as $kit) {
-            $data_publish = array(
-                'FILE_ID'           => $file_id,
-                'KODE_PEMBANGKIT'   => $kit['KODE_PEMBANGKIT'],
-                'TIPE'              => $kit['TIPE'],
-                'NAMA_PEMBANGKIT'   => $kit['NAMA_PEMBANGKIT'],
-                'KEPEMILIKAN'       => $kit['KEPEMILIKAN'],
-                'DAYA_TERPASANG'    => $kit['DAYA_TERPASANG'],
-                'SISTEM_TRANSMISI'  => $kit['SISTEM'],
-                'REGIONAL'          => $kit['REGIONAL'],
-                'IS_BATUBARA'       => $kit['IS_BATUBARA'],
-                'IS_GASPIPA'        => $kit['IS_GASPIPA'],
-                'IS_LNG'            => $kit['IS_LNG'],
-                'IS_BIOMASA'        => $kit['IS_BIOMASA'],
-                'IS_BBM'            => $kit['IS_BBM'],
-                'ID_BBO'            => $kit['ID_BBO'],
-                'KODE_MESIN'        => $kit['KODE_MESIN'],
-                'IS_ACTIVE'         => $kit['IS_ACTIVE'],
-                'PUBLISH_BY'        => get_session_name(),
-                'PUBLISH_ON'        => $date
-            );
-
-            $this->Pembangkit_model->addPembangkitPublish($data_publish);
-        }
-
-        $publish = array();
-        foreach ($pembangkit as $item) {
-            $new_item = array(
-                'KODE_PEMBANGKIT'   => $item['KODE_PEMBANGKIT'],
-                'TIPE'              => $item['TIPE'],
-                'NAMA_PEMBANGKIT'   => $item['NAMA_PEMBANGKIT'],
-                'KEPEMILIKAN'       => $item['KEPEMILIKAN'],
-                'DAYA_TERPASANG'    => $item['DAYA_TERPASANG'],
-                'SISTEM_TRANSMISI'  => $item['SISTEM'],
-                'REGIONAL'          => $item['REGIONAL'],
-                'IS_BATUBARA'       => $item['IS_BATUBARA'],
-                'IS_GASPIPA'        => $item['IS_GASPIPA'],
-                'IS_LNG'            => $item['IS_LNG'],
-                'IS_BIOMASA'        => $item['IS_BIOMASA'],
-                'IS_BBM'            => $item['IS_BBM'],
-                'ID_BBO'            => $item['ID_BBO'],
-                'KODE_MESIN'        => $item['KODE_MESIN'],
-                'IS_ACTIVE'         => $item['IS_ACTIVE'],
-                'PUBLISH_BY'        => get_session_name(),
-                'PUBLISH_ON'        => $date
-            );
-
-            // Tambahkan array baru ke dalam array hasil
-            $publish[] = $new_item;
-        }
-
-        //$publish   = $this->Pembangkit_model->getPembangkitPublish()->result_array();
-        $date_name  = date('YmdHis', strtotime($date));
-        $file_name  = $date_name . '_pembangkit.csv';
-
-        $csv_file = 'public/publish/' . $file_name;
-
-        $file = fopen($csv_file, 'w');
-
-        fputcsv($file, array_keys($publish[0]));
-
-        foreach ($publish as $row) {
-            fputcsv($file, $row);
-        }
-
-        fclose($file);
-
-        $data_file_update = array(
-            'FILE'        => $file_name
-        );
-        $this->Pembangkit_model->editPembangkitPublishFile($data_file_update, $file_id);
-
-
-        $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+        if ($token) {
+            foreach ($kit as $d) {
+                $data[] = [
+                    'ID'                    => $d['ID'],
+                    'KODE_PEMBANGKIT'       => $d['KODE_PEMBANGKIT'],
+                    'NAMA_PEMBANGKIT'       => $d['NAMA_PEMBANGKIT'],
+                    'KEPEMILIKAN'           => $d['KEPEMILIKAN'],
+                    'DAYA_TERPASANG'        => $d['DAYA_TERPASANG'],
+                    'IS_BATUBARA'           => $d['IS_BATUBARA'],
+                    'IS_GASPIPA'            => $d['IS_GASPIPA'],
+                    'IS_LNG'                => $d['IS_LNG'],
+                    'IS_BIOMASA'            => $d['IS_BIOMASA'],
+                    'IS_BBM'                => $d['IS_BBM'],
+                    'TIPE'                  => $d['TIPE'],
+                    'REGIONAL'              => $d['REGIONAL'],
+                    'SISTEM'                => $d['SISTEM'],
+                    'ID_BBO'                => $d['ID_BBO'],
+                    'KODE_MESIN'            => $d['KODE_MESIN'],
+                    'SEQUENCE'              => $d['SEQUENCE'],
+                    'IS_ACTIVE'             => $d['IS_ACTIVE'],
+                    'CREATED_BY'            => $d['CREATED_BY'],
+                    'CREATED_ON'            => $d['CREATED_ON'],
+                    'CHANGED_BY'            => $d['CHANGED_BY'],
+                    'CHANGED_ON'            => $d['CHANGED_ON'],
+                    'PUBLISH_ON'            => $publish_on,
+                    'SOURCE'                => 'DATASTORE_INTEGRASI_PEMBANGKIT'
+                ];
+            }
+            insert_data($token, $table_name, $data);
+            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>Sukses!</strong> Data berhasil dipublish di Snowflake!
+            </div>';
+            $this->session->set_flashdata('flash', $flash);
+            $ket = 'Mempublish data <strong>Pembangkit</strong> ke <strong>Snowflake</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Pembangkit', 'PUBLISH', 'success', $ket);
+            redirect('pembangkit');
+        } else {
+            $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Sukses!</strong> Data berhasil dipublish.
+                        <strong>Gagal!</strong> Token tidak berhasil digenerate.
                         </div>';
-        $this->session->set_flashdata('flash', $flash);
-        $ket = 'Mempublish data <strong>Pembangkit</strong>';
-        activity_log(get_session_id(), get_session_name(), 'Pembangkit', 'PUBLISH', 'success', $ket);
-
-        $subject = 'Publish Master Pembangkit';
-        $data_email = array(
-            "modul"     => "Pembangkit",
-            "modul_id"  => $file_id,
-            "file"      => $file_name,
-            "time"      => $date,
-            "color"     => "primary",
-            "url"       => "kit_publish/detail/" . encrypt_url($file_id)
-        );
-        $message = 'User ' . get_session_name() . ' telah melakukan Publish Master ' . $data_email['modul'] . ' dengan nama file ' . $data_email['file'];
-        send_notification(get_session_id(), $data_email, $subject, 'email/pembangkit', $message);
-
-        redirect('kit_publish');
+            $this->session->set_flashdata('flash', $flash);
+            redirect('pembangkit');
+        }
     }
 }

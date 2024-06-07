@@ -21,6 +21,21 @@ class Tools_model extends CI_Model
         return $update;
     }
 
+    //API
+    public function getApi()
+    {
+        $this->db->select('ID, DATABASE, SCHEMA, INTEGRASI_TOKEN, INTEGRASI_LOAD');
+        $this->db->from('apps_api');
+        $this->db->where('ID', 1);
+        return $this->db->get();
+    }
+
+    public function editApi($data)
+    {
+        $update = $this->db->update('apps_api', $data, array('ID' => 1));
+        return $update;
+    }
+
     //BACKUP DB
     public function getBackupById($id)
     {

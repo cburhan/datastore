@@ -63,7 +63,16 @@ class Pembangkit_model extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('pembangkit');
-        $this->db->order_by('ID ASC');
+        $this->db->where('IS_BATUBARA', 1);
+        $this->db->order_by('SEQUENCE ASC');
+        return $this->db->get();
+    }
+
+    public function getPembangkitBatubara()
+    {
+        $this->db->select('*');
+        $this->db->from('pembangkit');
+        $this->db->order_by('SEQUENCE ASC');
         return $this->db->get();
     }
 
@@ -108,39 +117,5 @@ class Pembangkit_model extends CI_Model
         } catch (Exception $e) {
             return false;
         }
-    }
-
-    public function addPembangkitPublish($data)
-    {
-        $this->db->insert('pembangkit_publish', $data);
-        if ($this->db->affected_rows() > 0) {
-            return $this->db->insert_id();
-        } else {
-            return NULL;
-        }
-    }
-
-    public function addPembangkitPublishFile($data)
-    {
-        $this->db->insert('pembangkit_publish_file', $data);
-        if ($this->db->affected_rows() > 0) {
-            return $this->db->insert_id();
-        } else {
-            return NULL;
-        }
-    }
-
-    public function editPembangkitPublishFile($data, $id)
-    {
-        $update = $this->db->update('pembangkit_publish_file', $data, array('ID' => $id));
-        return $update;
-    }
-
-    public function getPembangkitPublish()
-    {
-        $this->db->select('KODE_PEMBANGKIT, TIPE, NAMA_PEMBANGKIT, KEPEMILIKAN, DAYA_TERPASANG, SISTEM, REGIONAL, IS_BATUBARA, IS_GASPIPA, IS_LNG, IS_BIOMASA, IS_BBM, ID_BBO, KODE_MESIN, IS_ACTIVE');
-        $this->db->from('pembangkit');
-        $this->db->order_by('ID ASC');
-        return $this->db->get();
     }
 }

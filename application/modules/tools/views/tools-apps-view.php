@@ -109,6 +109,24 @@
                                                             <?php } ?>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <th scope="row" style="width: 200px;" class="align-middle">Integrasi Token</th>
+                                                        <td class="align-middle"><span class="text-primary"><strong><?= $apps['INTEGRASI_TOKEN']; ?></strong></span></td>
+                                                        <td style="width: 100px;" class="align-middle text-center">
+                                                            <?php if (check_button('change_int_token') > 0) { ?>
+                                                                <button class="btn btn-warning btn-sm waves-effect" type="button" data-bs-toggle="modal" data-bs-target="#token"><i class="ion ion-md-color-filter me-1"></i>Edit</button>
+                                                            <?php } ?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row" style="width: 200px;" class="align-middle">Integrasi Load</th>
+                                                        <td class="align-middle"><span class="text-primary"><strong><?= $apps['INTEGRASI_LOAD']; ?></strong></span></td>
+                                                        <td style="width: 100px;" class="align-middle text-center">
+                                                            <?php if (check_button('change_int_load') > 0) { ?>
+                                                                <button class="btn btn-warning btn-sm waves-effect" type="button" data-bs-toggle="modal" data-bs-target="#load"><i class="ion ion-md-color-filter me-1"></i>Edit</button>
+                                                            <?php } ?>
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -310,6 +328,76 @@
                                                 <img src="<?= base_url('public/apps/noimage.png'); ?>" id="joss2" class="img-thumbnail rounded me-2" width="200" alt="">
                                             </div>
                                         </div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <div class="form-control-wrap">
+                                            <button type="button" class="btn btn-sm btn-secondary waves-effect waves-light" data-bs-dismiss="modal"><i class="ion ion-md-close me-1"></i>Close</button>
+                                            <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1"></i>Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        <?php } ?>
+
+        <?php if (check_button('change_int_token') > 0) { ?>
+            <div class="modal fade" id="token" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="nama">Integrasi Token</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="<?= base_url('tools/change_int_token'); ?>">
+                                <?= csrf(); ?>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Link<span class="text-danger">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="token" class="form-control" value="<?= $apps['INTEGRASI_TOKEN']; ?>" required>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-12 text-center">
+                                        <div class="form-control-wrap">
+                                            <button type="button" class="btn btn-sm btn-secondary waves-effect waves-light" data-bs-dismiss="modal"><i class="ion ion-md-close me-1"></i>Close</button>
+                                            <button class="btn btn-sm btn-primary waves-effect waves-light" type="submit"><i class="ion ion-md-save me-1"></i>Simpan</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        <?php } ?>
+
+        <?php if (check_button('change_int_load') > 0) { ?>
+            <div class="modal fade" id="load" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="nama">Integrasi Load</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="POST" action="<?= base_url('tools/change_int_load'); ?>">
+                                <?= csrf(); ?>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Link<span class="text-danger">*</span></label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="load" class="form-control" value="<?= $apps['INTEGRASI_LOAD']; ?>" required>
                                     </div>
                                 </div>
                                 <hr>

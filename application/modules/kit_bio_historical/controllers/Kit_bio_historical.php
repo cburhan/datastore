@@ -229,92 +229,50 @@ class Kit_bio_historical extends MY_Controller
 
     public function publish()
     {
-        $pembangkit   = $this->Kit_bio_historical_model->getBioHistoricalPublish()->result_array();
-        $date = date('Y-m-d H:i:s');
+        $bio        = $this->Kit_bio_historical_model->getBioHistorical()->result_array();
+        $publish_on = date('Y-m-d H:i:s');
 
-        $data_file = array(
-            'PUBLISH_BY'        => get_session_name(),
-            'PUBLISH_ON'        => $date
-        );
-        $file_id = $this->Kit_bio_historical_model->addBioHistoricalPublishFile($data_file);
+        $token      = get_token();
+        $db         = api()['DATABASE'];
+        $schema     = api()['SCHEMA'];
+        $table      = 'DATASTORE_INTEGRASI_BIOHISTORICAL';
+        $table_name = $db . '.' . $schema . '.' . $table;
 
-        foreach ($pembangkit as $kit) {
-            $data_publish = array(
-                'FILE_ID'                           => $file_id,
-                'KODE_PEMBANGKIT'                   => $kit['KODE_PEMBANGKIT'],
-                'NAMA_PEMBANGKIT'                   => $kit['NAMA_PEMBANGKIT'],
-                'TAHUN'                             => $kit['TAHUN'],
-                'TARGET_PEMAKAIAN_BIO'              => $kit['TARGET_PEMAKAIAN_BIO'],
-                'INTENSITAS_EMISI_BIO'              => $kit['INTENSITAS_EMISI_BIO'],
-                'KAPASITAS_MAX_PENYIMPANAN_BIO'     => $kit['KAPASITAS_MAX_PENYIMPANAN_BIO'],
-                'KAPASITAS_MAX_BONGKAR_HARIAN_BIO'  => $kit['KAPASITAS_MAX_BONGKAR_HARIAN_BIO'],
-                'PUBLISH_BY'                        => get_session_name(),
-                'PUBLISH_ON'                        => $date
-            );
-
-            $this->Kit_bio_historical_model->addBioHistoricalPublish($data_publish);
-        }
-
-        $publish = array();
-        foreach ($pembangkit as $item) {
-            $new_item = array(
-                'KODE_PEMBANGKIT'                   => $item['KODE_PEMBANGKIT'],
-                'NAMA_PEMBANGKIT'                   => $item['NAMA_PEMBANGKIT'],
-                'TAHUN'                             => $item['TAHUN'],
-                'TARGET_PEMAKAIAN_BIO'              => $item['TARGET_PEMAKAIAN_BIO'],
-                'INTENSITAS_EMISI_BIO'              => $item['INTENSITAS_EMISI_BIO'],
-                'KAPASITAS_MAX_PENYIMPANAN_BIO'     => $item['KAPASITAS_MAX_PENYIMPANAN_BIO'],
-                'KAPASITAS_MAX_BONGKAR_HARIAN_BIO'  => $item['KAPASITAS_MAX_BONGKAR_HARIAN_BIO'],
-                'PUBLISH_BY'                        => get_session_name(),
-                'PUBLISH_ON'                        => $date
-            );
-
-            // Tambahkan array baru ke dalam array hasil
-            $publish[] = $new_item;
-        }
-
-        //$publish   = $this->Pembangkit_model->getPembangkitPublish()->result_array();
-        $date_name  = date('YmdHis', strtotime($date));
-        $file_name  = $date_name . '_pembangkit_bio_historical.csv';
-
-        $csv_file = 'public/publish/' . $file_name;
-
-        $file = fopen($csv_file, 'w');
-
-        fputcsv($file, array_keys($publish[0]));
-
-        foreach ($publish as $row) {
-            fputcsv($file, $row);
-        }
-
-        fclose($file);
-
-        $data_file_update = array(
-            'FILE'        => $file_name
-        );
-        $this->Kit_bio_historical_model->editBioHistoricalPublishFile($data_file_update, $file_id);
-
-
-        $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+        if ($token) {
+            foreach ($bio as $d) {
+                $data[] = [
+                    'ID'                                => $d['ID'],
+                    'KODE_PEMBANGKIT'                   => $d['KODE_PEMBANGKIT'],
+                    'NAMA_PEMBANGKIT'                   => $d['NAMA_PEMBANGKIT'],
+                    'TAHUN'                             => $d['TAHUN'],
+                    'TARGET_PEMAKAIAN_BIO'              => $d['TARGET_PEMAKAIAN_BIO'],
+                    'INTENSITAS_EMISI_BIO'              => $d['INTENSITAS_EMISI_BIO'],
+                    'KAPASITAS_MAX_PENYIMPANAN_BIO'     => $d['KAPASITAS_MAX_PENYIMPANAN_BIO'],
+                    'KAPASITAS_MAX_BONGKAR_HARIAN_BIO'  => $d['KAPASITAS_MAX_BONGKAR_HARIAN_BIO'],
+                    'CREATED_BY'                        => $d['CREATED_BY'],
+                    'CREATED_ON'                        => $d['CREATED_ON'],
+                    'CHANGED_BY'                        => $d['CHANGED_BY'],
+                    'CHANGED_ON'                        => $d['CHANGED_ON'],
+                    'PUBLISH_ON'                        => $publish_on,
+                    'SOURCE'                            => 'DATASTORE_INTEGRASI_BIOHISTORICAL'
+                ];
+            }
+            insert_data($token, $table_name, $data);
+            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <strong>Sukses!</strong> Data berhasil dipublish di Snowflake!
+            </div>';
+            $this->session->set_flashdata('flash', $flash);
+            $ket = 'Mempublish data <strong>Bio Historical</strong> ke <strong>Snowflake</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Pembangkit', 'PUBLISH', 'success', $ket);
+            redirect('kit_bio_historical');
+        } else {
+            $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        <strong>Sukses!</strong> Data berhasil dipublish.
+                        <strong>Gagal!</strong> Token tidak berhasil digenerate.
                         </div>';
-        $this->session->set_flashdata('flash', $flash);
-        $ket = 'Mempublish data <strong>Bio Historical</strong>';
-        activity_log(get_session_id(), get_session_name(), 'Pembangkit', 'PUBLISH', 'success', $ket);
-
-        $subject = 'Publish Master Biomasa Historical';
-        $data_email = array(
-            "modul"     => "Bio Historical",
-            "modul_id"  => $file_id,
-            "file"      => $file_name,
-            "time"      => $date,
-            "color"     => "primary",
-            "url"       => "kit_bio_publish/detail/" . encrypt_url($file_id)
-        );
-        $message = 'User ' . get_session_name() . ' telah melakukan Publish Master ' . $data_email['modul'] . ' dengan nama file ' . $data_email['file'];
-        send_notification(get_session_id(), $data_email, $subject, 'email/bio_historical', $message);
-
-        redirect('kit_bio_publish');
+            $this->session->set_flashdata('flash', $flash);
+            redirect('kit_bio_historical');
+        }
     }
 }

@@ -7,7 +7,11 @@ class Rob_model extends CI_Model
     }
 
     //MENU
-    var $select_column = array('ID', 'BULAN', 'BLN', 'TAHUN', 'FILE', 'TIPE', 'CREATED_BY', 'CREATED_ON');
+    var $select_column = array(
+        'ID', 'KODE_PEMBANGKIT', 'NAMA_PEMBANGKIT', 'CREATED_BY', 'CREATED_ON', 'CHANGED_BY', 'CHANGED_ON',
+        'BULAN', 'TAHUN', 'RENCANA_PEMBEBANAN', 'MERIT_ORDER', 'TAHUN', 'CF',
+        'SISTEM', 'BAHAN_BAKAR'
+    );
     var $order_column = array('ID', 'TAHUN', 'TIPE', 'CREATED_BY');
 
     public function make_query()
@@ -19,7 +23,6 @@ class Rob_model extends CI_Model
             $this->db->group_start();
             $this->db->like('TAHUN', $_POST['search']['value']);
             $this->db->or_like('BULAN', $_POST['search']['value']);
-            $this->db->or_like('FILE', $_POST['search']['value']);
             $this->db->or_like('CREATED_BY', $_POST['search']['value']);
             $this->db->group_end();
         }
@@ -28,9 +31,8 @@ class Rob_model extends CI_Model
             $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
             $this->db->order_by('TAHUN', 'DESC');
-            $this->db->order_by('BLN', 'DESC');
-            $this->db->order_by('TIPE', 'DESC');
-            $this->db->order_by('CREATED_ON', 'DESC');
+            $this->db->order_by('SISTEM', 'DESC');
+            $this->db->order_by('ID', 'ASC');
         }
     }
 
@@ -61,6 +63,14 @@ class Rob_model extends CI_Model
         return $this->db->count_all_results();
     }
 
+    public function getRob()
+    {
+        $this->db->select('*');
+        $this->db->from('rob');
+        $this->db->order_by('TAHUN ASC, BULAN ASC, SISTEM ASC, ID ASC');
+        return $this->db->get();
+    }
+
     public function getRobById($rob_id)
     {
         $this->db->select('*');
@@ -82,6 +92,12 @@ class Rob_model extends CI_Model
     public function editRob($data, $rob_id)
     {
         $update = $this->db->update('rob', $data, array('ID' => $rob_id));
+        return $update;
+    }
+
+    public function editRobByKode($data, $kode, $bulan, $tahun)
+    {
+        $update = $this->db->update('rob', $data, array('KODE_PEMBANGKIT' => $kode, 'BULAN' => $bulan, 'TAHUN' => $tahun));
         return $update;
     }
 

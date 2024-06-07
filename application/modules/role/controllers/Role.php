@@ -35,14 +35,14 @@ class Role extends MY_Controller
         foreach ($fetch_data as $row) {
             $no++;
             $sub_array = array();
-            $sub_array[] = '<div class="text-center">' . $no . '</div>';
-            $sub_array[] = $row->ROLE;
+            $sub_array[] = '<div class="text-center"><smalld>' . $no . '</smalld></div>';
+            $sub_array[] = '<smalld>' . $row->ROLE . '</smalld>';
 
             $listUr = array();
             $ra = get_role_access($row->ID);
             if ($ra != NULL) {
                 foreach ($ra as $rax) {
-                    $listUr[] = '<li class="text-primary">' . $rax['TITLE'] . '</li>';
+                    $listUr[] = '<li class="text-primary"><smalld>' . $rax['CLASS_METHOD'] . '</smalld></li>';
                 }
             } else {
                 $listUr = NULL;

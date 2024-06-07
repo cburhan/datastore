@@ -5,6 +5,17 @@
     <?php $this->load->view('template/head'); ?>
     <link href="<?= base_url('assets/'); ?>libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
     <link href="<?= base_url('assets/'); ?>libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css">
+    <style>
+        .smalls,
+        smalls {
+            font-size: 65%;
+        }
+
+        .smalld,
+        smalld {
+            font-size: 50%;
+        }
+    </style>
 </head>
 
 <body data-sidebar="dark">
@@ -29,21 +40,28 @@
                         <div class="row align-items-center">
                             <div class="col-md-8">
                                 <h6 class="page-title mb-0"><?= $ptitle; ?></h6>
-                                <p class="card-text">#List Data <?= $ptitle; ?> Tahunan</p>
+                                <p class="card-text">#List Data <?= $title; ?></p>
                             </div>
-                            <?php if (check_button('add') > 0) {
-                            ?>
-                                <div class="col-md-4">
-                                    <div class="float-end d-none d-md-block">
-                                        <div class="dropdown">
-                                            <button class="btn btn-sm btn-primary" type="button" onclick="window.location.href = '<?= base_url('rot/add'); ?>';">
+                            <div class="col-md-4">
+                                <div class="float-end d-none d-md-block">
+                                    <div class="dropdown">
+                                        <?php if (check_button('publish') > 0) {
+                                        ?>
+                                            <button class="btn btn-sm btn-success" type="button" onclick="window.location.href = '<?= base_url('rot/publish'); ?>';">
+                                                <i class="ion ion-md-rocket me-1"></i> Publish
+                                            </button>
+                                        <?php }
+                                        ?>
+                                        <?php if (check_button('upload') > 0) {
+                                        ?>
+                                            <button class="btn btn-sm btn-primary" type="button" onclick="window.location.href = '<?= base_url('rot/upload'); ?>';">
                                                 <i class="ion ion-md-add me-1"></i> Add Data
                                             </button>
-                                        </div>
+                                        <?php }
+                                        ?>
                                     </div>
                                 </div>
-                            <?php }
-                            ?>
+                            </div>
                         </div>
                         <!-- end page title -->
                         <?= $this->session->flashdata('flash'); ?>
@@ -59,13 +77,65 @@
                                         <table id="mytable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th style="width: 25px;">#</th>
-                                                    <th>File</th>
-                                                    <th>Tahun</th>
-                                                    <th>Tipe</th>
-                                                    <?php if (check_button('detail') > 0 || check_button('delete') > 0) {
+                                                    <th>
+                                                        <smalls>Kode</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Pembangkit</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Sistem</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Bahan Bakar</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Jan</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Feb</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Mar</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Apr</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Mei</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Jun</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Jul</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Aug</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Sep</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Okt</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Nov</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Des</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>Tahun</smalls>
+                                                    </th>
+                                                    <th>
+                                                        <smalls>CF (%)</smalls>
+                                                    </th>
+                                                    <?php if (check_button('edit') > 0 || check_button('delete') > 0) {
                                                     ?>
-                                                        <th class="text-center" style="width: 100px;">Actions</th>
+                                                        <th class="text-center" style="width: 50px;">
+                                                            <smalls>Actions</smalls>
+                                                        </th>
                                                     <?php }
                                                     ?>
                                                 </tr>
@@ -115,11 +185,11 @@
                     "serverSide": true,
                     "pageLength": 20,
                     "ajax": {
-                        "url": "<?php echo site_url('rot/get_data'); ?>",
+                        "url": "<?= site_url('rot/get_data'); ?>",
                         "type": "POST"
                     },
                     'columnDefs': [{
-                        "targets": [0, 2, 3, 4],
+                        "targets": [0, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
                         "className": "text-center",
                     }]
                 });

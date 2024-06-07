@@ -6,9 +6,13 @@ class Rot_model extends CI_Model
         parent::__construct();
     }
 
-    //MENU
-    var $select_column = array('ID', 'TAHUN', 'FILE', 'TIPE', 'CREATED_BY', 'CREATED_ON');
-    var $order_column = array('ID', 'TAHUN', 'TIPE', 'CREATED_BY');
+    //ROT
+    var $select_column = array(
+        'ID', 'KODE_PEMBANGKIT', 'NAMA_PEMBANGKIT', 'CREATED_BY', 'CREATED_ON', 'CHANGED_BY', 'CHANGED_ON',
+        'JAN', 'FEB', 'MAR', 'APR', 'MEI', 'JUN', 'JUL', 'AUG', 'SEP', 'OKT', 'NOV', 'DES', 'TAHUN', 'CF',
+        'SISTEM', 'BAHAN_BAKAR'
+    );
+    var $order_column = array('ID', 'TAHUN');
 
     public function make_query()
     {
@@ -17,9 +21,9 @@ class Rot_model extends CI_Model
 
         if (isset($_POST['search']['value'])) {
             $this->db->group_start();
-            $this->db->like('TAHUN', $_POST['search']['value']);
-            $this->db->or_like('FILE', $_POST['search']['value']);
-            $this->db->or_like('CREATED_BY', $_POST['search']['value']);
+            $this->db->like('KODE_PEMBANGKIT', $_POST['search']['value']);
+            $this->db->or_like('NAMA_PEMBANGKIT', $_POST['search']['value']);
+            $this->db->or_like('TAHUN', $_POST['search']['value']);
             $this->db->group_end();
         }
 
@@ -27,8 +31,8 @@ class Rot_model extends CI_Model
             $this->db->order_by($this->order_column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
         } else {
             $this->db->order_by('TAHUN', 'DESC');
-            $this->db->order_by('TIPE', 'DESC');
-            $this->db->order_by('CREATED_ON', 'DESC');
+            $this->db->order_by('SISTEM', 'DESC');
+            $this->db->order_by('ID', 'ASC');
         }
     }
 
@@ -59,6 +63,14 @@ class Rot_model extends CI_Model
         return $this->db->count_all_results();
     }
 
+    public function getRot()
+    {
+        $this->db->select('*');
+        $this->db->from('rot');
+        $this->db->order_by('TAHUN ASC, SISTEM ASC, ID ASC');
+        return $this->db->get();
+    }
+
     public function getRotById($rot_id)
     {
         $this->db->select('*');
@@ -80,6 +92,12 @@ class Rot_model extends CI_Model
     public function editRot($data, $rot_id)
     {
         $update = $this->db->update('rot', $data, array('ID' => $rot_id));
+        return $update;
+    }
+
+    public function editRotByKode($data, $kode, $tahun)
+    {
+        $update = $this->db->update('rot', $data, array('KODE_PEMBANGKIT' => $kode, 'TAHUN' => $tahun));
         return $update;
     }
 

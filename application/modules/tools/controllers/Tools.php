@@ -639,4 +639,133 @@ class Tools extends MY_Controller
             redirect('tools/apps');
         }
     }
+
+    public function api()
+    {
+        $data['ptitle'] = "Tools";
+        $data['title']  = "API";
+
+        $data['api']   = $this->Tools_model->getApi()->row_array();
+
+        $this->load->view('tools-api-view', $data);
+    }
+
+    public function change_db_api()
+    {
+        $apps   = $this->Tools_model->getApi()->row_array();
+
+        $this->form_validation->set_rules('db', 'Db', 'required', [
+            'required'      => 'Database tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Gagal!</strong> ' . validation_errors() . '
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            redirect('tools/api');
+        } else {
+            cek_csrf();
+            $data = array("DATABASE" => $this->input->post('db'));
+            $this->Tools_model->editApi($data);
+            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Sukses!</strong> Database API berhasil diubah.
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            $ket = 'Mengubah <strong>DATABASE API </strong> dari <strong>' . $apps['DATABASE'] . '</strong> menjadi <strong>' . $this->input->post('db') . '</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Tools', 'UPDATE', 'primary', $ket);
+            redirect('tools/api');
+        }
+    }
+
+    public function change_schema_api()
+    {
+        $apps   = $this->Tools_model->getApi()->row_array();
+
+        $this->form_validation->set_rules('schema', 'Schema', 'required', [
+            'required'      => 'Schema tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Gagal!</strong> ' . validation_errors() . '
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            redirect('tools/api');
+        } else {
+            cek_csrf();
+            $data = array("SCHEMA" => $this->input->post('schema'));
+            $this->Tools_model->editApi($data);
+            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Sukses!</strong> Database API berhasil diubah.
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            $ket = 'Mengubah <strong>SCHEMA API </strong> dari <strong>' . $apps['SCHEMA'] . '</strong> menjadi <strong>' . $this->input->post('schema') . '</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Tools', 'UPDATE', 'primary', $ket);
+            redirect('tools/api');
+        }
+    }
+
+    public function change_int_token()
+    {
+        $apps   = $this->Tools_model->getApi()->row_array();
+
+        $this->form_validation->set_rules('token', 'Token', 'required', [
+            'required'      => 'Link Integrasi Token tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Gagal!</strong> ' . validation_errors() . '
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            redirect('tools/api');
+        } else {
+            $data = array("INTEGRASI_TOKEN" => $this->input->post('token'));
+            $this->Tools_model->editApi($data);
+            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Sukses!</strong> Link Integrasi Token berhasil diubah.
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            $ket = 'Mengubah <strong>LINK INTEGRASI TOKEN </strong> dari <strong>' . $apps['INTEGRASI_TOKEN'] . '</strong> menjadi <strong>' . $this->input->post('token') . '</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Tools', 'UPDATE', 'primary', $ket);
+            redirect('tools/api');
+        }
+    }
+
+    public function change_int_load()
+    {
+        $apps   = $this->Tools_model->getApi()->row_array();
+
+        $this->form_validation->set_rules('load', 'Load', 'required', [
+            'required'      => 'Link Integrasi Load tidak boleh kosong'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $flash = '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Gagal!</strong> ' . validation_errors() . '
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            redirect('tools/api');
+        } else {
+            cek_csrf();
+            $data = array("INTEGRASI_LOAD" => $this->input->post('load'));
+            $this->Tools_model->editApi($data);
+            $flash = '<div class="alert alert-success alert-dismissible bg-success text-white border-0" role="alert">
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <strong>Sukses!</strong> Link Integrasi Token berhasil diubah.
+                        </div>';
+            $this->session->set_flashdata('flash', $flash);
+            $ket = 'Mengubah <strong>LINK INTEGRASI LOAD </strong> dari <strong>' . $apps['INTEGRASI_LOAD'] . '</strong> menjadi <strong>' . $this->input->post('load') . '</strong>';
+            activity_log(get_session_id(), get_session_name(), 'Tools', 'UPDATE', 'primary', $ket);
+            redirect('tools/api');
+        }
+    }
 }
